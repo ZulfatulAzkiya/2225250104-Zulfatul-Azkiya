@@ -1,0 +1,9 @@
+# Blueprint Render.com (paket gratis). Render menyediakan HTTPS otomatis,
+# yang WAJIB agar ULFALINE bisa dipasang (install) dari browser HP.
+services:
+  - type: web
+    name: ulfaline
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/kesehatan
+    autoDeploy: true
