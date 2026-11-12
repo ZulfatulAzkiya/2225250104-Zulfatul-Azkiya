@@ -1,0 +1,3 @@
+{
+  "tests/test_pemeriksa.py::test_periksa_langkah[2x + 3 = 11-sub:3-2x + 3 + 0 = 11-E_TIDAK_MAJU]": true
+}
