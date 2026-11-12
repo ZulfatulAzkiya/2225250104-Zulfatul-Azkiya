@@ -1,0 +1,310 @@
+{
+  "versi": 1,
+  "catatan": "Setiap misi mengikuti proses literasi matematika: Pahami → Rumuskan → Selesaikan → Tafsirkan → Cek. Model & solusi diverifikasi oleh backend/tests/test_konten.py.",
+  "misi": [
+    {
+      "id": "kuota",
+      "judul": "Kuota Internet Dina",
+      "ikon": "📶",
+      "konteks": "Personal",
+      "level": "dasar",
+      "jenis": "ptlsv",
+      "cerita": "Dina membeli paket kuota internet 30 GB untuk sebulan. Ia sudah memakai 6 GB untuk media sosial. Setiap hari Dina menonton video belajar yang memakai 2 GB. Paling lama berapa hari Dina bisa menonton video belajar?",
+      "pahami": {
+        "tanya": "Apa yang ditanyakan dalam cerita ini?",
+        "pilihan": ["Paling lama berapa hari Dina bisa menonton video belajar", "Berapa GB kuota yang sudah dipakai", "Berapa harga paket kuota"],
+        "benar": 0,
+        "penjelasan": "Yang dicari adalah banyak hari. Kuota yang sudah dipakai adalah informasi yang diketahui."
+      },
+      "variabel": "x = banyak hari Dina menonton video belajar",
+      "rumuskan": {
+        "tanya": "Model matematika yang tepat adalah …",
+        "pilihan": ["6 + 2x ≤ 30", "6x + 2 ≤ 30", "6 + 2x ≥ 30"],
+        "benar": 0,
+        "umpan": ["", "6 GB dipakai sekali saja. Yang bertambah setiap hari adalah 2 GB, jadi 2x.", "Kuota yang terpakai tidak boleh MELEBIHI 30 GB, jadi pakai ≤."],
+        "penjelasan": "Kuota terpakai = 6 + 2x, dan tidak boleh lebih dari 30 GB."
+      },
+      "model": "6 + 2x ≤ 30",
+      "solusi": "x ≤ 12",
+      "tafsirkan": {
+        "tanya": "Hasilnya x ≤ 12. Apa artinya dalam cerita?",
+        "pilihan": ["Dina bisa menonton paling lama 12 hari", "Dina harus menonton paling sedikit 12 hari", "Dina bisa menonton tepat 18 hari"],
+        "benar": 0,
+        "penjelasan": "x ≤ 12 berarti banyak harinya 12 atau kurang. Jadi paling lama 12 hari."
+      },
+      "cek": {
+        "hitung": "x = 12 → 6 + 2 × 12 = 30 ≤ 30 ✓\nx = 13 → 6 + 2 × 13 = 32 > 30 ✗ (kuota tidak cukup)",
+        "tanya": "Mengapa jawabannya \"paling lama\", bukan \"tepat\" 12 hari?",
+        "pilihan": ["Karena menonton kurang dari 12 hari pun kuotanya tetap cukup", "Karena 12 adalah bilangan genap", "Karena kuotanya pasti bersisa banyak"],
+        "benar": 0,
+        "penjelasan": "Semua bilangan hari dari 0 sampai 12 memenuhi, jadi 12 adalah batas paling lama."
+      }
+    },
+    {
+      "id": "ojek",
+      "judul": "Ongkos Ojek Online",
+      "ikon": "🛵",
+      "konteks": "Sosial budaya",
+      "level": "dasar",
+      "jenis": "ptlsv",
+      "cerita": "Raka memesan ojek online ke perpustakaan daerah. Tarifnya Rp4 ribu per km ditambah biaya pemesanan Rp2 ribu. Uang Raka hanya Rp30 ribu. Berapa km jarak terjauh yang bisa ditempuh Raka?",
+      "pahami": {
+        "tanya": "Informasi mana yang PALING penting untuk menjawab?",
+        "pilihan": ["Tarif per km, biaya pemesanan, dan uang Raka", "Nama tempat tujuan Raka", "Jenis kendaraan yang dipesan"],
+        "benar": 0,
+        "penjelasan": "Biaya perjalanan dihitung dari tarif per km dan biaya pemesanan, lalu dibandingkan dengan uang Raka."
+      },
+      "variabel": "x = jarak perjalanan (km), biaya dalam ribu rupiah",
+      "rumuskan": {
+        "tanya": "Model matematika yang tepat adalah …",
+        "pilihan": ["4x + 2 ≤ 30", "2x + 4 ≤ 30", "4x + 2 ≥ 30"],
+        "benar": 0,
+        "umpan": ["", "Yang dikali jarak adalah tarif per km (4 ribu). Biaya pemesanan 2 ribu dibayar sekali.", "Biaya tidak boleh LEBIH dari uang Raka, jadi pakai ≤."],
+        "penjelasan": "Biaya = 4x + 2 (ribu rupiah), dan tidak boleh lebih dari 30 ribu."
+      },
+      "model": "4x + 2 ≤ 30",
+      "solusi": "x ≤ 7",
+      "tafsirkan": {
+        "tanya": "Hasilnya x ≤ 7. Apa artinya?",
+        "pilihan": ["Jarak terjauh yang bisa ditempuh 7 km", "Jarak terdekat yang bisa ditempuh 7 km", "Jarak terjauh yang bisa ditempuh 8 km"],
+        "benar": 0,
+        "penjelasan": "x ≤ 7 berarti jaraknya 7 km atau kurang. Jadi paling jauh 7 km."
+      },
+      "cek": {
+        "hitung": "x = 7 → 4 × 7 + 2 = 30 ≤ 30 ✓\nx = 8 → 4 × 8 + 2 = 34 > 30 ✗",
+        "tanya": "Jika jarak ke perpustakaan ternyata 9 km, apa saran yang masuk akal?",
+        "pilihan": ["Raka perlu tambahan uang atau memilih transportasi yang lebih murah", "Raka tetap bisa naik ojek sampai tujuan", "Tarif ojek pasti turun"],
+        "benar": 0,
+        "penjelasan": "9 km lebih dari 7 km, jadi uang Rp30 ribu tidak cukup untuk ojek."
+      }
+    },
+    {
+      "id": "tabungan",
+      "judul": "Menabung untuk Sepatu",
+      "ikon": "👟",
+      "konteks": "Personal",
+      "level": "dasar",
+      "jenis": "plsv",
+      "cerita": "Raka sudah punya tabungan Rp50 ribu. Setiap minggu ia menabung lagi Rp15 ribu. Ia ingin membeli sepatu seharga Rp230 ribu. Setelah berapa minggu tabungannya tepat cukup untuk membeli sepatu?",
+      "pahami": {
+        "tanya": "Apa yang ditanyakan?",
+        "pilihan": ["Banyak minggu sampai tabungan menjadi Rp230 ribu", "Harga sepatu", "Uang tabungan awal Raka"],
+        "benar": 0,
+        "penjelasan": "Harga sepatu dan tabungan awal sudah diketahui. Yang dicari banyak minggu menabung."
+      },
+      "variabel": "x = banyak minggu menabung, uang dalam ribu rupiah",
+      "rumuskan": {
+        "tanya": "Model matematika yang tepat adalah …",
+        "pilihan": ["50 + 15x = 230", "15 + 50x = 230", "50x + 15x = 230"],
+        "benar": 0,
+        "umpan": ["", "Rp50 ribu adalah tabungan awal (sekali). Yang bertambah tiap minggu adalah Rp15 ribu.", "Tabungan awal tidak dikali banyak minggu."],
+        "penjelasan": "Tabungan = 50 + 15x, dan harus tepat 230."
+      },
+      "model": "50 + 15x = 230",
+      "solusi": "x = 12",
+      "tafsirkan": {
+        "tanya": "Hasilnya x = 12. Apa artinya?",
+        "pilihan": ["Setelah 12 minggu tabungannya tepat cukup", "Setelah 18 minggu tabungannya tepat cukup", "Setelah 230 minggu tabungannya cukup"],
+        "benar": 0,
+        "penjelasan": "x adalah banyak minggu, jadi x = 12 berarti 12 minggu."
+      },
+      "cek": {
+        "hitung": "x = 12 → 50 + 15 × 12 = 50 + 180 = 230 ✓",
+        "tanya": "12 minggu kira-kira sama dengan …",
+        "pilihan": ["3 bulan", "1 bulan", "1 tahun"],
+        "benar": 0,
+        "penjelasan": "1 bulan ≈ 4 minggu, jadi 12 minggu ≈ 3 bulan."
+      }
+    },
+    {
+      "id": "nilai",
+      "judul": "Nilai Rata-rata Sari",
+      "ikon": "📝",
+      "konteks": "Personal",
+      "level": "menengah",
+      "jenis": "ptlsv",
+      "cerita": "Agar lulus, rata-rata 4 nilai ulangan Sari minimal 75. Nilai tiga ulangan pertamanya 70, 80, dan 68. Berapa nilai minimal ulangan keempat agar Sari lulus?",
+      "pahami": {
+        "tanya": "Apa arti \"rata-rata minimal 75\"?",
+        "pilihan": ["Rata-ratanya 75 atau lebih", "Rata-ratanya harus kurang dari 75", "Setiap nilai ulangan harus 75"],
+        "benar": 0,
+        "penjelasan": "\"Minimal\" berarti paling sedikit, jadi 75 atau lebih (≥)."
+      },
+      "variabel": "x = nilai ulangan keempat",
+      "rumuskan": {
+        "tanya": "Model matematika yang tepat adalah …",
+        "pilihan": ["(70 + 80 + 68 + x)/4 ≥ 75", "70 + 80 + 68 + x ≥ 75", "(70 + 80 + 68 + x)/4 ≤ 75"],
+        "benar": 0,
+        "umpan": ["", "Rata-rata = jumlah nilai DIBAGI banyak ulangan (4).", "Minimal 75 berarti 75 atau lebih, jadi pakai ≥."],
+        "penjelasan": "Rata-rata = (jumlah empat nilai) ÷ 4, dan harus ≥ 75."
+      },
+      "model": "(70 + 80 + 68 + x)/4 ≥ 75",
+      "solusi": "x ≥ 82",
+      "tafsirkan": {
+        "tanya": "Hasilnya x ≥ 82. Apa artinya?",
+        "pilihan": ["Nilai ulangan keempat minimal 82", "Nilai ulangan keempat maksimal 82", "Nilai ulangan keempat harus tepat 75"],
+        "benar": 0,
+        "penjelasan": "x ≥ 82 berarti 82 atau lebih. Jadi paling sedikit 82."
+      },
+      "cek": {
+        "hitung": "x = 82 → (70 + 80 + 68 + 82) ÷ 4 = 300 ÷ 4 = 75 ≥ 75 ✓\nx = 81 → 299 ÷ 4 = 74,75 < 75 ✗",
+        "tanya": "Nilai ulangan paling tinggi 100. Jadi nilai keempat yang mungkin adalah …",
+        "pilihan": ["Dari 82 sampai 100", "Semua bilangan yang lebih dari 82", "Dari 75 sampai 82"],
+        "benar": 0,
+        "penjelasan": "Jawaban matematika (x ≥ 82) perlu disesuaikan dengan keadaan nyata: nilai tidak mungkin lebih dari 100."
+      }
+    },
+    {
+      "id": "lift",
+      "judul": "Kapasitas Lift Barang",
+      "ikon": "🛗",
+      "konteks": "Saintifik",
+      "level": "menengah",
+      "jenis": "ptlsv",
+      "cerita": "Sebuah lift barang hanya boleh membawa beban paling berat 800 kg. Pak Joko (70 kg) akan naik bersama beberapa kotak. Berat setiap kotak 25 kg. Berapa kotak paling banyak yang boleh dibawa?",
+      "pahami": {
+        "tanya": "Apa arti \"paling berat 800 kg\"?",
+        "pilihan": ["Beban total tidak boleh lebih dari 800 kg", "Beban total harus tepat 800 kg", "Beban total minimal 800 kg"],
+        "benar": 0,
+        "penjelasan": "\"Paling berat\" berarti batas atas: 800 kg atau kurang (≤)."
+      },
+      "variabel": "x = banyak kotak",
+      "rumuskan": {
+        "tanya": "Model matematika yang tepat adalah …",
+        "pilihan": ["70 + 25x ≤ 800", "25 + 70x ≤ 800", "70 + 25x ≥ 800"],
+        "benar": 0,
+        "umpan": ["", "Berat Pak Joko (70 kg) dihitung sekali. Yang dikali banyak kotak adalah 25 kg.", "Beban tidak boleh LEBIH dari 800 kg, jadi pakai ≤."],
+        "penjelasan": "Beban total = 70 + 25x, dan paling berat 800 kg."
+      },
+      "model": "70 + 25x ≤ 800",
+      "solusi": "x ≤ 29,2",
+      "tafsirkan": {
+        "tanya": "Hasil hitungannya x ≤ 29,2. Jadi berapa kotak paling banyak?",
+        "pilihan": ["29 kotak", "29,2 kotak", "30 kotak"],
+        "benar": 0,
+        "penjelasan": "Banyak kotak harus bilangan cacah (kotak tidak bisa dipotong). Bilangan cacah terbesar yang ≤ 29,2 adalah 29."
+      },
+      "cek": {
+        "hitung": "x = 29 → 70 + 25 × 29 = 795 ≤ 800 ✓\nx = 30 → 70 + 25 × 30 = 820 > 800 ✗",
+        "tanya": "Mengapa 29,2 tidak dibulatkan ke atas menjadi 30?",
+        "pilihan": ["Karena 30 kotak membuat beban melebihi batas aman lift", "Karena pembulatan selalu ke bawah", "Karena 30 bukan bilangan bulat"],
+        "benar": 0,
+        "penjelasan": "Arah pembulatan ditentukan oleh konteks. Di sini, 30 kotak berbahaya karena melebihi 800 kg."
+      }
+    },
+    {
+      "id": "pagar",
+      "judul": "Pagar Kebun Sayur",
+      "ikon": "🥬",
+      "konteks": "Sosial budaya",
+      "level": "menengah",
+      "jenis": "plsv",
+      "cerita": "Pak Budi memagari kebun sayur berbentuk persegi panjang dengan kawat sepanjang 46 m, pas tanpa sisa. Panjang kebun 3 m lebih dari lebarnya. Berapa ukuran kebun itu?",
+      "pahami": {
+        "tanya": "Kawat 46 m dipakai untuk mengelilingi kebun. Jadi 46 m adalah …",
+        "pilihan": ["Keliling kebun", "Luas kebun", "Panjang kebun"],
+        "benar": 0,
+        "penjelasan": "Pagar mengelilingi kebun, jadi panjang kawat = keliling."
+      },
+      "variabel": "x = lebar kebun (m), sehingga panjangnya x + 3",
+      "rumuskan": {
+        "tanya": "Model matematika yang tepat adalah …",
+        "pilihan": ["2(x + x + 3) = 46", "x(x + 3) = 46", "x + x + 3 = 46"],
+        "benar": 0,
+        "umpan": ["", "Itu rumus LUAS, padahal 46 m adalah keliling.", "Keliling persegi panjang = 2 × (panjang + lebar)."],
+        "penjelasan": "Keliling = 2 × (panjang + lebar) = 2(x + 3 + x) = 46."
+      },
+      "model": "2(x + x + 3) = 46",
+      "solusi": "x = 10",
+      "tafsirkan": {
+        "tanya": "Hasilnya x = 10. Berapa ukuran kebun?",
+        "pilihan": ["Lebar 10 m dan panjang 13 m", "Lebar 10 m dan panjang 10 m", "Lebar 13 m dan panjang 10 m"],
+        "benar": 0,
+        "penjelasan": "x adalah lebar, jadi lebar 10 m dan panjang 10 + 3 = 13 m."
+      },
+      "cek": {
+        "hitung": "Keliling = 2 × (13 + 10) = 2 × 23 = 46 m ✓",
+        "tanya": "Berapa luas kebun Pak Budi?",
+        "pilihan": ["130 m²", "46 m²", "23 m²"],
+        "benar": 0,
+        "penjelasan": "Luas = panjang × lebar = 13 × 10 = 130 m²."
+      }
+    },
+    {
+      "id": "sepeda",
+      "judul": "Sewa Sepeda di Taman",
+      "ikon": "🚲",
+      "konteks": "Sosial budaya",
+      "level": "tantangan",
+      "jenis": "ptlsv",
+      "cerita": "Ada dua tempat sewa sepeda di taman kota. Tempat A: Rp10 ribu sekali sewa ditambah Rp5 ribu per jam. Tempat B: Rp8 ribu per jam tanpa biaya awal. Mulai berapa jam sewa di tempat A lebih murah?",
+      "pahami": {
+        "tanya": "Apa yang dibandingkan dalam soal ini?",
+        "pilihan": ["Biaya sewa A dan B untuk lama sewa yang sama", "Jarak tempat A dan tempat B", "Banyak sepeda di A dan B"],
+        "benar": 0,
+        "penjelasan": "Kita membandingkan biaya total di A dan B jika lama sewanya sama."
+      },
+      "variabel": "x = lama sewa (jam), biaya dalam ribu rupiah",
+      "rumuskan": {
+        "tanya": "\"A lebih murah daripada B\" ditulis …",
+        "pilihan": ["10 + 5x < 8x", "10 + 5x > 8x", "10x + 5 < 8x"],
+        "benar": 0,
+        "umpan": ["", "A lebih MURAH berarti biaya A KURANG DARI biaya B.", "Rp10 ribu dibayar sekali. Yang dikali lama sewa adalah Rp5 ribu."],
+        "penjelasan": "Biaya A = 10 + 5x, biaya B = 8x. A lebih murah: 10 + 5x < 8x."
+      },
+      "model": "10 + 5x < 8x",
+      "solusi": "x > 10/3",
+      "tafsirkan": {
+        "tanya": "Hasilnya x > 10/3 (sekitar 3,3 jam). Jika sewa dihitung per jam penuh, kapan A lebih murah?",
+        "pilihan": ["Mulai sewa 4 jam", "Mulai sewa 3 jam", "Jika sewa kurang dari 3 jam"],
+        "benar": 0,
+        "penjelasan": "Bilangan bulat terkecil yang lebih dari 3,3 adalah 4."
+      },
+      "cek": {
+        "hitung": "x = 3 → A = 10 + 15 = 25, B = 24 → B lebih murah\nx = 4 → A = 10 + 20 = 30, B = 32 → A lebih murah ✓",
+        "tanya": "Kakak ingin bersepeda 2 jam saja. Tempat mana yang sebaiknya dipilih?",
+        "pilihan": ["Tempat B, karena untuk 2 jam B lebih murah", "Tempat A, karena A selalu lebih murah", "Sama saja"],
+        "benar": 0,
+        "penjelasan": "Untuk 2 jam: A = 10 + 10 = 20 ribu, B = 16 ribu. B lebih murah."
+      }
+    },
+    {
+      "id": "tandon",
+      "judul": "Air di Tandon Rumah",
+      "ikon": "💧",
+      "konteks": "Saintifik",
+      "level": "tantangan",
+      "jenis": "ptlsv",
+      "cerita": "Tandon air di rumah Ani berisi 120 liter. Setiap jam air terpakai 8 liter dan tidak ada air yang masuk. Pompa harus dinyalakan jika isi tandon kurang dari 40 liter. Setelah berapa jam pompa harus dinyalakan?",
+      "pahami": {
+        "tanya": "Apa yang terjadi pada isi tandon setiap jam?",
+        "pilihan": ["Berkurang 8 liter", "Bertambah 8 liter", "Tetap 120 liter"],
+        "benar": 0,
+        "penjelasan": "Air terpakai dan tidak ada yang masuk, jadi isinya berkurang 8 liter per jam."
+      },
+      "variabel": "x = lama pemakaian air (jam)",
+      "rumuskan": {
+        "tanya": "\"Isi tandon kurang dari 40 liter\" ditulis …",
+        "pilihan": ["120 − 8x < 40", "120 + 8x < 40", "8x − 120 < 40"],
+        "benar": 0,
+        "umpan": ["", "Air TERPAKAI, jadi isinya berkurang. Gunakan pengurangan.", "Isi awal 120 liter, lalu dikurangi 8 liter tiap jam: 120 − 8x."],
+        "penjelasan": "Isi tandon setelah x jam = 120 − 8x, dan harus kurang dari 40."
+      },
+      "model": "120 − 8x < 40",
+      "solusi": "x > 10",
+      "tafsirkan": {
+        "tanya": "Hasilnya x > 10. Apa artinya?",
+        "pilihan": ["Pompa dinyalakan setelah lebih dari 10 jam", "Pompa dinyalakan sebelum 10 jam", "Pompa dinyalakan setelah 40 jam"],
+        "benar": 0,
+        "penjelasan": "x > 10 berarti waktunya lebih dari 10 jam."
+      },
+      "cek": {
+        "hitung": "x = 10 → 120 − 80 = 40 (belum kurang dari 40)\nx = 11 → 120 − 88 = 32 < 40 ✓",
+        "tanya": "Dari −8x < −80 menjadi x > 10. Mengapa tandanya berubah?",
+        "pilihan": ["Karena kedua ruas dibagi −8 (bilangan negatif)", "Karena 80 lebih besar dari 8", "Karena air berkurang"],
+        "benar": 0,
+        "penjelasan": "Membagi dengan bilangan negatif membalik urutan bilangan, sehingga tandanya dibalik."
+      }
+    }
+  ]
+}

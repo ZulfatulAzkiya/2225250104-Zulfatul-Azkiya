@@ -1,0 +1,106 @@
+// Konten materi ULFALINE. Satu kartu = satu konsep, teks ≤ ~40 kata (EL05, DS05).
+// Jenis kartu: teks | garis | simbol | timbangan | cermin | contoh | cek | selesai
+// Contoh soal ("contoh") diselesaikan otomatis oleh mesin.js, jadi langkahnya selalu benar.
+
+export const TOPIK = [
+  {
+    id: 'prasyarat',
+    no: 0,
+    judul: 'Pemanasan Prasyarat',
+    ikon: '🔁',
+    ringkas: 'Bilangan negatif & bentuk aljabar',
+    kartu: [
+      { jenis: 'teks', judul: 'Kenapa pemanasan?', teks: 'Untuk menyelesaikan persamaan, kita perlu lancar menghitung bilangan negatif dan bentuk aljabar. Yuk, ingat lagi sebentar.' },
+      { jenis: 'teks', judul: 'Kali & bagi bilangan bulat', rumus: ['(−3) × (−2) = 6', '(−3) × 2 = −6'], teks: 'Tanda sama → hasilnya positif. Tanda beda → hasilnya negatif.' },
+      { jenis: 'teks', judul: 'Mengurangi = menambah lawannya', rumus: ['5 − (−2) = 5 + 2 = 7'], teks: 'Lawan dari −2 adalah 2. Jadi mengurangi −2 sama dengan menambah 2.' },
+      { jenis: 'garis', judul: 'Makin ke kiri, makin kecil', titik: [-5, -2], min: -7, maks: 2, teks: '−5 ada di kiri −2, jadi −5 < −2.' },
+      { jenis: 'teks', judul: 'Suku sejenis', rumus: ['3x + 2x − 4 = 5x − 4'], teks: 'Hanya suku yang sama-sama memuat x yang boleh dijumlahkan. 5x dan −4 tidak bisa digabung.' },
+      { jenis: 'teks', judul: 'Sifat distributif', rumus: ['3(x − 2) = 3x − 6'], teks: 'Kalikan bilangan di depan kurung ke SETIAP suku di dalam kurung.' },
+      { jenis: 'cek', tanya: '(−4) × (−5) = …', pilihan: ['20', '−20', '−9'], benar: 0, penjelasan: 'Tanda sama (negatif × negatif) → positif.' },
+      { jenis: 'selesai', teks: 'Sudah ingat? Uji dirimu dengan kuis pemanasan singkat.', aksi: [{ label: 'Kuis Pemanasan', href: '#/prasyarat' }] },
+    ],
+  },
+  {
+    id: 'plsv',
+    no: 1,
+    judul: 'Persamaan Linear',
+    ikon: '⚖️',
+    ringkas: 'Prinsip timbangan & langkah penyelesaian',
+    kartu: [
+      { jenis: 'teks', judul: 'Kalimat terbuka', rumus: ['x + 3 = 7'], teks: 'Kalimat ini belum bisa dikatakan benar atau salah sebelum x diganti bilangan. Inilah kalimat terbuka.' },
+      { jenis: 'teks', judul: 'Persamaan linear satu variabel', rumus: ['2x + 3 = 11'], teks: 'Ciri PLSV: ada tanda =, hanya satu variabel (x), dan pangkat x adalah 1.' },
+      { jenis: 'timbangan', judul: 'Persamaan = timbangan seimbang' },
+      { jenis: 'teks', judul: 'Aturan timbangan', teks: 'Apa pun yang kamu lakukan di satu ruas, lakukan juga di ruas lain. Tujuannya: x sendirian.' },
+      { jenis: 'contoh', judul: 'Contoh 1', soal: '2x + 3 = 11' },
+      { jenis: 'contoh', judul: 'Contoh 2: x di kedua ruas', soal: '3x − 5 = x + 7' },
+      { jenis: 'contoh', judul: 'Contoh 3: koefisien negatif', soal: '7 − 3x = 19', catatan: 'Pada persamaan, membagi dengan bilangan negatif TIDAK mengubah tanda =.' },
+      { jenis: 'cek', tanya: 'Langkah pertama yang tepat untuk 4x − 5 = 11 adalah …', pilihan: ['+5 di kedua ruas', '−5 di kedua ruas', '÷4 hanya di ruas kiri'], benar: 0, penjelasan: 'Untuk menghilangkan −5, tambahkan 5 di kedua ruas.' },
+      { jenis: 'selesai', teks: 'Kamu sudah mengenal PLSV. Saatnya berlatih langkah demi langkah!', aksi: [{ label: 'Latihan PLSV', href: '#/latihan/plsv/dasar' }] },
+    ],
+  },
+  {
+    id: 'simbol',
+    no: 2,
+    judul: 'Simbol Pertidaksamaan',
+    ikon: '🔣',
+    ringkas: 'Arti <, >, ≤, ≥ dan garis bilangan',
+    kartu: [
+      { jenis: 'simbol', judul: 'Empat simbol pertidaksamaan' },
+      { jenis: 'teks', judul: 'Trik mengingat', rumus: ['2 < 5', '5 > 2'], teks: 'Ujung runcing simbol selalu menunjuk bilangan yang lebih KECIL. Bagian yang terbuka menghadap bilangan yang lebih besar.' },
+      { jenis: 'garis', judul: 'Bulatan kosong atau penuh?', rel: '<=', nilai: 3, teks: 'x ≤ 3: bulatan PENUH karena 3 ikut. Untuk < atau >, bulatannya kosong karena batasnya tidak ikut.' },
+      { jenis: 'cek', tanya: 'x > −1 dibaca …', pilihan: ['x lebih dari −1', 'x kurang dari −1', 'x kurang dari atau sama dengan −1'], benar: 0, penjelasan: '> dibaca "lebih dari".' },
+      { jenis: 'cek', tanya: 'Bulatan PENUH di 2 dengan arsiran ke KIRI menunjukkan …', garis: { rel: '<=', nilai: 2 }, pilihan: ['x ≤ 2', 'x < 2', 'x ≥ 2'], benar: 0, penjelasan: 'Penuh berarti 2 ikut (≤ atau ≥). Arsiran ke kiri berarti lebih kecil: x ≤ 2.' },
+      { jenis: 'cek', tanya: '"Usia penonton paling sedikit 13 tahun." Jika u = usia, ditulis …', pilihan: ['u ≥ 13', 'u ≤ 13', 'u > 13'], benar: 0, penjelasan: '"Paling sedikit 13" berarti 13 atau lebih: u ≥ 13.' },
+      { jenis: 'selesai', teks: 'Simbol sudah bermakna. Lanjut ke pertidaksamaan linear!', aksi: [{ label: 'Lanjut materi', href: '#/belajar/ptlsv' }] },
+    ],
+  },
+  {
+    id: 'ptlsv',
+    no: 3,
+    judul: 'Pertidaksamaan Linear',
+    ikon: '↔️',
+    ringkas: 'Cara menyelesaikan PtLSV',
+    kartu: [
+      { jenis: 'teks', judul: 'PLSV dan PtLSV', teks: 'Sama: satu variabel, pangkat 1, cara membuat x sendirian. Beda: PtLSV memakai <, >, ≤, ≥ dan jawabannya berupa banyak bilangan.' },
+      { jenis: 'garis', judul: 'Jawabannya banyak!', rel: '<', nilai: 4, teks: 'x < 4 berarti x boleh 3; 0; −10; 3,9; … Semua bilangan di kiri 4.' },
+      { jenis: 'contoh', judul: 'Contoh 1', soal: '3x − 4 ≤ 11' },
+      { jenis: 'contoh', judul: 'Contoh 2: ada pecahan', soal: 'x/2 + 1 < 4' },
+      { jenis: 'cek', tanya: 'Penyelesaian 2x + 1 > 7 adalah …', pilihan: ['x > 3', 'x < 3', 'x > 4'], benar: 0, penjelasan: '2x + 1 > 7 → 2x > 6 → x > 3. Dibagi 2 (positif), tanda tetap.' },
+      { jenis: 'selesai', teks: 'Bagus! Ada satu aturan penting lagi: kapan tanda harus dibalik.', aksi: [{ label: 'Latihan PtLSV', href: '#/latihan/ptlsv/dasar' }, { label: 'Lanjut materi', href: '#/belajar/tanda' }] },
+    ],
+  },
+  {
+    id: 'tanda',
+    no: 4,
+    judul: 'Kenapa Tandanya Dibalik?',
+    ikon: '🔄',
+    ringkas: 'Dikali atau dibagi bilangan negatif',
+    kartu: [
+      { jenis: 'teks', judul: 'Coba tebak', rumus: ['2 < 5'], teks: 'Jika kedua ruas dikali −1, apakah −2 < −5 masih benar? Mari kita lihat di garis bilangan.' },
+      { jenis: 'cermin', judul: 'Garis bilangan cermin' },
+      { jenis: 'teks', judul: 'Aturannya', rumus: ['−2x > 4  →  x < −2'], teks: 'Dikali atau dibagi bilangan NEGATIF → tanda dibalik. Ditambah atau dikurangi bilangan apa pun → tanda tetap.' },
+      { jenis: 'contoh', judul: 'Contoh 1', soal: '−2x + 3 > 7' },
+      { jenis: 'contoh', judul: 'Contoh 2: x di kedua ruas', soal: '5 − 3x ≥ 2x − 10' },
+      { jenis: 'cek', tanya: 'Dari −4x ≥ 12, setelah kedua ruas dibagi −4 hasilnya …', pilihan: ['x ≤ −3', 'x ≥ −3', 'x ≤ 3'], benar: 0, penjelasan: 'Dibagi −4 (negatif) → tanda dibalik: x ≤ −3.' },
+      { jenis: 'cek', tanya: 'Dari x − 6 < 2, setelah +6 di kedua ruas hasilnya …', pilihan: ['x < 8', 'x > 8'], benar: 0, penjelasan: 'Menambah tidak membalik tanda. Hasilnya x < 8.' },
+      { jenis: 'selesai', teks: 'Sekarang kamu tahu KENAPA tandanya dibalik. Latih terus agar tidak lupa!', aksi: [{ label: 'Latihan PtLSV Menengah', href: '#/latihan/ptlsv/menengah' }] },
+    ],
+  },
+  {
+    id: 'literasi',
+    no: 5,
+    judul: 'Literasi Matematika',
+    ikon: '🌏',
+    ringkas: 'Memakai matematika dalam kehidupan',
+    kartu: [
+      { jenis: 'teks', judul: 'Apa itu literasi matematika?', teks: 'Kemampuan memakai matematika untuk memahami masalah sehari-hari, menyelesaikannya, lalu menilai apakah jawabannya masuk akal.' },
+      { jenis: 'teks', judul: 'Empat langkah literasi', daftar: ['1. Pahami cerita', '2. Rumuskan model matematika', '3. Selesaikan', '4. Tafsirkan & cek jawaban'], teks: 'Setiap Misi Literasi mengikuti empat langkah ini.' },
+      { jenis: 'teks', judul: 'Kata kunci dalam cerita', daftar: ['paling banyak, maksimal, tidak lebih dari → ≤', 'paling sedikit, minimal, tidak kurang dari → ≥', 'lebih dari → >', 'kurang dari → <'] },
+      { jenis: 'cek', tanya: '"Muatan perahu tidak boleh lebih dari 50 kg." Jika m = muatan, ditulis …', pilihan: ['m ≤ 50', 'm < 50', 'm ≥ 50'], benar: 0, penjelasan: '"Tidak lebih dari 50" berarti 50 atau kurang: m ≤ 50.' },
+      { jenis: 'teks', judul: 'Jawaban harus masuk akal', rumus: ['x ≤ 29,2'], teks: 'Jika x adalah banyak kotak, jawabannya paling banyak 29 kotak. Kotak tidak bisa dipotong!' },
+      { jenis: 'selesai', teks: 'Siap memakai matematika di dunia nyata?', aksi: [{ label: 'Mulai Misi Literasi', href: '#/literasi' }] },
+    ],
+  },
+];
+
+export const cariTopik = (id) => TOPIK.find((t) => t.id === id);

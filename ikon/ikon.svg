@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#2f5bd3"/>
+  <text x="256" y="300" text-anchor="middle" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="230" font-weight="800" fill="#ffffff">U</text>
+  <line x1="84" y1="392" x2="420" y2="392" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M446 392 L408 368 L408 416 Z" fill="#ffffff"/>
+  <line x1="140" y1="370" x2="140" y2="414" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+  <line x1="372" y1="370" x2="372" y2="414" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+  <line x1="214" y1="392" x2="400" y2="392" stroke="#ffa45c" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="214" cy="392" r="30" fill="#ffa45c" stroke="#ffffff" stroke-width="8"/>
+</svg>

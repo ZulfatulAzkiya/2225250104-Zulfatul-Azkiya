@@ -1,0 +1,18 @@
+{
+  "versi": 1,
+  "catatan": "Kuis Pemanasan Prasyarat (FR-01). Kolom 'cek' dipakai test untuk memastikan kunci jawaban benar.",
+  "topik": {
+    "bilangan": { "judul": "Operasi bilangan negatif", "slide": 1 },
+    "aljabar": { "judul": "Bentuk aljabar", "slide": 4 }
+  },
+  "soal": [
+    { "topik": "bilangan", "tanya": "−7 + 4 = …", "pilihan": ["−3", "3", "−11", "11"], "benar": 0, "cek": "-7 + 4", "penjelasan": "Dari −7 bergerak 4 langkah ke kanan: −3." },
+    { "topik": "bilangan", "tanya": "5 − (−3) = …", "pilihan": ["8", "2", "−8", "−2"], "benar": 0, "cek": "5 - (-3)", "penjelasan": "Mengurangi = menambah lawannya: 5 + 3 = 8." },
+    { "topik": "bilangan", "tanya": "(−6) × 3 = …", "pilihan": ["−18", "18", "−9", "−3"], "benar": 0, "cek": "(-6) * 3", "penjelasan": "Tanda berbeda → hasil negatif." },
+    { "topik": "bilangan", "tanya": "(−12) ÷ (−4) = …", "pilihan": ["3", "−3", "8", "−8"], "benar": 0, "cek": "(-12) / (-4)", "penjelasan": "Tanda sama → hasil positif." },
+    { "topik": "bilangan", "tanya": "Mana yang lebih kecil?", "pilihan": ["−5", "−2"], "benar": 0, "penjelasan": "−5 ada di sebelah kiri −2 pada garis bilangan." },
+    { "topik": "aljabar", "tanya": "Bentuk sederhana dari 3x + 2x − 4 adalah …", "pilihan": ["5x − 4", "6x − 4", "5x + 4", "x"], "benar": 0, "cek": "3x + 2x - 4", "penjelasan": "Jumlahkan suku sejenis: 3x + 2x = 5x." },
+    { "topik": "aljabar", "tanya": "Bentuk 3(x − 2) sama dengan …", "pilihan": ["3x − 6", "3x − 2", "x − 6", "3x + 6"], "benar": 0, "cek": "3(x - 2)", "penjelasan": "Kalikan 3 ke setiap suku: 3·x − 3·2." },
+    { "topik": "aljabar", "tanya": "Koefisien x pada 7 − 4x adalah …", "pilihan": ["−4", "4", "7", "x"], "benar": 0, "penjelasan": "Koefisien adalah bilangan yang menempel pada x, beserta tandanya: −4." }
+  ]
+}
