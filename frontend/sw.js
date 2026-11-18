@@ -2,7 +2,7 @@
 // Setiap kali file aplikasi berubah, naikkan VERSI agar cache diperbarui.
 // Daftar BERKAS dicek oleh backend/tests/test_frontend.py (semua file harus tercantum).
 
-const VERSI = 'ulfaline-v1.1.0';
+const VERSI = 'ulfaline-v1.1.1';
 const BERKAS = [
   './',
   'index.html',
