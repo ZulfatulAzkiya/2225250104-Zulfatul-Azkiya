@@ -50,7 +50,7 @@ Catatan Windows: path proyek ini panjang, jadi `pip install playwright` di `.ven
 3. **Simbol dijelaskan sebelum dipakai.** *(EL03, IL01)*
 4. **Setiap langkah menampilkan operasinya** dengan `.chip-op` (warna `--op`); langkah balik tanda memakai `.chip-op.balik`. *(EL02)*
 5. **Animasi hanya untuk konsep**; hormati `prefers-reduced-motion` dan pengaturan "Kurangi gerakan". *(DS05)*
-6. **Navigasi bawah tetap 4 menu** (Beranda, Petualangan, Belajar, Latihan); Progres & Akun di header; Misi Literasi dibuka dari halaman Petualangan. *(DS04)*
+6. **Navigasi bawah**: Beranda, Peta, tombol bulat **Ulfa** di tengah (Ruang Ulfa), Belajar, Latihan. Progres & Akun di header; Misi Literasi dibuka dari halaman Petualangan. *(DS04)*
 7. **Umpan balik spesifik per langkah** dengan kode `E_*`, nada tidak menyalahkan. *(DS03, IL05)*
 8. Peringatan pembalikan tanda **selalu** muncul saat memilih ×/÷ bilangan negatif pada pertidaksamaan. *(IL03, DS02)*
 9. Latihan bertingkat; level terbuka saat nilai ≥ 80 (`AMBANG_KUASAI`). *(GL04)*
@@ -64,6 +64,10 @@ Checklist layar: [docs/panduan-ui-ux.md](docs/panduan-ui-ux.md) §8.
 - Misi literasi (`data/literasi.json`) dan kuis (`data/prasyarat.json`) diverifikasi `tests/test_konten.py`: model harus menghasilkan `solusi`, dan pengecoh harus berbeda.
 - Tampilan memakai minus asli `−` dan simbol `≤ ≥`; parser menerima juga `-`, `<=`, `>=`, dan koma desimal.
 - Kode kesalahan baru: tambahkan di `pemeriksa.py` + `mesin.js` (PESAN & LABEL_KESALAHAN) + `docs/konten-materi.md` §5 + tes.
+
+## Gaya Visual
+
+Tema "Portal Buku Cerita": krem hangat, hijau zaitun, aksen oranye; judul halaman berupa pita hijau; kartu membulat berbayang lembut. Karakter: **Ulfa** (siswi SMP: kemeja putih, rok biru tua, rambut kuncir berpita, ransel & kets) dan **Lino** (tarsius), digambar sebagai SVG di `komponen/ilustrasi.js` (berbadan penuh) dan `komponen/tokoh.js` (wajah ekspresif). Jangan meniru karakter/desain milik pihak lain.
 
 ## Konvensi Kode
 

@@ -12,7 +12,7 @@ Siswa membantu **Ulfa** (penjelajah berhijab) dan **Lino** (tarsius, hewan khas 
 - Musik & efek suara disintesis di `frontend/js/petualangan/suara.js` (melodi pentatonis orisinal)
 - Tidak memakai pustaka atau aset gambar pihak ketiga.
 
-**Gaya visual (v1.3).** Atas permintaan pemilik proyek, tampilan diubah dari 3D low-poly menjadi **kartun 2D bergaris tegas dan penuh warna**, mengikuti nuansa umum kartun petualangan anak: langit cerah, matahari, awan, pohon kelapa, bunga, kupu-kupu, jalan setapak berliku, dan karakter berbadan penuh dengan pose (berjalan, bersorak, menunjuk). Karakter dan desainnya tetap milik ULFALINE sendiri.
+**Gaya visual (v1.4).** Portal bergaya buku cerita (krem, hijau zaitun, oranye) dengan judul berpita, peta berpin label, daftar bergambar, tombol Ulfa di tengah navigasi, dan halaman **Ruang Ulfa** (perkenalan, Ketuk Ulfa untuk tips, musik, koleksi bintang 20). Ulfa digambar ulang sebagai **siswi SMP berseragam**. Sebelumnya (v1.3): Atas permintaan pemilik proyek, tampilan diubah dari 3D low-poly menjadi **kartun 2D bergaris tegas dan penuh warna**, mengikuti nuansa umum kartun petualangan anak: langit cerah, matahari, awan, pohon kelapa, bunga, kupu-kupu, jalan setapak berliku, dan karakter berbadan penuh dengan pose (berjalan, bersorak, menunjuk). Karakter dan desainnya tetap milik ULFALINE sendiri.
 
 ## 2. Keselarasan dengan Pretest–Posttest
 

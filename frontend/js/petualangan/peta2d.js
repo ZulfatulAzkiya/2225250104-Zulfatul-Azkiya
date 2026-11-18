@@ -93,8 +93,8 @@ export function buatPeta2D(wadah, { daftarPos, posAktif, selesai, diTitik, onPil
   const kurangGerak = gerakDikurangi();
   const svg = s('svg', { viewBox: `0 0 ${W} ${H}`, class: 'peta2d', role: 'img', 'aria-label': 'Peta Pulau Aljabar dengan tujuh pos dan Pulau Harta' });
   svg.append(s('defs', {},
-    s('linearGradient', { id: 'pl-laut', x1: 0, y1: 0, x2: 0, y2: 1 }, s('stop', { offset: '0%', 'stop-color': '#5cc6f5' }), s('stop', { offset: '100%', 'stop-color': '#2e8fd6' })),
-    s('linearGradient', { id: 'pl-darat', x1: 0, y1: 0, x2: 0, y2: 1 }, s('stop', { offset: '0%', 'stop-color': '#86d872' }), s('stop', { offset: '100%', 'stop-color': '#4fae49' })),
+    s('linearGradient', { id: 'pl-laut', x1: 0, y1: 0, x2: 0, y2: 1 }, s('stop', { offset: '0%', 'stop-color': '#9fd8ef' }), s('stop', { offset: '100%', 'stop-color': '#5cb0dc' })),
+    s('linearGradient', { id: 'pl-darat', x1: 0, y1: 0, x2: 0, y2: 1 }, s('stop', { offset: '0%', 'stop-color': '#b5dc7c' }), s('stop', { offset: '100%', 'stop-color': '#7fb84a' })),
     s('linearGradient', { id: 'pl-jalan', x1: 0, y1: 0, x2: 1, y2: 0 }, s('stop', { offset: '0%', 'stop-color': '#f7df9f' }), s('stop', { offset: '100%', 'stop-color': '#ecc778' }))));
 
   // laut, ombak, pulau
@@ -151,10 +151,17 @@ export function buatPeta2D(wadah, { daftarPos, posAktif, selesai, diTitik, onPil
     svg.append(kelompok);
     const status = selesai.has(p.id) ? 'sudah' : i === posAktif ? 'kini' : 'nanti';
     // Posisi di elemen luar; animasi denyut di elemen dalam (agar transform tidak saling menimpa).
-    const pn = s('g', { transform: `translate(${x} ${y - (status === 'kini' ? 92 : 84)})` },
+    const warna = status === 'sudah' ? '#4f8a2c' : status === 'kini' ? '#f0932b' : '#a39a8c';
+    const lebarLabel = p.nama.length * 6.2 + 16;
+    const pn = s('g', { transform: `translate(${x} ${y - (status === 'kini' ? 96 : 88)})` },
       s('g', { class: `penanda ${status}` },
-        s('circle', { r: status === 'kini' ? 17 : 14, fill: status === 'sudah' ? '#2f9e5a' : status === 'kini' ? '#ffc93c' : '#b9b4ad', stroke: GARIS, 'stroke-width': 2.5 }),
-        s('text', { y: 5.5, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 900, fill: status === 'kini' ? GARIS : '#fff' }, status === 'sudah' ? '✓' : String(i + 1))));
+        // pin peta (tetesan) berisi nomor/centang
+        s('path', { d: 'M0 16 C-6 8 -15 2 -15 -8 A15 15 0 1 1 15 -8 C15 2 6 8 0 16 Z', fill: warna, stroke: '#fffaf0', 'stroke-width': 2.5 }),
+        s('circle', { cy: -8, r: 9.5, fill: '#fffaf0' }),
+        s('text', { y: -3.5, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 900, fill: warna }, status === 'sudah' ? '✓' : String(i + 1))),
+      s('g', { transform: 'translate(0 -36)' },
+        s('rect', { x: -lebarLabel / 2, y: -11, width: lebarLabel, height: 20, rx: 10, fill: '#fffaf0', stroke: '#d9c49a', 'stroke-width': 1.2, opacity: status === 'nanti' ? 0.85 : 1 }),
+        s('text', { y: 3.5, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': 800, fill: '#4a3a24' }, p.nama)));
     pn.addEventListener('click', () => onPilihPos?.(i));
     lapisPenanda.append(pn);
   });

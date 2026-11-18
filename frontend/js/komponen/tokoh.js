@@ -4,10 +4,7 @@
 
 import { s } from '../ui.js';
 
-const KULIT = '#e8b48a';
-const HIJAB = '#14a39a';
-const TOPI = '#d9952e';
-const GARIS = '#2b2d42';
+const GARIS = '#3b2a20';
 
 function mulut(ekspresi, cx, cy, lebar) {
   if (ekspresi === 'hore') {
@@ -28,32 +25,40 @@ function mata(ekspresi, x, y, r, warnaIris = '#2b1b10') {
 }
 
 function ulfa(ekspresi) {
+  const RAMBUT = '#87491f';
+  const KULIT = '#ffd9bd';
   const tangan = {
-    hore: [s('ellipse', { cx: 18, cy: 58, rx: 9, ry: 9, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
-      s('ellipse', { cx: 102, cy: 58, rx: 9, ry: 9, fill: KULIT, stroke: GARIS, 'stroke-width': 2 })],
-    tanya: [s('ellipse', { cx: 74, cy: 92, rx: 9, ry: 8, fill: KULIT, stroke: GARIS, 'stroke-width': 2 })],
-    semangat: [s('circle', { cx: 100, cy: 80, r: 10, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
-      s('rect', { x: 96, y: 62, width: 8, height: 14, rx: 4, fill: KULIT, stroke: GARIS, 'stroke-width': 2 })],
+    hore: [s('circle', { cx: 16, cy: 66, r: 8, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
+      s('circle', { cx: 104, cy: 66, r: 8, fill: KULIT, stroke: GARIS, 'stroke-width': 2 })],
+    tanya: [s('circle', { cx: 76, cy: 98, r: 7.5, fill: KULIT, stroke: GARIS, 'stroke-width': 2 })],
+    semangat: [s('circle', { cx: 102, cy: 84, r: 9, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
+      s('rect', { x: 98, y: 66, width: 8, height: 14, rx: 4, fill: KULIT, stroke: GARIS, 'stroke-width': 2 })],
   }[ekspresi] || [];
   return [
-    s('path', { d: 'M20 124 C24 96 42 88 60 88 C78 88 96 96 100 124 Z', fill: TOPI, stroke: GARIS, 'stroke-width': 2.5 }),
-    s('path', { d: 'M48 90 L60 108 L72 90 Z', fill: HIJAB, stroke: GARIS, 'stroke-width': 2 }),
-    s('path', { d: 'M28 66 C28 36 43 22 60 22 C77 22 92 36 92 66 C92 84 80 96 60 98 C40 96 28 84 28 66 Z', fill: HIJAB, stroke: GARIS, 'stroke-width': 2.5 }),
-    s('ellipse', { cx: 60, cy: 64, rx: 21, ry: 24, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
-    s('ellipse', { cx: 60, cy: 32, rx: 40, ry: 8, fill: '#b5741f', stroke: GARIS, 'stroke-width': 2.5 }),
-    s('path', { d: 'M38 32 C38 14 82 14 82 32 Z', fill: TOPI, stroke: GARIS, 'stroke-width': 2.5 }),
-    s('rect', { x: 39, y: 26, width: 42, height: 5, fill: '#ff6f59' }),
+    // bahu: kemeja putih berkerah & tali ransel
+    s('path', { d: 'M22 128 C24 104 40 96 60 96 C80 96 96 104 98 128 Z', fill: '#ffffff', stroke: GARIS, 'stroke-width': 2.5 }),
+    s('path', { d: 'M48 96 L60 110 L72 96 L68 94 L60 102 L52 94 Z', fill: '#fff', stroke: GARIS, 'stroke-width': 2 }),
+    s('path', { d: 'M36 100 Q33 114 36 128 M84 100 Q87 114 84 128', stroke: '#f2668f', 'stroke-width': 6, fill: 'none' }),
+    // kuncir & pita
+    s('path', { d: 'M30 40 C8 48 6 84 22 100 C18 78 24 60 36 50 Z', fill: RAMBUT, stroke: GARIS, 'stroke-width': 2.2 }),
+    s('path', { d: 'M24 34 l-15 -10 l3 18 Z M29 34 l13 -12 l2 16 Z', fill: '#ff6f9c', stroke: GARIS, 'stroke-width': 2 }),
+    s('circle', { cx: 26.5, cy: 34, r: 4.5, fill: '#ff6f9c', stroke: GARIS, 'stroke-width': 1.8 }),
+    // kepala
+    s('ellipse', { cx: 60, cy: 56, rx: 30, ry: 31, fill: RAMBUT, stroke: GARIS, 'stroke-width': 2.5 }),
+    s('ellipse', { cx: 61, cy: 63, rx: 25, ry: 24.5, fill: KULIT, stroke: GARIS, 'stroke-width': 2.2 }),
+    s('ellipse', { cx: 87, cy: 64, rx: 5, ry: 6, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
+    s('path', { d: 'M31 54 C35 28 80 24 91 52 C80 42 68 42 60 50 C55 40 42 42 36 56 Z', fill: RAMBUT, stroke: GARIS, 'stroke-width': 2.2 }),
     ekspresi === 'tanya'
-      ? s('path', { d: 'M64 51 Q70 46 76 50', stroke: GARIS, 'stroke-width': 2.5, fill: 'none', 'stroke-linecap': 'round' })
-      : s('path', { d: 'M64 53 Q69 50 75 53', stroke: GARIS, 'stroke-width': 2.5, fill: 'none', 'stroke-linecap': 'round' }),
-    s('path', { d: 'M45 53 Q51 50 56 53', stroke: GARIS, 'stroke-width': 2.5, fill: 'none', 'stroke-linecap': 'round' }),
-    mata(ekspresi, 51, 62, 4.2),
-    mata(ekspresi, 69, 62, 4.2),
-    s('circle', { cx: 45, cy: 72, r: 4.5, fill: '#ff8a7a', opacity: 0.7 }),
-    s('circle', { cx: 75, cy: 72, r: 4.5, fill: '#ff8a7a', opacity: 0.7 }),
-    mulut(ekspresi, 60, 76, 8),
+      ? s('path', { d: 'M64 52 Q70 47 76 51', stroke: GARIS, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' })
+      : s('path', { d: 'M64 54 Q69 51 75 54', stroke: GARIS, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' }),
+    s('path', { d: 'M45 54 Q50 51 55 54', stroke: GARIS, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' }),
+    mata(ekspresi, 51, 63, 4.4),
+    mata(ekspresi, 70, 63, 4.4),
+    s('ellipse', { cx: 44, cy: 72, rx: 5, ry: 3.2, fill: '#ff9e9e', opacity: 0.7 }),
+    s('ellipse', { cx: 77, cy: 72, rx: 5, ry: 3.2, fill: '#ff9e9e', opacity: 0.7 }),
+    mulut(ekspresi, 60.5, 76, 7.5),
     ...tangan,
-    ekspresi === 'tanya' ? s('text', { x: 98, y: 30, 'font-size': 26, 'font-weight': 900, fill: '#8b5cf6', stroke: GARIS, 'stroke-width': 1 }, '?') : null,
+    ekspresi === 'tanya' ? s('text', { x: 98, y: 30, 'font-size': 26, 'font-weight': 900, fill: '#7c4ddb', stroke: GARIS, 'stroke-width': 1 }, '?') : null,
   ];
 }
 

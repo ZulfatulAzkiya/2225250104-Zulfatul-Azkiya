@@ -205,6 +205,15 @@ def main() -> None:
         page.wait_for_timeout(500)
         foto(page, "20-harta-sertifikat")
 
+        # 6c. Ruang Ulfa (tombol tengah navigasi)
+        page.locator(".nav a.tengah").click()
+        expect(page.get_by_role("heading", name=re.compile("Ruang Ulfa"))).to_be_visible()
+        page.get_by_role("button", name="Ketuk Ulfa untuk mendapat tips").click()
+        expect(page.locator(".gelembung-tip")).to_contain_text("KEDUA ruas")
+        # 6 bintang pemanasan + 7 pos + 1 level dikuasai + 1 peti harta = 15
+        expect(page.get_by_text("15 / 20")).to_be_visible()
+        foto(page, "21-ruang-ulfa")
+
         # 7. Progres & pengaturan
         page.goto(URL + "#/progres")
         expect(page.get_by_text("Misi lift")).to_be_visible()
