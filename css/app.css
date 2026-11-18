@@ -34,7 +34,8 @@
   --shadow: 0 6px 16px var(--bayang), 0 1px 0 rgba(255, 255, 255, .6) inset;
   --fs: 17px;
   --nav-h: 72px;
-  --font: "Nunito", "Quicksand", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --font: "Fredoka", "Nunito", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --font-judul: "Fredoka", "Nunito", system-ui, sans-serif;
   --font-mat: "Cambria Math", "STIX Two Math", "Times New Roman", serif;
   color-scheme: light;
 }
@@ -70,7 +71,8 @@ body {
   color: var(--text);
   font-family: var(--font);
   font-size: var(--fs);
-  line-height: 1.5;
+  line-height: 1.55;
+  font-weight: 400;
   min-height: 100dvh;
   background-color: var(--bg);
   background-image:
@@ -85,7 +87,8 @@ body {
 @media (prefers-color-scheme: dark) { :root:not([data-tema="terang"]) body { background-image: none; } }
 button, input { font: inherit; color: inherit; }
 a { color: var(--primary); font-weight: 800; }
-h1, h2, h3 { line-height: 1.25; margin: 0 0 .5rem; font-weight: 900; }
+h1, h2, h3 { line-height: 1.25; margin: 0 0 .5rem; font-weight: 600; font-family: var(--font-judul); letter-spacing: .01em; }
+.merek, .judul-warna, .tombol, .nav a { font-family: var(--font-judul); }
 h1 { font-size: 1.3em; }
 h2 { font-size: 1.12em; }
 h3 { font-size: 1em; }
@@ -94,6 +97,27 @@ p { margin: 0 0 .75rem; }
 :focus-visible { outline: 3px solid var(--oranye); outline-offset: 3px; border-radius: 10px; }
 h1[tabindex="-1"]:focus { outline: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+
+/* ---------- font ---------- */
+@font-face { font-family: "Fredoka"; src: url("../fonts/Fredoka.ttf") format("truetype"); font-weight: 300 700; font-display: swap; }
+
+/* ---------- gerak halus karakter ---------- */
+.ulfa .mata { transform-box: fill-box; transform-origin: center; animation: kedip 5s infinite; }
+@keyframes kedip { 0%, 93%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.12); } }
+.adegan .ulfa .kepala, .potret .ulfa .kepala { animation: napas 3.2s ease-in-out infinite; }
+@keyframes napas { 50% { transform: translateY(1.2px) rotate(.6deg); } }
+.ulfa .lengan, .ulfa .kaki { transform: rotate(var(--sudut)); transition: transform .35s ease; }
+.berjalan .ulfa .kaki-kiri { animation: ayunA .5s ease-in-out infinite alternate; }
+.berjalan .ulfa .kaki-kanan { animation: ayunB .5s ease-in-out infinite alternate; }
+.berjalan .ulfa .lengan-kiri { animation: ayunB .5s ease-in-out infinite alternate; }
+.berjalan .ulfa .lengan-kanan { animation: ayunA .5s ease-in-out infinite alternate; }
+@keyframes ayunA { from { transform: rotate(16deg); } to { transform: rotate(-16deg); } }
+@keyframes ayunB { from { transform: rotate(-16deg); } to { transform: rotate(16deg); } }
+.adegan .ulfa.pose-hore .lengan-kanan { animation: lambai 1s ease-in-out infinite alternate; }
+@keyframes lambai { from { transform: rotate(-150deg); } to { transform: rotate(-128deg); } }
+:root[data-gerak="kurang"] .ulfa * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .ulfa * { animation: none !important; } }
 
 /* ---------------------------------------------------------------- kerangka */
 .atas {
