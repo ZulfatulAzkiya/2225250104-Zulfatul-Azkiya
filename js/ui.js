@@ -95,5 +95,14 @@ export function kosongkan(el, ...anak) {
   return el;
 }
 
+// Fungsi yang dijalankan saat meninggalkan halaman (menghentikan 3D, musik, narasi).
+const pembersih = [];
+export function saatKeluar(fn) { pembersih.push(fn); }
+export function jalankanPembersih() {
+  while (pembersih.length) {
+    try { pembersih.pop()(); } catch (e) { console.warn(e); }
+  }
+}
+
 export const LABEL_LEVEL = { dasar: 'Dasar', menengah: 'Menengah', tantangan: 'Tantangan' };
 export const LABEL_TOPIK_LATIHAN = { plsv: 'Persamaan (PLSV)', ptlsv: 'Pertidaksamaan (PtLSV)' };

@@ -13,7 +13,7 @@ export function tampilan(teks) {
  * onBenar(benarPertama) dipanggil sekali saat siswa memilih jawaban yang benar.
  * Pilihan salah memberi umpan balik dan siswa boleh mencoba lagi.
  */
-export function buatPilihan({ tanya, pilihan, benar, penjelasan = '', umpanSalah = [], garis = null, onBenar = () => {} }) {
+export function buatPilihan({ tanya, pilihan, benar, penjelasan = '', umpanSalah = [], garis = null, onBenar = () => {}, onSalah = () => {} }) {
   let salahDulu = false;
   let selesai = false;
   const hasil = h('div', { 'aria-live': 'polite' });
@@ -37,6 +37,7 @@ export function buatPilihan({ tanya, pilihan, benar, penjelasan = '', umpanSalah
       b.classList.add('salah');
       b.disabled = true;
       kosongkan(hasil, umpan('salah', 'Belum tepat. ', umpanSalah[i] || 'Coba pilih jawaban lain.'));
+      onSalah();
     }
   }
 

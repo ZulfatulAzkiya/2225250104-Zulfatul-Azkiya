@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Ulfa, penjelajah berhijab">
+  <!-- Karakter orisinal ULFALINE: Ulfa -->
+  <circle cx="60" cy="60" r="58" fill="#fde8c8"/>
+  <!-- bahu & rompi penjelajah -->
+  <path d="M18 120 C22 92 40 84 60 84 C80 84 98 92 102 120 Z" fill="#c9893b"/>
+  <path d="M46 86 L60 104 L74 86 Z" fill="#2f9e8f"/>
+  <!-- hijab -->
+  <path d="M26 64 C26 34 42 20 60 20 C78 20 94 34 94 64 C94 82 82 94 60 96 C38 94 26 82 26 64 Z" fill="#2f9e8f"/>
+  <!-- wajah -->
+  <ellipse cx="60" cy="62" rx="22" ry="25" fill="#e8b48a"/>
+  <!-- topi penjelajah -->
+  <ellipse cx="60" cy="30" rx="40" ry="8" fill="#a8742f"/>
+  <path d="M38 30 C38 14 82 14 82 30 Z" fill="#c9893b"/>
+  <rect x="38" y="25" width="44" height="5" fill="#7a5420"/>
+  <!-- mata -->
+  <ellipse cx="51" cy="60" rx="4" ry="5" fill="#2b1b10"/>
+  <ellipse cx="69" cy="60" rx="4" ry="5" fill="#2b1b10"/>
+  <circle cx="52.5" cy="58.5" r="1.4" fill="#fff"/>
+  <circle cx="70.5" cy="58.5" r="1.4" fill="#fff"/>
+  <!-- alis -->
+  <path d="M45 52 Q51 49 56 52" stroke="#4a2e1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M64 52 Q69 49 75 52" stroke="#4a2e1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- pipi & senyum -->
+  <circle cx="45" cy="70" r="4" fill="#f29b8a" opacity=".6"/>
+  <circle cx="75" cy="70" r="4" fill="#f29b8a" opacity=".6"/>
+  <path d="M51 74 Q60 82 69 74" stroke="#7a2e1e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

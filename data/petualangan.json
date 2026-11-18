@@ -1,0 +1,129 @@
+{
+  "versi": 1,
+  "catatan": "Ekspedisi Pulau Aljabar. Skor per indikator literasi matematika mengikuti rubrik pretest-posttest (maks 6 per indikator, total 24). Angka & konteks sengaja BERBEDA dari soal pretest/posttest. Diverifikasi backend/tests/test_konten.py.",
+  "indikator": {
+    "R": "Mathematical Reasoning",
+    "F": "Formulating Situations Mathematically",
+    "E": "Employing Concepts, Facts, and Procedures",
+    "I": "Interpreting, Applying, and Evaluating"
+  },
+  "pembuka": [
+    { "siapa": "ulfa", "teks": "Lihat! Aku menemukan peta kuno di perpustakaan sekolah. Katanya ada harta karun di Pulau Harta!" },
+    { "siapa": "lino", "teks": "Tapi jalannya melewati tujuh pos penuh teka-teki aljabar. Ayo kita pecahkan satu per satu!" }
+  ],
+  "pos": [
+    {
+      "id": "gerbang",
+      "nama": "Gerbang Batu",
+      "ikon": "🗿",
+      "fokus": "Pemanasan: bilangan negatif",
+      "narasi": [
+        { "siapa": "lino", "teks": "Gerbang hutan terkunci. Kuncinya tiga angka rahasia dari hitungan bilangan bulat." }
+      ],
+      "teka": [
+        { "jenis": "pilihan", "tanya": "Angka rahasia pertama: −8 + 5 = …", "pilihan": ["−3", "3", "−13"], "benar": 0, "penjelasan": "Dari −8 maju 5 langkah ke kanan: −3.", "cek": "-8 + 5", "bintang": 1 },
+        { "jenis": "pilihan", "tanya": "Angka rahasia kedua: (−4) × (−6) = …", "pilihan": ["24", "−24", "−10"], "benar": 0, "penjelasan": "Negatif × negatif = positif.", "cek": "(-4)(-6)", "bintang": 1 },
+        { "jenis": "pilihan", "tanya": "Angka rahasia ketiga: mana yang lebih BESAR?", "pilihan": ["−3", "−7"], "benar": 0, "penjelasan": "−3 ada di sebelah kanan −7 pada garis bilangan, jadi −3 lebih besar.", "bintang": 1 }
+      ]
+    },
+    {
+      "id": "jembatan",
+      "nama": "Jembatan Timbangan",
+      "ikon": "⚖️",
+      "fokus": "Persamaan linear",
+      "narasi": [
+        { "siapa": "ulfa", "teks": "Jembatan gantung hanya turun jika dua keranjangnya seimbang." },
+        { "siapa": "lino", "teks": "Kiri: 5 karung masing-masing x kg, dikurangi 4 kg. Kanan: 3 karung yang sama, ditambah 10 kg." }
+      ],
+      "teka": [
+        { "jenis": "pilihan", "tanya": "Persamaan yang tepat untuk timbangan seimbang adalah …", "pilihan": ["5x − 4 = 3x + 10", "5x + 4 = 3x − 10", "5x − 4 = 3x"], "benar": 0, "setara": "5x − 4 = 3x + 10", "umpan": ["", "Keranjang kiri DIKURANGI 4 kg dan kanan DITAMBAH 10 kg.", "Beban 10 kg di kanan jangan dilupakan."], "penjelasan": "Kiri = 5x − 4, kanan = 3x + 10, dan keduanya seimbang (=).", "skor": { "E": 1 } },
+        { "jenis": "langkah", "soal": "5x − 4 = 3x + 10", "jawaban": "x = 7", "skor": { "E": 1 } },
+        { "jenis": "pilihan", "tanya": "Cek dengan substitusi x = 7. Kiri: 5(7) − 4 = 31. Kanan: 3(7) + 10 = …", "pilihan": ["31, jadi seimbang ✓", "21, jadi tidak seimbang", "41, jadi tidak seimbang"], "benar": 0, "penjelasan": "3 × 7 + 10 = 31. Kedua ruas sama, jadi x = 7 kg benar.", "skor": { "E": 1 } }
+      ]
+    },
+    {
+      "id": "sungai",
+      "nama": "Sungai Batu Loncat",
+      "ikon": "🪨",
+      "fokus": "Makna tanda pertidaksamaan",
+      "narasi": [
+        { "siapa": "lino", "teks": "Hati-hati! Hanya batu yang memenuhi x ≤ 2 yang aman diinjak." },
+        { "siapa": "ulfa", "teks": "≤ dibaca \"kurang dari atau sama dengan\". Jadi 2 juga boleh!" }
+      ],
+      "teka": [
+        { "jenis": "batu", "tanya": "Ketuk SEMUA batu yang aman (x ≤ 2).", "rel": "<=", "nilai": 2, "batu": [-3, 5, -1, 3, 0, 2], "bintang": 2 },
+        { "jenis": "pilihan", "tanya": "Batu bernomor 2 aman diinjak karena …", "pilihan": ["tanda ≤ berarti 2 ikut (sama dengan)", "2 adalah bilangan genap", "2 lebih besar dari 0"], "benar": 0, "penjelasan": "Garis di bawah tanda ≤ berarti \"atau sama dengan\". Bulatan di 2 penuh.", "bintang": 1 }
+      ]
+    },
+    {
+      "id": "gua",
+      "nama": "Gua Cermin",
+      "ikon": "🪞",
+      "fokus": "Pertidaksamaan: tanda dibalik",
+      "narasi": [
+        { "siapa": "ulfa", "teks": "Di dinding gua ada tulisan: 8 − 3x ≥ 20. Pintu terbuka jika kita menemukan nilai x." },
+        { "siapa": "lino", "teks": "Ingat, cermin gua membalik urutan bilangan, seperti dikali bilangan negatif!" }
+      ],
+      "teka": [
+        { "jenis": "langkah", "soal": "8 − 3x ≥ 20", "jawaban": "x ≤ −4", "skor": { "E": 2 } },
+        { "jenis": "pilihan", "tanya": "Mengapa tanda ≥ berubah menjadi ≤?", "pilihan": ["Karena kedua ruas dibagi −3, bilangan negatif", "Karena 12 lebih besar dari 8", "Karena x ada di ruas kiri"], "benar": 0, "penjelasan": "Membagi dengan bilangan negatif membalik urutan bilangan, jadi tandanya dibalik.", "skor": { "E": 1 } }
+      ]
+    },
+    {
+      "id": "pasar",
+      "nama": "Pasar Apung",
+      "ikon": "🛶",
+      "fokus": "Merumuskan model matematika",
+      "narasi": [
+        { "siapa": "ulfa", "teks": "Kita butuh bekal. Pedagang perahu menjual pisang Rp2.500 per sisir." },
+        { "siapa": "lino", "teks": "Uang bekal kita paling banyak Rp20.000. Berapa sisir paling banyak yang bisa dibeli?" }
+      ],
+      "teka": [
+        { "jenis": "pilihan", "tanya": "Apa yang tepat dimisalkan sebagai x?", "pilihan": ["Banyak sisir pisang yang dibeli", "Harga satu sisir pisang", "Uang bekal yang dibawa"], "benar": 0, "penjelasan": "Yang dicari adalah banyak sisir, jadi x = banyak sisir.", "skor": { "F": 1 } },
+        { "jenis": "pilihan", "tanya": "Model matematika yang tepat adalah …", "pilihan": ["2500x ≤ 20000", "2500x ≥ 20000", "x + 2500 ≤ 20000"], "benar": 0, "setara": "2500x ≤ 20000", "umpan": ["", "\"Paling banyak Rp20.000\" berarti biaya tidak boleh LEBIH dari 20.000: pakai ≤.", "Harga per sisir dikali banyak sisir: 2500 × x."], "penjelasan": "Biaya = 2500x, dan tidak boleh lebih dari 20.000.", "skor": { "F": 2 } },
+        { "jenis": "langkah", "soal": "2500x ≤ 20000", "jawaban": "x ≤ 8", "skor": { "F": 1 } },
+        { "jenis": "pilihan", "tanya": "Jadi, paling banyak berapa sisir pisang?", "pilihan": ["8 sisir", "7 sisir", "9 sisir"], "benar": 0, "penjelasan": "x ≤ 8, jadi paling banyak 8 sisir.", "skor": { "F": 1 } },
+        { "jenis": "pilihan", "tanya": "Kesimpulan yang paling tepat adalah …", "pilihan": ["8 sisir menghabiskan tepat Rp20.000; sisir ke-9 membuat uang tidak cukup", "Kita boleh membeli 9 sisir", "Kita harus membeli tepat 20 sisir"], "benar": 0, "penjelasan": "2500 × 8 = 20.000. Sisir ke-9 membuat biaya menjadi 22.500, melebihi uang.", "skor": { "F": 1 } }
+      ]
+    },
+    {
+      "id": "bukit",
+      "nama": "Bukit Dua Jalan",
+      "ikon": "⛰️",
+      "fokus": "Bernalar & mengambil keputusan",
+      "narasi": [
+        { "siapa": "lino", "teks": "Untuk mendaki, kita perlu air minum. Uang kita Rp40.000 dan harus tersisa paling sedikit Rp8.000 untuk naik perahu." },
+        { "siapa": "ulfa", "teks": "Toko A: biaya masuk Rp4.000, air Rp7.000 per botol. Toko B: biaya masuk Rp10.000, air Rp5.000 per botol. Kita ingin botol sebanyak mungkin!" }
+      ],
+      "teka": [
+        { "jenis": "pilihan", "tanya": "Uang paling banyak yang boleh dibelanjakan adalah …", "pilihan": ["Rp32.000", "Rp40.000", "Rp48.000"], "benar": 0, "penjelasan": "Rp40.000 − Rp8.000 = Rp32.000, karena Rp8.000 harus tersisa.", "skor": { "R": 1 } },
+        { "jenis": "pilihan", "tanya": "Model untuk Toko A (x = banyak botol) adalah …", "pilihan": ["4000 + 7000x ≤ 32000", "7000 + 4000x ≤ 32000", "4000 + 7000x ≥ 32000"], "benar": 0, "setara": "4000 + 7000x ≤ 32000", "umpan": ["", "Biaya masuk Rp4.000 dibayar sekali. Yang dikali banyak botol adalah Rp7.000.", "Belanja tidak boleh LEBIH dari Rp32.000, jadi pakai ≤."], "penjelasan": "Biaya Toko A = 4000 + 7000x, paling banyak 32.000.", "skor": { "R": 1 } },
+        { "jenis": "langkah", "soal": "4000 + 7000x ≤ 32000", "jawaban": "x ≤ 4", "skor": { "R": 1 } },
+        { "jenis": "pilihan", "tanya": "Untuk Toko B, 10000 + 5000y ≤ 32000 menghasilkan y ≤ 4,4. Paling banyak berapa botol?", "pilihan": ["4 botol", "4,4 botol", "5 botol"], "benar": 0, "penjelasan": "Botol tidak bisa dipotong, jadi paling banyak 4 botol. 5 botol membutuhkan Rp35.000, melebihi Rp32.000.", "skor": { "R": 1 } },
+        { "jenis": "pilihan", "tanya": "Toko A: 4 botol, sisa Rp8.000. Toko B: 4 botol, sisa Rp10.000. Toko mana yang sebaiknya dipilih?", "pilihan": ["Toko B: botolnya sama banyak, tetapi sisa uangnya lebih banyak", "Toko A: biaya masuknya lebih murah", "Sama saja, tidak ada bedanya"], "benar": 0, "penjelasan": "Banyak botol sama (4), tetapi Toko B menyisakan Rp2.000 lebih banyak. Keputusan didasarkan pada perbandingan hasil, bukan hanya satu harga.", "skor": { "R": 2 } }
+      ]
+    },
+    {
+      "id": "dermaga",
+      "nama": "Dermaga Rakit",
+      "ikon": "🛟",
+      "fokus": "Menafsirkan & menilai hasil",
+      "narasi": [
+        { "siapa": "ulfa", "teks": "Rakit ke Pulau Harta hanya kuat menahan 300 kg. Kita berdua dan bekal sudah 120 kg." },
+        { "siapa": "lino", "teks": "Kita ingin membawa peti kayu kosong untuk harta. Tiap peti beratnya 40 kg. Berapa peti yang aman dibawa?" }
+      ],
+      "teka": [
+        { "jenis": "pilihan", "tanya": "Informasi penting dalam cerita ini adalah …", "pilihan": ["Batas 300 kg, beban awal 120 kg, tiap peti 40 kg", "Batas 120 kg dan tiap peti 300 kg", "Rakit memuat 40 peti"], "benar": 0, "penjelasan": "Tiga bilangan ini yang membentuk model.", "skor": { "I": 1 } },
+        { "jenis": "pilihan", "tanya": "Model yang tepat (x = banyak peti) adalah …", "pilihan": ["120 + 40x ≤ 300", "120x + 40 ≤ 300", "120 + 40x ≥ 300"], "benar": 0, "setara": "120 + 40x ≤ 300", "umpan": ["", "Beban awal 120 kg dihitung sekali. Tiap peti 40 kg, jadi 40x.", "Beban tidak boleh LEBIH dari 300 kg: pakai ≤."], "penjelasan": "Beban total = 120 + 40x, paling berat 300 kg.", "skor": { "I": 1 } },
+        { "jenis": "langkah", "soal": "120 + 40x ≤ 300", "jawaban": "x ≤ 4,5", "skor": { "I": 1 } },
+        { "jenis": "pilihan", "tanya": "Hasilnya x ≤ 4,5. Berapa peti paling banyak yang dibawa?", "pilihan": ["4 peti", "4,5 peti", "5 peti"], "benar": 0, "penjelasan": "Peti tidak bisa dipotong. Bilangan cacah terbesar yang ≤ 4,5 adalah 4.", "skor": { "I": 1 } },
+        { "jenis": "pilihan", "tanya": "Cek: 4 peti → 120 + 40 × 4 = 280 kg. Apa artinya?", "pilihan": ["Aman, karena 280 kg tidak lebih dari 300 kg", "Terlalu berat untuk rakit", "Tepat sama dengan batas 300 kg"], "benar": 0, "penjelasan": "280 ≤ 300, jadi rakit aman.", "skor": { "I": 1 } },
+        { "jenis": "pilihan", "tanya": "Mengapa peti ke-5 tidak boleh dinaikkan?", "pilihan": ["Beban menjadi 320 kg, melebihi batas 300 kg", "Karena 5 adalah bilangan ganjil", "Karena rakit hanya muat 4 benda"], "benar": 0, "penjelasan": "120 + 40 × 5 = 320 > 300. Jawaban dibulatkan ke BAWAH karena keselamatan.", "skor": { "I": 1 } }
+      ]
+    }
+  ],
+  "penutup": [
+    { "siapa": "lino", "teks": "Kita sampai di Pulau Harta! Petinya terbuka!" },
+    { "siapa": "ulfa", "teks": "Harta sebenarnya adalah kemampuan kita memakai aljabar untuk memecahkan masalah. Hebat, Penjelajah!" }
+  ]
+}
