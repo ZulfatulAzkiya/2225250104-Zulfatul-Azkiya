@@ -2,7 +2,7 @@
 // Setiap kali file aplikasi berubah, naikkan VERSI agar cache diperbarui.
 // Daftar BERKAS dicek oleh backend/tests/test_frontend.py (semua file harus tercantum).
 
-const VERSI = 'ulfaline-v1.5.0';
+const VERSI = 'ulfaline-v1.6.0';
 const BERKAS = [
   './',
   'index.html',
@@ -28,6 +28,7 @@ const BERKAS = [
   'js/halaman/akun.js',
   'js/halaman/petualangan.js',
   'js/halaman/ulfa.js',
+  'js/halaman/layar-awal.js',
   'js/petualangan/peta2d.js',
   'js/petualangan/suara.js',
   'gambar/latar-hutan.svg',
