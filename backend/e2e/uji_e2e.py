@@ -241,7 +241,10 @@ def main() -> None:
             pctx.close()
         assert masalah == [], f"belum bisa dipasang: {masalah}"
 
-    galat = [g for g in galat if "ERR_INTERNET_DISCONNECTED" not in g and "Failed to fetch" not in g]
+    # 404 wajar di hosting statis (GitHub Pages/Netlify): /api/soal tidak ada, aplikasi memakai bank soal.
+    # Keberadaan semua file aplikasi sudah dijamin test_frontend.py.
+    galat = [g for g in galat if "ERR_INTERNET_DISCONNECTED" not in g and "Failed to fetch" not in g
+             and "status of 404" not in g]
     if galat:
         print("GALAT BROWSER:\n" + "\n".join(galat))
         sys.exit(1)

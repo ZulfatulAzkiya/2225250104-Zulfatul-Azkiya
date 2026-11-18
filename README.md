@@ -2,6 +2,18 @@
 
 Aplikasi belajar **Persamaan Linear Satu Variabel (PLSV)** dan **Pertidaksamaan Linear Satu Variabel (PtLSV)** untuk siswa SMP (Kurikulum Merdeka, Fase D), dengan **Misi Literasi Matematika**. Aplikasi dirancang berdasarkan **Cognitive Load Theory** dari hasil wawancara siswa.
 
+## 🔗 Buka & Pasang Aplikasi
+
+**https://zulfatulazkiya.github.io/2225250104-Zulfatul-Azkiya/**
+
+| Perangkat | Cara memasang (tanpa Play Store / App Store) |
+|---|---|
+| Android | Buka link di **Chrome**, isi nama, lalu ketuk **📲 Pasang Aplikasi** di Beranda (atau menu ⋮ → *Instal aplikasi*). ULFALINE masuk ke daftar aplikasi HP. |
+| iPhone/iPad | Buka di **Safari**, ketuk **Bagikan**, lalu pilih **Tambahkan ke Layar Utama**. |
+| Laptop | Buka di Chrome/Edge, lalu klik ikon **Instal** di bilah alamat (atau langsung dipakai di browser). |
+
+Setelah dibuka sekali, aplikasi tetap bisa dipakai **offline**.
+
 - 🌐 Dibuka di **browser** (HP, tablet, laptop)
 - 📲 Bisa **dipasang langsung dari browser** (PWA), tanpa Play Store atau App Store
 - 📴 Tetap bisa dipakai **offline** setelah dibuka sekali

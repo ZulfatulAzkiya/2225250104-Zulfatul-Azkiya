@@ -2,6 +2,20 @@
 
 ULFALINE adalah **Progressive Web App (PWA)**: dibuka di browser, lalu bisa **dipasang (install) langsung dari browser**, tanpa Play Store atau App Store. Setelah terpasang, ULFALINE muncul di layar utama HP seperti aplikasi biasa dan tetap bisa dipakai saat offline.
 
+## Link resmi (sudah aktif)
+
+**https://zulfatulazkiya.github.io/2225250104-Zulfatul-Azkiya/**
+
+- Disajikan **GitHub Pages** dari cabang `gh-pages` di repositori `ZulfatulAzkiya/2225250104-Zulfatul-Azkiya`. Gratis, HTTPS, dan permanen.
+- Cabang `gh-pages` berisi salinan folder `frontend`. Untuk memperbarui situs: commit dan push perubahan ke `main`, naikkan `VERSI` di `frontend/sw.js`, lalu klik dua kali **`terbitkan-web.bat`**.
+- Di GitHub Pages tidak ada server Python, jadi soal latihan diambil dari bank 900 soal (`frontend/data/bank-soal.json`) yang dibuat oleh generator Python. Pemeriksaan jawaban tetap berjalan penuh di HP memakai `mesin.js`.
+
+### Memasang di HP Android
+1. Buka link di **Google Chrome**.
+2. Isi nama panggilan, lalu ketuk **Mulai Belajar**.
+3. Di Beranda ketuk **📲 Pasang Aplikasi** (atau menu ⋮ → **Instal aplikasi** / **Tambahkan ke layar utama**), lalu pilih **Instal**.
+4. Ikon ULFALINE muncul di layar utama dan daftar aplikasi. Aplikasi terbuka layar penuh seperti aplikasi biasa dan tetap jalan tanpa internet.
+
 ## Ringkas: pilih cara mendapatkan link
 
 | Kebutuhan | Cara | Link | Bisa dipasang di HP? |
