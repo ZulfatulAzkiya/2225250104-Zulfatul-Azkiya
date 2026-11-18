@@ -165,12 +165,18 @@ def main() -> None:
         for i, pos in enumerate(petualangan["pos"]):
             page.get_by_role("button", name=f"Masuk Pos {i + 1} ▶").click()
             expect(page.get_by_role("heading", name=re.compile(f"Pos {i + 1}:"))).to_be_visible()
+            # Ulfa bertanya: "Kita sedang menuju ke mana?" (peta rute)
+            jawab_pilihan(page, pos["nama"])
+            if i == 2:
+                foto(page, "16a-peta-rute")
+            page.get_by_role("button", name="Ayo ke sana! ▶").click()
             if i == 0:
                 foto(page, "16-pos-narasi")
             page.get_by_role("button", name="Mulai teka-teki ▶").click()
             for t in pos["teka"]:
                 if t["jenis"] == "pilihan":
                     jawab_pilihan(page, t["pilihan"][t["benar"]])
+                    expect(page.locator(".reaksi .tokoh")).to_be_visible()
                 elif t["jenis"] == "langkah":
                     kerjakan_soal(page)
                 else:

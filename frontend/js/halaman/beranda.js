@@ -7,6 +7,7 @@ import { topikBerikut, statusTopik } from './belajar.js';
 import { SARAN_KESALAHAN } from './latihan.js';
 import { LABEL_KESALAHAN } from '../mesin.js';
 import { blokPasang, bisaDipasang } from '../pasang.js';
+import { tokoh } from '../komponen/tokoh.js';
 
 function latihanDisarankan() {
   for (const topik of ['plsv', 'ptlsv']) {
@@ -35,7 +36,7 @@ export function halamanBeranda() {
   return [
     h('h1', {}, `Halo, ${d.profil?.nama || 'teman'}! 👋`),
     h('section', { class: 'kartu kartu-petualangan' },
-      h('div', { class: 'baris' }, h('img', { src: 'gambar/ulfa.svg', alt: '', width: 64, height: 64 }), h('img', { src: 'gambar/lino.svg', alt: '', width: 64, height: 64 })),
+      h('div', { class: 'pahlawan' }, tokoh('ulfa', jumlahPos >= 7 ? 'hore' : 'senyum', 96), tokoh('lino', 'senyum', 78)),
       h('h2', {}, '🗺️ Ekspedisi Pulau Aljabar'),
       h('p', {}, jumlahPos >= 7 ? 'Semua pos terlewati! Sudahkah kamu membuka peti harta karun?' : `Bantu Ulfa & Lino melewati 7 pos teka-teki menuju harta karun. Pos selesai: ${jumlahPos}/7.`),
       h('a', { class: 'tombol penuh', href: '#/petualangan' }, jumlahPos ? 'Lanjutkan petualangan ▶' : 'Mulai petualangan ▶')),

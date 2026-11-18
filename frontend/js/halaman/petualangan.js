@@ -9,6 +9,7 @@ import { buatPengerja } from '../komponen/pengerja.js';
 import { garisBilangan, INFO_SIMBOL } from '../komponen/visual.js';
 import { buatDunia, dukungWebGL, TITIK_POS, TITIK_HARTA } from '../petualangan/dunia3d.js';
 import * as suara from '../petualangan/suara.js';
+import { tokoh, kataHore, kataSemangat } from '../komponen/tokoh.js';
 
 const DATA = 'data/petualangan.json';
 const NAMA = { ulfa: 'Ulfa', lino: 'Lino' };
@@ -38,11 +39,36 @@ function percakapan(baris) {
   const teksSemua = baris.map((b) => `${NAMA[b.siapa]}: ${b.teks}`).join(' ');
   return h('div', { class: 'percakapan' },
     baris.map((b) => h('div', { class: `gelembung ${b.siapa}` },
-      h('img', { src: `gambar/${b.siapa}.svg`, alt: '', width: 56, height: 56 }),
+      tokoh(b.siapa, b.ekspresi || 'senyum', 60),
       h('p', {}, h('strong', {}, `${NAMA[b.siapa]}: `), b.teks))),
     suara.bisaBicara()
       ? h('button', { class: 'tombol netral', type: 'button', onclick: () => suara.bicara(teksSemua) }, '🔊 Dengarkan')
       : null);
+}
+
+/** Kartu Lagu Ekspedisi: lirik karaoke yang menyala mengikuti musik. */
+function kartuLagu() {
+  let berhenti = null;
+  const baris = suara.LAGU.map((b) => h('li', {}, b.lirik));
+  const tombol = h('button', { class: 'tombol kedua penuh', type: 'button' }, '🎵 Putar Lagu Ekspedisi');
+  const selesai = () => {
+    berhenti = null;
+    baris.forEach((b) => b.classList.remove('aktif'));
+    tombol.textContent = '🎵 Putar Lagu Ekspedisi';
+  };
+  tombol.addEventListener('click', () => {
+    if (berhenti) { berhenti(); selesai(); return; }
+    tombol.textContent = '⏹️ Hentikan lagu';
+    berhenti = suara.nyanyikan((i) => {
+      baris.forEach((b, j) => b.classList.toggle('aktif', i === j));
+    }, selesai);
+  });
+  saatKeluar(() => berhenti?.());
+  return h('section', { class: 'kartu' },
+    h('h2', {}, '🎶 Lagu Ekspedisi'),
+    h('p', { class: 'redup kecil' }, 'Nyanyikan bersama! Lirik yang sedang dinyanyikan akan menyala.'),
+    h('ol', { class: 'lirik' }, baris),
+    tombol);
 }
 
 function tombolSuara() {
@@ -72,12 +98,13 @@ export function halamanPeta() {
     const pt = simpan.petualangan();
     if (!pt.pembuka) {
       kosongkan(wadah, h('section', { class: 'kartu' },
-        h('h2', {}, 'Peta kuno ditemukan!'),
+        h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 110), tokoh('lino', 'senyum', 90)),
+        h('h2', { style: 'text-align:center;margin-top:8px' }, 'Peta kuno ditemukan!'),
         percakapan(data.pembuka),
         h('button', {
           class: 'tombol penuh', type: 'button', style: 'margin-top:12px',
           onclick: () => { simpan.setPembukaDilihat(); suara.efek('buka'); tampil(data); },
-        }, 'Ayo berangkat! 🧭')));
+        }, 'Ayo berangkat! 🧭')), kartuLagu());
       return;
     }
 
@@ -128,6 +155,7 @@ export function halamanPeta() {
           h('button', { class: 'item', type: 'button', onclick: () => masuk(i) },
             h('span', { class: 'ikon', 'aria-hidden': 'true' }, sudah.has(p.id) ? '✅' : i === aktif ? p.ikon : '🔒'),
             h('span', { class: 'isi' }, h('strong', {}, `${i + 1}. ${p.nama}`), h('span', { class: 'redup kecil' }, p.fokus))))))),
+      kartuLagu(),
       h('p', { class: 'redup kecil', style: 'text-align:center' }, 'Ingin tantangan lain? ', h('a', { href: '#/literasi' }, '🌏 Misi Literasi tambahan')));
 
     if (!dukungWebGL()) {
@@ -155,6 +183,17 @@ export function halamanPeta() {
   }
 
   return [h('h1', {}, '🗺️ Ekspedisi Pulau Aljabar'), wadah];
+}
+
+/** Peta rute bergambar: pos yang sudah, sedang, dan akan dilalui. */
+function petaRute(data, iPos) {
+  const sudah = simpan.petualangan().pos;
+  const titik = [...data.pos.map((p, j) => ({ ikon: p.ikon, nama: p.nama, status: sudah[p.id]?.selesai ? 'sudah' : j === iPos ? 'kini' : 'nanti' })),
+    { ikon: '🏆', nama: 'Pulau Harta', status: 'nanti' }];
+  return h('ol', { class: 'rute', 'aria-label': `Peta rute: pos ${iPos + 1} dari ${data.pos.length}` },
+    titik.map((tt) => h('li', { class: tt.status, title: tt.nama },
+      h('span', { class: 'ikon-rute', 'aria-hidden': 'true' }, tt.status === 'sudah' ? '✅' : tt.ikon),
+      tt.status === 'kini' ? h('span', { class: 'nama-rute' }, tt.nama) : h('span', { class: 'sr-only' }, tt.nama))));
 }
 
 function batangIndikator(nama, nilai, maks = 6) {
@@ -227,10 +266,28 @@ export function halamanPos(id) {
   function jalankan(data, pos, iPos) {
     const skor = {};
     let bintang = 0;
-    let k = -1; // -1 = narasi
+    let k = -2; // -2 = peta rute & pertanyaan Ulfa, -1 = narasi
 
     function tampil() {
       window.scrollTo({ top: 0 });
+      if (k === -2) {
+        // Ulfa bertanya langsung kepada siswa sambil menunjukkan peta rute (interaksi petualangan).
+        const lain = data.pos.filter((_, j) => j !== iPos).sort(() => Math.random() - 0.5).slice(0, 2).map((p) => p.nama);
+        const lanjutRute = h('button', { class: 'tombol penuh', type: 'button', disabled: true, onclick: () => { k = -1; tampil(); } }, 'Ayo ke sana! ▶');
+        kosongkan(wadah,
+          h('section', { class: 'kartu' },
+            h('h2', {}, '🗺️ Peta perjalanan'),
+            petaRute(data, iPos),
+            h('div', { class: 'reaksi' }, tokoh('ulfa', 'tanya', 64), h('p', {}, 'Lihat petanya! Kita sedang menuju ke mana?')),
+            buatPilihan({
+              tanya: 'Pilih tempat tujuan kita:', pilihan: [pos.nama, ...lain], benar: 0,
+              penjelasan: `Betul! Kita menuju ${pos.nama}.`,
+              onBenar: () => { suara.efek('benar'); lanjutRute.disabled = false; },
+              onSalah: () => suara.efek('salah'),
+            })),
+          lanjutRute);
+        return;
+      }
       if (k === -1) {
         kosongkan(wadah,
           h('p', { class: 'redup', style: 'margin-top:0' }, pos.fokus),
@@ -242,7 +299,9 @@ export function halamanPos(id) {
       const t = pos.teka[k];
       const lanjut = h('button', { class: 'tombol penuh', type: 'button', disabled: true, onclick: () => { k += 1; tampil(); } },
         k === pos.teka.length - 1 ? 'Selesaikan pos ✓' : 'Teka-teki berikutnya →');
+      const reaksi = h('div', { 'aria-live': 'polite' });
       const beri = (pertama) => {
+        kosongkan(reaksi, h('div', { class: 'reaksi' }, tokoh('lino', 'hore', 56), h('p', {}, kataHore())));
         if (pertama) {
           for (const [ind, n] of Object.entries(t.skor || {})) skor[ind] = (skor[ind] || 0) + n;
           bintang += t.bintang || 0;
@@ -252,7 +311,7 @@ export function halamanPos(id) {
       };
       let isi;
       if (t.jenis === 'pilihan') {
-        isi = buatPilihan({ tanya: t.tanya, pilihan: t.pilihan, benar: t.benar, penjelasan: t.penjelasan, umpanSalah: t.umpan || [], onBenar: beri, onSalah: () => suara.efek('salah') });
+        isi = buatPilihan({ tanya: t.tanya, pilihan: t.pilihan, benar: t.benar, penjelasan: t.penjelasan, umpanSalah: t.umpan || [], onBenar: beri, onSalah: () => { suara.efek('salah'); kosongkan(reaksi, h('div', { class: 'reaksi' }, tokoh('ulfa', 'semangat', 56), h('p', {}, kataSemangat()))); } });
       } else if (t.jenis === 'langkah') {
         isi = h('div', {}, h('p', {}, h('strong', {}, 'Selesaikan langkah demi langkah untuk membuka jalan:')),
           buatPengerja({ soal: t.soal, onSelesai: (r) => beri(r.benar) }));
@@ -263,6 +322,7 @@ export function halamanPos(id) {
         h('div', { class: 'titik-progres', 'aria-hidden': 'true' }, pos.teka.map((_, j) => h('i', { class: j === k ? 'aktif' : j < k ? 'lewat' : '' }))),
         h('p', { class: 'redup kecil', style: 'text-align:center;margin:0 0 8px' }, `Teka-teki ${k + 1} dari ${pos.teka.length}`),
         t.jenis === 'langkah' ? isi : h('section', { class: 'kartu' }, isi),
+        reaksi,
         lanjut);
     }
 
@@ -276,7 +336,7 @@ export function halamanPos(id) {
       const terakhir = iPos === data.pos.length - 1;
       kosongkan(wadah,
         h('section', { class: 'kartu', style: 'text-align:center' },
-          h('div', { style: 'font-size:3rem', 'aria-hidden': 'true' }, '🎉'),
+          h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 96), tokoh('lino', 'hore', 80)),
           h('h2', {}, `${pos.nama} terlewati!`),
           Object.keys(maks).length
             ? h('ul', { class: 'daftar', style: 'text-align:left' }, Object.keys(maks).map((ind) => h('li', { style: 'padding:4px 0' },
@@ -308,7 +368,9 @@ export function halamanHarta() {
     let dunia = null;
     const tampilSertifikat = () => {
       suara.efek('harta');
-      kosongkan(hasil, h('section', { class: 'kartu' }, percakapan(data.penutup)), sertifikat(data));
+      kosongkan(hasil,
+        h('section', { class: 'kartu' }, h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 110), tokoh('lino', 'hore', 90)), percakapan(data.penutup)),
+        sertifikat(data), kartuLagu());
     };
     buka.addEventListener('click', () => {
       buka.hidden = true;

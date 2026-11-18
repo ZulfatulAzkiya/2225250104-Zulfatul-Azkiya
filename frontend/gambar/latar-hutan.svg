@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice">
+  <!-- Latar orisinal ULFALINE: perbukitan & hutan tropis -->
+  <path d="M0 150 C120 90 240 120 360 100 C500 76 620 130 760 104 C900 80 1040 118 1200 92 L1200 260 L0 260 Z" fill="#b8e6a7"/>
+  <path d="M0 190 C160 140 300 176 460 150 C620 124 760 170 920 146 C1050 128 1130 150 1200 140 L1200 260 L0 260 Z" fill="#7cc96b"/>
+  <!-- pohon kelapa kiri -->
+  <path d="M120 200 C126 160 128 130 138 96" stroke="#9b6b3a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <g fill="#3fa65a" stroke="#2b2d42" stroke-width="2">
+    <path d="M138 96 C110 80 86 86 72 104 C96 94 116 96 138 96 Z"/>
+    <path d="M138 96 C162 74 190 76 206 92 C180 86 160 90 138 96 Z"/>
+    <path d="M138 96 C130 66 112 54 92 56 C114 66 126 80 138 96 Z"/>
+    <path d="M138 96 C150 64 170 54 190 58 C168 68 152 80 138 96 Z"/>
+  </g>
+  <!-- pohon bulat -->
+  <rect x="1028" y="150" width="14" height="60" rx="6" fill="#8a5a2b"/>
+  <circle cx="1035" cy="138" r="40" fill="#3fa65a" stroke="#2b2d42" stroke-width="2"/>
+  <circle cx="1008" cy="150" r="26" fill="#4fbf6a" stroke="#2b2d42" stroke-width="2"/>
+  <circle cx="1064" cy="152" r="24" fill="#4fbf6a" stroke="#2b2d42" stroke-width="2"/>
+  <!-- semak & bunga -->
+  <g stroke="#2b2d42" stroke-width="2">
+    <ellipse cx="300" cy="214" rx="60" ry="26" fill="#3fa65a"/>
+    <ellipse cx="820" cy="210" rx="70" ry="28" fill="#3fa65a"/>
+    <ellipse cx="560" cy="226" rx="50" ry="20" fill="#4fbf6a"/>
+  </g>
+  <g>
+    <circle cx="276" cy="200" r="7" fill="#ff6f59"/><circle cx="276" cy="200" r="2.5" fill="#ffc93c"/>
+    <circle cx="318" cy="196" r="7" fill="#ffc93c"/><circle cx="318" cy="196" r="2.5" fill="#ff6f59"/>
+    <circle cx="796" cy="196" r="7" fill="#c084fc"/><circle cx="796" cy="196" r="2.5" fill="#ffc93c"/>
+    <circle cx="846" cy="192" r="7" fill="#ff6f59"/><circle cx="846" cy="192" r="2.5" fill="#fff"/>
+    <circle cx="548" cy="214" r="6" fill="#ffc93c"/><circle cx="574" cy="216" r="6" fill="#c084fc"/>
+    <circle cx="430" cy="236" r="6" fill="#ff6f59"/><circle cx="690" cy="238" r="6" fill="#ffc93c"/>
+  </g>
+  <!-- kupu-kupu -->
+  <g transform="translate(660 120)">
+    <ellipse cx="-7" cy="0" rx="8" ry="6" fill="#ffc93c" stroke="#2b2d42" stroke-width="1.5"/>
+    <ellipse cx="7" cy="0" rx="8" ry="6" fill="#ffc93c" stroke="#2b2d42" stroke-width="1.5"/>
+    <rect x="-1.5" y="-6" width="3" height="12" rx="1.5" fill="#2b2d42"/>
+  </g>
+</svg>

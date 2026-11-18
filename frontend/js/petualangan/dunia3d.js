@@ -236,8 +236,8 @@ export async function buatDunia(wadah, { daftarPos, posAktif, selesai, diTitik, 
   wadah.append(renderer.domElement);
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x9fd8f5);
-  scene.fog = new THREE.Fog(0x9fd8f5, 45, 90);
+  scene.background = new THREE.Color(0x8fd3ff);
+  scene.fog = new THREE.Fog(0x8fd3ff, 60, 110);
   const kamera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
   scene.add(new THREE.HemisphereLight(0xffffff, 0x5a7a4a, 1.1));
   const matahari = new THREE.DirectionalLight(0xfff3d6, 1.4);
@@ -248,7 +248,7 @@ export async function buatDunia(wadah, { daftarPos, posAktif, selesai, diTitik, 
   const laut = mesh(new THREE.CircleGeometry(120, 32), 0x2f86c9, 0, -0.05, 0);
   laut.rotation.x = -Math.PI / 2;
   scene.add(laut);
-  const pulau = mesh(new THREE.CylinderGeometry(19, 21, 1.2, 24), 0x6cbf5a, 0, -0.6, 0);
+  const pulau = mesh(new THREE.CylinderGeometry(19, 21, 1.2, 24), 0x5cc84a, 0, -0.6, 0);
   scene.add(pulau);
   scene.add(mesh(new THREE.CylinderGeometry(21.2, 22, 0.3, 24), 0xeed9a4, 0, -0.9, 0));
   const pulauHarta = mesh(new THREE.CylinderGeometry(4, 4.6, 1.2, 14), 0xeed9a4, 10, -0.6, -21);
@@ -266,6 +266,34 @@ export async function buatDunia(wadah, { daftarPos, posAktif, selesai, diTitik, 
   // pepohonan dekorasi (posisi tetap agar konsisten)
   [[-16, 4], [-14, -2], [-12, -12], [-8, 15], [0, 15], [7, 13], [13, 8], [15, -2], [13, -9], [-2, 1], [0, -10],
     [-16, 9], [8, 12], [-10, 1], [16, 4], [-3, -15]].forEach(([x, z], i) => scene.add(pohon(x, z, 0.8 + (i % 3) * 0.2)));
+
+  // bunga warna-warni
+  const warnaBunga = [0xff6f59, 0xffc93c, 0xc084fc, 0xff8fc7, 0xffffff];
+  [[-12, 10], [-6, 12], [1, 12.5], [7, 9.5], [12, 4], [8, -2], [2, -7], [-9, -2], [-13, -7], [-1, -12], [-4, 4], [11, -6]]
+    .forEach(([x, z], i) => {
+      for (let j = 0; j < 4; j++) {
+        const a = (j / 4) * Math.PI * 2 + i;
+        const bx = x + Math.cos(a) * 0.7;
+        const bz = z + Math.sin(a) * 0.7;
+        scene.add(mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.4, 4), 0x2e8b57, bx, 0.2, bz));
+        scene.add(mesh(new THREE.SphereGeometry(0.17, 6, 4), warnaBunga[(i + j) % warnaBunga.length], bx, 0.45, bz));
+      }
+    });
+  // awan
+  [[-18, 14, -30], [6, 16, -40], [24, 13, -18], [-26, 15, -8]].forEach(([x, y, z]) => {
+    const awan = new THREE.Group();
+    [[0, 0, 0, 2.2], [1.9, -0.3, 0.2, 1.6], [-1.9, -0.4, 0, 1.5], [0.8, 0.9, 0, 1.4]].forEach(([dx, dy, dz, r]) => {
+      awan.add(new THREE.Mesh(new THREE.SphereGeometry(r, 10, 8), new THREE.MeshLambertMaterial({ color: 0xffffff })).translateX(dx).translateY(dy).translateZ(dz));
+    });
+    awan.position.set(x, y, z);
+    scene.add(awan);
+  });
+  // pelangi
+  [0xff6f59, 0xffa94d, 0xffd43b, 0x69db7c, 0x4dabf7, 0x9775fa].forEach((warna, i) => {
+    const busur = new THREE.Mesh(new THREE.TorusGeometry(26 - i * 0.9, 0.45, 6, 40, Math.PI), new THREE.MeshBasicMaterial({ color: warna }));
+    busur.position.set(0, -2, -48);
+    scene.add(busur);
+  });
 
   // bangunan pos
   const pilihan = [];

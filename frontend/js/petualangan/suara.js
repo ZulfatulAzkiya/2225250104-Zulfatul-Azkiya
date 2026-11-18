@@ -106,6 +106,54 @@ export function hentikanMusik() {
 
 export const musikBerjalan = () => pewaktu !== null;
 
+// ------------------------------------------------------------- lagu ekspedisi
+// Lagu ORISINAL ULFALINE (melodi & lirik ciptaan sendiri). 8 baris × 8 nada.
+export const LAGU = [
+  { lirik: 'Ayo, ayo, kita berangkat,', nada: [67, 67, 69, 67, 72, 71, 69, 67] },
+  { lirik: 'peta di tangan, semangat!', nada: [65, 65, 67, 65, 69, 67, 65, 64] },
+  { lirik: 'Kedua ruas harus seimbang,', nada: [64, 67, 72, 72, 71, 69, 67, 69] },
+  { lirik: 'x sendirian, kita menang!', nada: [67, 69, 71, 72, 74, 72, 71, 72] },
+  { lirik: 'Kali, bagi bilangan negatif,', nada: [76, 76, 74, 72, 74, 72, 71, 69] },
+  { lirik: 'tanda dibalik, jangan lupa!', nada: [69, 71, 72, 69, 67, 65, 64, 62] },
+  { lirik: 'Ulfa dan Lino penjelajah,', nada: [67, 72, 67, 72, 76, 74, 72, 71] },
+  { lirik: 'harta karun menanti kita!', nada: [72, 74, 76, 77, 76, 74, 72, 72] },
+];
+const AKOR = [48, 53, 48, 55, 57, 50, 52, 48];
+const KETUK_LAGU = 60 / 112 / 2;
+
+/**
+ * Memutar Lagu Ekspedisi. onBaris(i) dipanggil saat baris ke-i dimulai (untuk lirik karaoke).
+ * Mengembalikan fungsi untuk menghentikan lagu.
+ */
+export function nyanyikan(onBaris, onSelesai) {
+  const a = audio();
+  if (!a) { onSelesai?.(); return () => {}; }
+  hentikanMusik();
+  const jalur = a.createGain();
+  jalur.gain.value = 1;
+  jalur.connect(utama);
+  const mulai = a.currentTime + 0.15;
+  const panjangBaris = KETUK_LAGU * 10;
+  const pewaktuBaris = [];
+  LAGU.forEach((b, i) => {
+    const t0 = mulai + i * panjangBaris;
+    b.nada.forEach((m, j) => {
+      const dur = j === 7 ? KETUK_LAGU * 2.6 : KETUK_LAGU * 0.92;
+      nada(m, t0 + j * KETUK_LAGU, dur, { tipe: 'triangle', vol: 0.2, tujuan: jalur });
+    });
+    nada(AKOR[i], t0, panjangBaris * 0.95, { tipe: 'sine', vol: 0.1, tujuan: jalur });
+    nada(AKOR[i] + 7, t0 + KETUK_LAGU * 4, panjangBaris * 0.5, { tipe: 'sine', vol: 0.06, tujuan: jalur });
+    pewaktuBaris.push(setTimeout(() => onBaris?.(i), (t0 - a.currentTime) * 1000));
+  });
+  const akhir = setTimeout(() => { jalur.disconnect(); onSelesai?.(); }, (mulai - a.currentTime + LAGU.length * panjangBaris) * 1000);
+  return () => {
+    pewaktuBaris.forEach(clearTimeout);
+    clearTimeout(akhir);
+    jalur.gain.setTargetAtTime(0.0001, a.currentTime, 0.05);
+    setTimeout(() => jalur.disconnect(), 300);
+  };
+}
+
 // ------------------------------------------------------------------ narasi
 export const bisaBicara = () => 'speechSynthesis' in window;
 
