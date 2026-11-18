@@ -3,40 +3,9 @@
 import { h, umpan } from '../ui.js';
 import * as simpan from '../simpan.js';
 import { blokPasang } from '../pasang.js';
-import { adegan } from '../komponen/ilustrasi.js';
 
 function bersihkan(teks, maks) {
   return teks.replace(/[<>]/g, '').trim().slice(0, maks);
-}
-
-export function halamanMasuk() {
-  const nama = h('input', { class: 'teks', id: 'nama', autocomplete: 'nickname', maxlength: 20, required: true });
-  const kelas = h('input', { class: 'teks', id: 'kelas', autocomplete: 'off', maxlength: 12, placeholder: 'contoh: IX-A' });
-  const pesan = h('div', { 'aria-live': 'polite' });
-  const form = h('form', {
-    onsubmit: (e) => {
-      e.preventDefault();
-      const n = bersihkan(nama.value, 20);
-      if (!n) { pesan.replaceChildren(umpan('salah', '', 'Tulis nama panggilanmu dulu ya.')); nama.focus(); return; }
-      simpan.setProfil({ nama: n, kelas: bersihkan(kelas.value, 12) });
-      location.hash = '#/mulai';
-    },
-  },
-  h('label', { class: 'isian-teks', for: 'nama' }, 'Nama panggilan'),
-  nama,
-  h('label', { class: 'isian-teks', for: 'kelas' }, 'Kelas (boleh dikosongkan)'),
-  kelas,
-  pesan,
-  h('button', { class: 'tombol penuh', type: 'submit', style: 'margin-top:16px' }, 'Mulai Belajar'));
-  return [
-    h('section', { class: 'kartu splash' },
-      h('p', { class: 'redup', style: 'margin:0;font-weight:800' }, 'Petualangan Aljabar bersama'),
-      h('div', { class: 'judul-warna', role: 'heading', 'aria-level': '1' }, [...'ULFALINE'].map((c) => h('span', {}, c))),
-      adegan({ pose: 'hore', judul: 'Ulfa dan Lino menyambutmu', tinggi: 220 }),
-      h('p', {}, 'Ayo bertualang bersama Ulfa & Lino! Belajar persamaan & pertidaksamaan linear satu variabel, langkah demi langkah.')),
-    h('section', { class: 'kartu' }, form,
-      h('p', { class: 'redup kecil', style: 'margin-top:12px' }, 'Nama hanya disimpan di perangkat ini. Tidak perlu email atau nomor HP.')),
-  ];
 }
 
 export function halamanMulai() {

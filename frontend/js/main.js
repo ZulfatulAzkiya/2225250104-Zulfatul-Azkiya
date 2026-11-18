@@ -6,7 +6,8 @@ import { halamanPeta, halamanTopik, halamanPrasyarat } from './halaman/belajar.j
 import { halamanPilihLatihan, halamanSesi } from './halaman/latihan.js';
 import { halamanDaftarLiterasi, halamanMisi } from './halaman/literasi.js';
 import { halamanBeranda, halamanProgres } from './halaman/beranda.js';
-import { halamanMasuk, halamanMulai, halamanAkun } from './halaman/akun.js';
+import { halamanMulai, halamanAkun } from './halaman/akun.js';
+import { halamanMasuk } from './halaman/layar-awal.js';
 import { halamanPeta as halamanPetaPetualangan, halamanPos, halamanHarta } from './halaman/petualangan.js';
 import { halamanUlfa } from './halaman/ulfa.js';
 import { tokoh } from './komponen/tokoh.js';
@@ -59,6 +60,7 @@ function render() {
     else a.removeAttribute('aria-current');
   });
   document.querySelector('.nav').hidden = p === '/masuk';
+  document.body.classList.toggle('layar-penuh', p === '/masuk');
   const judul = app.querySelector('h1');
   if (judul) { judul.setAttribute('tabindex', '-1'); judul.focus({ preventScroll: true }); }
   window.scrollTo({ top: 0 });

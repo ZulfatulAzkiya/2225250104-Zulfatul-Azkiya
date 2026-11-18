@@ -69,6 +69,8 @@ Checklist layar: [docs/panduan-ui-ux.md](docs/panduan-ui-ux.md) §8.
 
 Font **Fredoka** (OFL, `frontend/fonts/`, lisensi di `Fredoka-OFL.txt`). Tema "Portal Buku Cerita": krem hangat, hijau zaitun, aksen oranye; judul halaman berupa pita hijau; kartu membulat berbayang lembut. Karakter: **Ulfa** (siswi SMP: kemeja putih, rok biru tua, rambut kuncir berpita, ransel & kets) dan **Lino** (tarsius), digambar sebagai SVG berbentuk melengkung halus di `komponen/ilustrasi.js` (berbadan penuh; lengan/kaki/mata dianimasikan lewat CSS: berayun, berkedip) dan `komponen/tokoh.js` (wajah ekspresif). Jangan meniru karakter/desain milik pihak lain.
 
+Layar awal sebelum login (`halaman/layar-awal.js`, rute `#/masuk`): layar penuh bergambar tanpa header/menu, papan judul dengan ubin simbol matematika, tombol besar "mulai", kartu karakter, lalu lembar isian nama dari bawah.
+
 ## Konvensi Kode
 
 - JS: buat elemen dengan `h()`/`s()` dari `ui.js`. **Jangan memakai `innerHTML`** (ada tesnya).

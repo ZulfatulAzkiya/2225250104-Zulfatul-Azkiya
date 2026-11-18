@@ -451,6 +451,86 @@ dialog::backdrop { background: rgb(0 0 0 / 45%); }
 .daftar .isi { display: flex; flex-direction: column; }
 .daftar .isi .redup { font-weight: 600; }
 
+/* ---------------------------------------------------------------- layar awal (sebelum login) */
+body.layar-penuh .atas, body.layar-penuh .nav { display: none !important; }
+body.layar-penuh { background: #6cbf55; }
+body.layar-penuh main { max-width: none; padding: 0; }
+.layar-awal { position: relative; min-height: 100dvh; overflow: hidden; }
+.latar-awal { position: absolute; inset: 0; width: 100%; height: 100%; }
+.isi-awal {
+  position: relative; z-index: 1; max-width: 460px; margin: 0 auto; min-height: 100dvh;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  padding: max(28px, env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));
+}
+.judul-awal { position: relative; width: 100%; padding: 46px 0 10px; text-align: center; }
+.layar-awal h1.plakat {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0; margin: 0;
+  padding: 14px 34px 18px; background: #8a4b2c; border-radius: 46% 54% 48% 52% / 58% 52% 48% 42%;
+  box-shadow: 0 10px 0 #6e3a20, 0 18px 30px rgba(40, 30, 10, .3);
+  color: #fff8e8; font-size: clamp(3.4rem, 17vw, 5rem); line-height: .88; letter-spacing: .01em; font-weight: 700;
+  text-shadow: 0 5px 0 #d9c7a5; transform: rotate(-3deg);
+}
+.layar-awal h1.plakat::after { content: none; }
+.layar-awal h1.plakat span + span { margin-left: .6em; }
+.slogan { margin: 18px 0 0; font-weight: 700; color: #3d2c1c; background: rgba(255, 250, 240, .85); display: inline-block; padding: 4px 14px; border-radius: 99px; }
+.ubin {
+  position: absolute; z-index: 2; width: 58px; height: 58px; display: grid; place-items: center;
+  background: #fffaf0; border-radius: 14px; box-shadow: 0 6px 0 #d9c7a5, 0 10px 16px rgba(40, 30, 10, .2);
+  font-family: var(--font-mat); font-size: 2rem; font-weight: 700; animation: melayang 3.2s ease-in-out infinite;
+}
+.ubin.u1 { left: 4%; top: 60px; rotate: -10deg; }
+.ubin.u2 { left: 28%; top: 0; rotate: 6deg; animation-delay: -.8s; }
+.ubin.u3 { right: 24%; top: 10px; rotate: -6deg; animation-delay: -1.6s; }
+.ubin.u4 { right: 2%; top: 92px; rotate: 9deg; animation-delay: -2.4s; }
+.ubin.u5 { left: 3%; top: 168px; rotate: -4deg; width: 46px; height: 46px; font-size: 1.6rem; z-index: 3; animation-delay: -1.2s; }
+@keyframes melayang { 50% { translate: 0 -8px; } }
+.baris-mulai { width: 100%; display: flex; align-items: flex-end; gap: 10px; }
+.tombol-main {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 92px;
+  border: 0; border-radius: 999px; background: #a8c80f; color: #fff; cursor: pointer;
+  font-family: var(--font-judul); font-size: 2.6rem; font-weight: 700; letter-spacing: .02em;
+  box-shadow: 0 8px 0 #7f9a06, 0 14px 22px rgba(40, 30, 10, .25); transition: transform .08s, box-shadow .08s;
+}
+.tombol-main span { font-size: 2.2rem; }
+.tombol-main:active { transform: translateY(5px); box-shadow: 0 3px 0 #7f9a06; }
+.profil-awal { flex: none; width: 104px; display: grid; justify-items: center; }
+.ulfa-awal { width: 96px; height: auto; margin-bottom: -6px; }
+.pil {
+  border: 0; border-radius: 999px; padding: 6px 16px; font-family: var(--font-judul); font-weight: 700; font-size: 1.05rem;
+  background: #a8c80f; color: #fff; cursor: pointer; box-shadow: 0 3px 0 #7f9a06;
+}
+.pil.kecil { background: #9cc17a; box-shadow: 0 3px 0 #6f9a52; padding: 4px 16px; position: relative; z-index: 1; }
+.pil.tunggu { background: #9fb8e6; box-shadow: 0 3px 0 #7a95c8; }
+.deret-kartu { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.kartu-awal {
+  display: grid; justify-items: center; gap: 2px; padding: 8px 6px 12px; text-align: center;
+  background: rgba(240, 246, 236, .92); border-radius: 22px; box-shadow: 0 6px 0 rgba(60, 90, 40, .25);
+}
+.kartu-awal strong { font-family: var(--font-judul); font-size: 1.3rem; color: #2f3b45; line-height: 1.1; }
+.kartu-awal > span { font-weight: 600; color: #4b5a63; font-size: .85rem; margin-bottom: 6px; }
+.kartu-awal .pil { width: 92%; font-size: .95rem; padding: 6px 4px; }
+.avatar-awal {
+  width: 82px; height: 82px; margin-top: -2px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  background: #cfe7f5; border: 4px solid #fff; box-shadow: 0 3px 8px rgba(40, 30, 10, .15);
+}
+.tanya-awal { font-family: var(--font-judul); font-size: 2.6rem; font-weight: 700; color: #7c4ddb; }
+.lingkar-pelangi {
+  margin-top: auto; width: 104px; height: 104px; border-radius: 50%; border: 6px solid #e6f2d9; cursor: pointer; padding: 0;
+  background: conic-gradient(#ffd166 0 14%, #ff9e7a 0 28%, #ff7fa8 0 42%, #b18cf2 0 57%, #7aa7f2 0 71%, #74d1c6 0 85%, #ffe27a 0);
+  display: grid; place-items: center; box-shadow: 0 8px 18px rgba(40, 30, 10, .25);
+}
+.lingkar-pelangi > span { width: 74px; height: 74px; border-radius: 50%; background: #fff8e8; display: grid; place-items: center; overflow: hidden; }
+.lembar-latar { position: fixed; inset: 0; z-index: 30; background: rgba(30, 30, 20, 0); transition: background .25s; display: flex; align-items: flex-end; justify-content: center; }
+.lembar-latar.terbuka { background: rgba(30, 30, 20, .45); }
+.lembar {
+  width: 100%; max-width: 520px; background: var(--surface); border-radius: 28px 28px 0 0; padding: 10px 20px calc(20px + env(safe-area-inset-bottom));
+  transform: translateY(100%); transition: transform .28s cubic-bezier(.2, .9, .3, 1.1); box-shadow: 0 -10px 30px rgba(0, 0, 0, .2);
+}
+.lembar-latar.terbuka .lembar { transform: none; }
+.pegangan { width: 54px; height: 6px; border-radius: 3px; background: var(--border); margin: 0 auto 8px; }
+:root[data-gerak="kurang"] .ubin { animation: none; }
+@media (prefers-reduced-motion: reduce) { .ubin { animation: none; } .lembar { transition: none; } }
+
 /* lagu ekspedisi & peta rute */
 .lirik { margin: 8px 0 12px; padding-left: 1.4em; display: grid; gap: 4px; }
 .lirik li { padding: 4px 10px; border-radius: 10px; font-weight: 700; transition: background .2s; }
