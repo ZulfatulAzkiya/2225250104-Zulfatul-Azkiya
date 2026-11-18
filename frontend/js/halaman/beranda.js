@@ -31,8 +31,14 @@ export function halamanBeranda() {
   const saran = latihanDisarankan();
   const r = ringkasan();
   const kesalahanUtama = simpan.rekapKesalahan()[0];
+  const jumlahPos = Object.values(d.petualangan?.pos || {}).filter((p) => p.selesai).length;
   return [
     h('h1', {}, `Halo, ${d.profil?.nama || 'teman'}! 👋`),
+    h('section', { class: 'kartu kartu-petualangan' },
+      h('div', { class: 'baris' }, h('img', { src: 'gambar/ulfa.svg', alt: '', width: 64, height: 64 }), h('img', { src: 'gambar/lino.svg', alt: '', width: 64, height: 64 })),
+      h('h2', {}, '🗺️ Ekspedisi Pulau Aljabar'),
+      h('p', {}, jumlahPos >= 7 ? 'Semua pos terlewati! Sudahkah kamu membuka peti harta karun?' : `Bantu Ulfa & Lino melewati 7 pos teka-teki menuju harta karun. Pos selesai: ${jumlahPos}/7.`),
+      h('a', { class: 'tombol penuh', href: '#/petualangan' }, jumlahPos ? 'Lanjutkan petualangan ▶' : 'Mulai petualangan ▶')),
     berikut
       ? h('section', { class: 'kartu sorot' },
         h('p', { class: 'redup kecil', style: 'margin:0' }, 'Lanjutkan belajar'),

@@ -39,6 +39,7 @@ Catatan Windows: path proyek ini panjang, jadi `pip install playwright` di `.ven
 | `backend/app/services/generator.py` | Templat soal per topik × level, diverifikasi sebelum dikirim |
 | `frontend/js/mesin.js` | **Cermin 1:1** dari tiga file Python pertama |
 | `frontend/js/komponen/pengerja.js` | UI latihan langkah demi langkah |
+| `frontend/js/halaman/petualangan.js`, `js/petualangan/` | Ekspedisi Pulau Aljabar: peta 3D (three.js, `vendor/`), suara Web Audio, pos teka-teki, sertifikat. Lihat [docs/petualangan.md](docs/petualangan.md) |
 
 **PENTING: paritas JS ↔ Python.** Setiap perubahan logika di `aljabar.py`/`operasi.py`/`pemeriksa.py` harus diterapkan juga ke `mesin.js` (dan sebaliknya), termasuk teks pesan. `tests/test_paritas_js.py` menjalankan `mesin.js` di V8 (mini-racer) dan membandingkan >500 kasus.
 
@@ -49,7 +50,7 @@ Catatan Windows: path proyek ini panjang, jadi `pip install playwright` di `.ven
 3. **Simbol dijelaskan sebelum dipakai.** *(EL03, IL01)*
 4. **Setiap langkah menampilkan operasinya** dengan `.chip-op` (warna `--op`); langkah balik tanda memakai `.chip-op.balik`. *(EL02)*
 5. **Animasi hanya untuk konsep**; hormati `prefers-reduced-motion` dan pengaturan "Kurangi gerakan". *(DS05)*
-6. **Navigasi bawah tetap 4 menu** (Beranda, Belajar, Latihan, Literasi); Progres & Akun di header. *(DS04)*
+6. **Navigasi bawah tetap 4 menu** (Beranda, Petualangan, Belajar, Latihan); Progres & Akun di header; Misi Literasi dibuka dari halaman Petualangan. *(DS04)*
 7. **Umpan balik spesifik per langkah** dengan kode `E_*`, nada tidak menyalahkan. *(DS03, IL05)*
 8. Peringatan pembalikan tanda **selalu** muncul saat memilih ×/÷ bilangan negatif pada pertidaksamaan. *(IL03, DS02)*
 9. Latihan bertingkat; level terbuka saat nilai ≥ 80 (`AMBANG_KUASAI`). *(GL04)*
@@ -71,6 +72,10 @@ Checklist layar: [docs/panduan-ui-ux.md](docs/panduan-ui-ux.md) §8.
 - File frontend baru **wajib** didaftarkan di `BERKAS` pada `sw.js`; naikkan `VERSI` saat rilis.
 - Python: type hints, logika di `services/`, route tipis di `main.py`.
 - Nama dalam Bahasa Indonesia (konsisten dengan kode yang ada).
+
+## Hak Cipta
+
+Jangan memakai gambar, karakter, nama, atau musik dari karya pihak lain (mis. kartun/serial TV) meskipun ada di bahan referensi. Semua aset ULFALINE dibuat sendiri; pustaka pihak ketiga hanya yang berlisensi terbuka (three.js, MIT).
 
 ## Privasi
 

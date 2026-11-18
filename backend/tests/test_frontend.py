@@ -41,7 +41,15 @@ def test_manifest_layak_dipasang():
 mini_racer = pytest.importorskip("py_mini_racer")
 
 
-@pytest.mark.parametrize("berkas", [b for b in BERKAS_APLIKASI if b.endswith(".js")] + ["sw.js"])
+KODE_SENDIRI = [b for b in BERKAS_APLIKASI if b.endswith(".js") and not b.startswith("vendor/")]
+
+
+def test_pustaka_pihak_ketiga_berlisensi():
+    three = (FRONTEND / "vendor" / "three.module.min.js").read_text(encoding="utf-8")[:300]
+    assert "SPDX-License-Identifier: MIT" in three
+
+
+@pytest.mark.parametrize("berkas", KODE_SENDIRI + ["sw.js"])
 def test_sintaks_javascript(berkas):
     kode = (FRONTEND / berkas).read_text(encoding="utf-8")
     kode = re.sub(r"^import\s[^;]+;", "", kode, flags=re.M | re.S)
@@ -61,6 +69,6 @@ def test_contoh_soal_materi_dapat_diselesaikan():
 
 def test_tanpa_innerhtml():
     """Konten selalu dibuat lewat DOM, bukan innerHTML (mencegah XSS)."""
-    for b in BERKAS_APLIKASI:
+    for b in KODE_SENDIRI:
         if b.endswith(".js"):
             assert "innerHTML" not in (FRONTEND / b).read_text(encoding="utf-8").replace("Jangan memakai innerHTML", ""), b

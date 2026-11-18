@@ -9,8 +9,9 @@ function awal() {
   return {
     versi: 1,
     profil: null,
-    pengaturan: { teks: 'normal', gerak: 'normal', tema: 'otomatis' },
+    pengaturan: { teks: 'normal', gerak: 'normal', tema: 'otomatis', suara: 'nyala', musik: 'nyala' },
     prasyarat: null,
+    petualangan: { pembuka: false, pos: {}, titik: 0 },
     topik: {},
     latihan: {},
     literasi: {},
@@ -24,7 +25,9 @@ function muat() {
   try {
     const mentah = localStorage.getItem(KUNCI);
     if (!mentah) return awal();
-    return { ...awal(), ...JSON.parse(mentah) };
+    const d = JSON.parse(mentah);
+    const a = awal();
+    return { ...a, ...d, pengaturan: { ...a.pengaturan, ...d.pengaturan }, petualangan: { ...a.petualangan, ...d.petualangan } };
   } catch {
     return awal();
   }
@@ -90,6 +93,25 @@ export function catatLiterasi(id, ringkasan) {
   catatSesi({ jenis: 'literasi', topik: id, ...ringkasan });
   tulis();
 }
+
+// ------------------------------------------------------------ petualangan
+export const petualangan = () => data.petualangan;
+
+export function setPembukaDilihat() { data.petualangan.pembuka = true; tulis(); }
+
+/** Simpan hasil sebuah pos; skor per indikator diambil yang terbaik. */
+export function catatPos(id, hasil) {
+  const lama = data.petualangan.pos[id];
+  const skor = { ...hasil.skor };
+  if (lama) for (const [k, v] of Object.entries(lama.skor || {})) skor[k] = Math.max(v, skor[k] || 0);
+  data.petualangan.pos[id] = { selesai: true, skor, bintang: Math.max(hasil.bintang, lama?.bintang || 0), kali: (lama?.kali || 0) + 1 };
+  tulis();
+}
+
+/** Posisi Ulfa di jalan (indeks titik). */
+export function setTitikPetualangan(titik) { data.petualangan.titik = titik; tulis(); }
+
+export function ulangPetualangan() { data.petualangan = { pembuka: true, pos: {}, titik: 0 }; tulis(); }
 
 export const infoLatihan = (topik, level) => data.latihan[`${topik}-${level}`] || null;
 

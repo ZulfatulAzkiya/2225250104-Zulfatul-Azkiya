@@ -37,6 +37,7 @@ Untuk menerbitkan online dan memasang di HP, lihat [docs/panduan-instalasi.md](d
 | 💡 **Petunjuk 3 tingkat** dan **contoh serupa** | GL02, GL03 |
 | 🌱 **3 level** (Dasar → Menengah → Tantangan), terbuka saat nilai ≥ 80; soal baru tanpa batas dari generator Python | GL01, GL04 |
 | 📊 **Nilai + pembahasan** (langkahmu vs langkah kunci) + saran materi | DS01, DS03 |
+| 🗺️ **Ekspedisi Pulau Aljabar (3D)**: petualangan harta karun bersama Ulfa & Lino, 7 pos teka-teki, musik & narasi suara, sertifikat skor 4 indikator literasi (selaras pretest–posttest) | Semua temuan + literasi |
 | 🌏 **8 Misi Literasi**: Pahami → Rumuskan → Selesaikan → Tafsirkan → Cek, dengan konteks AKM (personal, sosial budaya, saintifik) | Literasi matematika |
 | ⚙️ Ukuran teks, kurangi gerakan, tema gelap | DS05, aksesibilitas |
 
@@ -73,4 +74,4 @@ python e2e/uji_e2e.py                    # butuh: pip install playwright (memaka
 
 ## Dokumen
 
-[PRD](docs/PRD.md) · [Analisis Kebutuhan](docs/analisis-kebutuhan.md) · [Desain Instruksional](docs/desain-instruksional.md) · [Konten Materi](docs/konten-materi.md) · [User Flow](docs/user-flow-dan-layar.md) · [UI/UX](docs/panduan-ui-ux.md) · [Arsitektur](docs/arsitektur-teknis.md) · [Data & API](docs/skema-data-dan-api.md) · [Privasi](docs/privasi-dan-keamanan.md) · [Roadmap](docs/roadmap.md) · [Pengujian](docs/rencana-pengujian-dan-evaluasi.md) · [Instalasi](docs/panduan-instalasi.md)
+[PRD](docs/PRD.md) · [Analisis Kebutuhan](docs/analisis-kebutuhan.md) · [Desain Instruksional](docs/desain-instruksional.md) · [Konten Materi](docs/konten-materi.md) · [User Flow](docs/user-flow-dan-layar.md) · [UI/UX](docs/panduan-ui-ux.md) · [Arsitektur](docs/arsitektur-teknis.md) · [Data & API](docs/skema-data-dan-api.md) · [Privasi](docs/privasi-dan-keamanan.md) · [Roadmap](docs/roadmap.md) · [Pengujian](docs/rencana-pengujian-dan-evaluasi.md) · [Instalasi](docs/panduan-instalasi.md) · [Petualangan](docs/petualangan.md)

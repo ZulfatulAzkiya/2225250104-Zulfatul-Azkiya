@@ -153,6 +153,52 @@ def main() -> None:
         expect(page.locator(".skor-besar")).to_have_text("100")
         foto(page, "10-literasi-hasil")
 
+        # 6b. Ekspedisi Pulau Aljabar: peta 3D → 7 pos → peti harta
+        petualangan = json.loads(urllib.request.urlopen(URL + "data/petualangan.json").read().decode())
+        page.goto(URL + "#/petualangan")
+        expect(page.get_by_role("heading", name="Peta kuno ditemukan!")).to_be_visible()
+        foto(page, "14-petualangan-pembuka")
+        page.get_by_role("button", name="Ayo berangkat! 🧭").click()
+        expect(page.locator("canvas.kanvas-3d")).to_be_visible()
+        page.wait_for_timeout(2500)
+        foto(page, "15-peta-3d")
+        for i, pos in enumerate(petualangan["pos"]):
+            page.get_by_role("button", name=f"Masuk Pos {i + 1} ▶").click()
+            expect(page.get_by_role("heading", name=re.compile(f"Pos {i + 1}:"))).to_be_visible()
+            if i == 0:
+                foto(page, "16-pos-narasi")
+            page.get_by_role("button", name="Mulai teka-teki ▶").click()
+            for t in pos["teka"]:
+                if t["jenis"] == "pilihan":
+                    jawab_pilihan(page, t["pilihan"][t["benar"]])
+                elif t["jenis"] == "langkah":
+                    kerjakan_soal(page)
+                else:
+                    aman = {"<": lambda n: n < t["nilai"], ">": lambda n: n > t["nilai"],
+                            "<=": lambda n: n <= t["nilai"], ">=": lambda n: n >= t["nilai"]}[t["rel"]]
+                    for n in t["batu"]:
+                        if aman(n):
+                            page.get_by_role("button", name=f"batu {n}", exact=True).click()
+                    foto(page, "17-batu-loncat")
+                    page.get_by_role("button", name="Periksa langkahku").click()
+                    expect(page.locator(".umpan.benar")).to_be_visible()
+                page.get_by_role("button", name=re.compile("Teka-teki berikutnya|Selesaikan pos")).click()
+            expect(page.get_by_role("heading", name=f"{pos['nama']} terlewati!")).to_be_visible()
+            if i == 5:
+                foto(page, "18-pos-selesai")
+            page.get_by_role("link", name=re.compile("Kembali ke peta|Naik rakit")).click()
+            expect(page.locator("canvas.kanvas-3d")).to_be_visible()
+        page.wait_for_timeout(3000)
+        foto(page, "19-peta-selesai")
+        page.get_by_role("link", name="Buka Peti Harta Karun ✨").click()
+        expect(page.locator("canvas.kanvas-3d")).to_be_visible()
+        page.wait_for_timeout(800)
+        page.get_by_role("button", name="Buka Peti! 🗝️").click()
+        expect(page.get_by_role("heading", name="📜 Sertifikat Penjelajah Aljabar")).to_be_visible(timeout=8000)
+        expect(page.locator(".sertifikat .skor-besar")).to_have_text("24/24")
+        page.wait_for_timeout(500)
+        foto(page, "20-harta-sertifikat")
+
         # 7. Progres & pengaturan
         page.goto(URL + "#/progres")
         expect(page.get_by_text("Misi lift")).to_be_visible()

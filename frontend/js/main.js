@@ -1,12 +1,13 @@
 // Titik masuk ULFALINE: router berbasis hash, navigasi, dan service worker.
 
-import { h, kosongkan } from './ui.js';
+import { h, kosongkan, jalankanPembersih } from './ui.js';
 import * as simpan from './simpan.js';
 import { halamanPeta, halamanTopik, halamanPrasyarat } from './halaman/belajar.js';
 import { halamanPilihLatihan, halamanSesi } from './halaman/latihan.js';
 import { halamanDaftarLiterasi, halamanMisi } from './halaman/literasi.js';
 import { halamanBeranda, halamanProgres } from './halaman/beranda.js';
 import { halamanMasuk, halamanMulai, halamanAkun } from './halaman/akun.js';
+import { halamanPeta as halamanPetaPetualangan, halamanPos, halamanHarta } from './halaman/petualangan.js';
 
 const RUTE = [
   [/^\/$/, () => halamanBeranda(), 'beranda', 'Beranda'],
@@ -15,8 +16,11 @@ const RUTE = [
   [/^\/prasyarat$/, () => halamanPrasyarat(), 'belajar', 'Kuis Pemanasan'],
   [/^\/latihan$/, () => halamanPilihLatihan(), 'latihan', 'Latihan'],
   [/^\/latihan\/([a-z]+)\/([a-z]+)$/, (m) => halamanSesi(m[1], m[2]), 'latihan', 'Sesi Latihan'],
-  [/^\/literasi$/, () => halamanDaftarLiterasi(), 'literasi', 'Misi Literasi'],
-  [/^\/literasi\/([a-z-]+)$/, (m) => halamanMisi(m[1]), 'literasi', 'Misi Literasi'],
+  [/^\/petualangan$/, () => halamanPetaPetualangan(), 'petualangan', 'Ekspedisi Pulau Aljabar'],
+  [/^\/petualangan\/harta$/, () => halamanHarta(), 'petualangan', 'Pulau Harta'],
+  [/^\/petualangan\/([a-z]+)$/, (m) => halamanPos(m[1]), 'petualangan', 'Pos Petualangan'],
+  [/^\/literasi$/, () => halamanDaftarLiterasi(), 'petualangan', 'Misi Literasi'],
+  [/^\/literasi\/([a-z-]+)$/, (m) => halamanMisi(m[1]), 'petualangan', 'Misi Literasi'],
   [/^\/progres$/, () => halamanProgres(), 'beranda', 'Progres'],
   [/^\/akun$/, () => halamanAkun(), null, 'Akun'],
   [/^\/masuk$/, () => halamanMasuk(), null, 'Selamat datang'],
@@ -31,6 +35,7 @@ function jalur() {
 }
 
 function render() {
+  jalankanPembersih();
   let p = jalur();
   if (!simpan.ambil().profil && p !== '/masuk') {
     location.replace('#/masuk');

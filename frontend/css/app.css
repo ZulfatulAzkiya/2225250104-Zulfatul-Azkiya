@@ -278,6 +278,39 @@ dialog {
 }
 dialog::backdrop { background: rgb(0 0 0 / 45%); }
 
+/* ---------------------------------------------------------------- petualangan */
+.dunia {
+  position: relative; height: min(56vh, 460px); min-height: 260px; margin: 0 0 12px;
+  border-radius: var(--radius); overflow: hidden; background: linear-gradient(#9fd8f5, #2f86c9);
+  border: 1px solid var(--border);
+}
+.kanvas-3d { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; }
+.dunia-cadangan { display: grid; place-items: center; height: 100%; padding: 16px; text-align: center; color: #10304a; font-weight: 700; }
+.percakapan { display: grid; gap: 10px; }
+.gelembung { display: flex; gap: 10px; align-items: flex-start; }
+.gelembung img { flex: none; border-radius: 50%; background: var(--surface-2); }
+.gelembung p { margin: 0; padding: 10px 14px; border-radius: 4px 16px 16px 16px; background: var(--surface-2); }
+.gelembung.lino { flex-direction: row-reverse; }
+.gelembung.lino p { border-radius: 16px 4px 16px 16px; background: var(--primary-soft); }
+.batu-sungai {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; padding: 16px;
+  border-radius: var(--radius); background: linear-gradient(135deg, #3b8fd9, #2f6fb0);
+}
+.batu {
+  min-height: 64px; border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%; border: 3px solid transparent;
+  background: #b9b9b9; color: #1f2328; font-family: var(--font-mat); font-size: 1.4em; font-weight: 700; cursor: pointer;
+}
+.batu[aria-pressed="true"] { background: #e9f7ec; border-color: #1a7f37; box-shadow: 0 0 0 3px rgb(26 127 55 / 35%); }
+.skor-indikator { display: grid; gap: 10px; margin: 8px 0 12px; }
+.kartu-petualangan { background: linear-gradient(135deg, var(--primary-soft), var(--op-soft)); border-color: var(--primary); }
+.sertifikat { border: 3px double #c99a2e; }
+
+@media print {
+  .atas, .nav, .navlangkah, .tombol, .dunia, .percakapan, p > a { display: none !important; }
+  main { padding: 0; }
+  .sertifikat { box-shadow: none; }
+}
+
 .galat-aplikasi { padding: 16px; margin: 16px; border-radius: 12px; background: var(--error-soft); }
 
 @media (prefers-reduced-motion: reduce) {

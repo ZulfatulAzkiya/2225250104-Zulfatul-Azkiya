@@ -63,6 +63,62 @@ def test_prasyarat_topik_valid():
     assert all(q["topik"] in PRASYARAT["topik"] for q in PRASYARAT["soal"])
 
 
+PETUALANGAN = _muat("petualangan.json")
+TEKA = [(p["id"], t) for p in PETUALANGAN["pos"] for t in p["teka"]]
+
+
+def test_petualangan_skor_mengikuti_rubrik_pretest_posttest():
+    """4 indikator literasi, masing-masing maksimal 6 (total 24), sama seperti rubrik pretest-posttest."""
+    total = {}
+    for _, t in TEKA:
+        for k, v in t.get("skor", {}).items():
+            total[k] = total.get(k, 0) + v
+    assert total == {"R": 6, "F": 6, "E": 6, "I": 6}
+    assert set(PETUALANGAN["indikator"]) == {"R", "F", "E", "I"}
+    assert len(PETUALANGAN["pos"]) == 7
+
+
+@pytest.mark.parametrize("pos,t", TEKA, ids=lambda x: x if isinstance(x, str) else x.get("jenis"))
+def test_teka_teki_benar(pos, t):
+    if t["jenis"] == "langkah":
+        assert selesaikan(t["soal"])["jawaban"] == t["jawaban"]
+    elif t["jenis"] == "pilihan":
+        assert 0 <= t["benar"] < len(t["pilihan"]) and len(set(t["pilihan"])) == len(t["pilihan"])
+        if "umpan" in t:
+            assert len(t["umpan"]) == len(t["pilihan"])
+        if "setara" in t:
+            model = urai_kalimat(t["setara"]).bentuk
+            assert urai_kalimat(t["pilihan"][t["benar"]]).bentuk == model
+            for i, p in enumerate(t["pilihan"]):
+                if i != t["benar"]:
+                    assert urai_kalimat(p).bentuk != model
+        if "cek" in t:
+            assert urai_ekspresi(t["cek"]).lin == urai_ekspresi(t["pilihan"][t["benar"]]).lin
+    elif t["jenis"] == "batu":
+        aman = [n for n in t["batu"] if {"<": n < t["nilai"], ">": n > t["nilai"], "<=": n <= t["nilai"], ">=": n >= t["nilai"]}[t["rel"]]]
+        assert 0 < len(aman) < len(t["batu"])
+    else:
+        pytest.fail(f"jenis tidak dikenal: {t['jenis']}")
+
+
+def test_petualangan_tidak_menyalin_soal_pretest_posttest():
+    """Model di petualangan setara struktur, tetapi bilangannya berbeda dari soal tes."""
+    soal_tes = ["1500x <= 18000", "3x - 7 = 2x + 9", "18 + 2x <= 24", "2000x <= 20000", "4x + 6 = 2x + 18", "210 + 30x <= 450",
+                "8000x + 6000 <= 38000", "7500x + 5000 <= 50000"]
+    tes = {urai_kalimat(s).bentuk for s in soal_tes}
+    for _, t in TEKA:
+        for teks in [t.get("soal"), t.get("setara")]:
+            if teks:
+                assert urai_kalimat(teks).bentuk not in tes, teks
+
+
+def test_narasi_singkat():
+    baris = PETUALANGAN["pembuka"] + PETUALANGAN["penutup"] + [b for p in PETUALANGAN["pos"] for b in p["narasi"]]
+    for b in baris:
+        assert b["siapa"] in {"ulfa", "lino"}
+        assert len(b["teks"].split()) <= 40, b["teks"]
+
+
 def test_bank_soal_lengkap_dan_benar():
     bank = _muat("bank-soal.json")["soal"]
     assert len(bank) >= 300
