@@ -7,6 +7,7 @@ import { garisBilangan, penjelajahSimbol, timbangan, cerminTanda } from '../komp
 import { buatContoh } from '../komponen/contoh.js';
 import { buatPilihan } from '../komponen/pilihan.js';
 import { muatJson } from '../api.js';
+import { tokoh } from '../komponen/tokoh.js';
 
 export function statusTopik(id) {
   const t = simpan.ambil().topik[id];
@@ -25,10 +26,12 @@ export function halamanPeta() {
     h('p', { class: 'redup' }, 'Pelajari berurutan dari atas. Satu kartu, satu konsep.'),
     h('ul', { class: 'daftar' }, TOPIK.map((t) => {
       const st = statusTopik(t.id);
+      const ekspresi = ['senyum', 'hore', 'tanya', 'semangat'][t.no % 4];
       return h('li', {}, h('a', { href: `#/belajar/${t.id}` },
-        h('span', { class: 'ikon', 'aria-hidden': 'true' }, t.ikon),
-        h('span', { class: 'isi' }, h('strong', {}, `${t.no}. ${t.judul}`), h('span', { class: 'redup kecil' }, t.ringkas)),
-        h('span', { class: `lencana ${st.kelas}` }, st.teks)));
+        h('span', { class: 'thumb', 'aria-hidden': 'true' }, tokoh('ulfa', ekspresi, 50, { lompat: false }), h('span', { class: 'lencana-ikon' }, t.ikon)),
+        h('span', { class: 'isi' }, h('strong', {}, `${t.no}. ${t.judul}`), h('span', { class: 'redup kecil' }, t.ringkas),
+          h('span', { class: `lencana ${st.kelas}`, style: 'margin-top:4px;align-self:flex-start' }, st.teks)),
+        h('span', { class: 'panah-bulat', 'aria-hidden': 'true' }, '›')));
     })),
   ];
 }

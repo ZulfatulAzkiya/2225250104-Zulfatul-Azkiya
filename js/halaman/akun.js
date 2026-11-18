@@ -29,9 +29,10 @@ export function halamanMasuk() {
   pesan,
   h('button', { class: 'tombol penuh', type: 'submit', style: 'margin-top:16px' }, 'Mulai Belajar'));
   return [
-    h('section', { class: 'kartu', style: 'text-align:center' },
-      adegan({ pose: 'hore', judul: 'Ulfa dan Lino menyambutmu', tinggi: 200 }),
-      h('h1', { style: 'margin-top:8px' }, 'ULFALINE'),
+    h('section', { class: 'kartu splash' },
+      h('p', { class: 'redup', style: 'margin:0;font-weight:800' }, 'Petualangan Aljabar bersama'),
+      h('div', { class: 'judul-warna', role: 'heading', 'aria-level': '1' }, [...'ULFALINE'].map((c) => h('span', {}, c))),
+      adegan({ pose: 'hore', judul: 'Ulfa dan Lino menyambutmu', tinggi: 220 }),
       h('p', {}, 'Ayo bertualang bersama Ulfa & Lino! Belajar persamaan & pertidaksamaan linear satu variabel, langkah demi langkah.')),
     h('section', { class: 'kartu' }, form,
       h('p', { class: 'redup kecil', style: 'margin-top:12px' }, 'Nama hanya disimpan di perangkat ini. Tidak perlu email atau nomor HP.')),

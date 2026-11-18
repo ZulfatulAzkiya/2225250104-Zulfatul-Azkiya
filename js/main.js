@@ -8,6 +8,8 @@ import { halamanDaftarLiterasi, halamanMisi } from './halaman/literasi.js';
 import { halamanBeranda, halamanProgres } from './halaman/beranda.js';
 import { halamanMasuk, halamanMulai, halamanAkun } from './halaman/akun.js';
 import { halamanPeta as halamanPetaPetualangan, halamanPos, halamanHarta } from './halaman/petualangan.js';
+import { halamanUlfa } from './halaman/ulfa.js';
+import { tokoh } from './komponen/tokoh.js';
 
 const RUTE = [
   [/^\/$/, () => halamanBeranda(), 'beranda', 'Beranda'],
@@ -21,6 +23,7 @@ const RUTE = [
   [/^\/petualangan\/([a-z]+)$/, (m) => halamanPos(m[1]), 'petualangan', 'Pos Petualangan'],
   [/^\/literasi$/, () => halamanDaftarLiterasi(), 'petualangan', 'Misi Literasi'],
   [/^\/literasi\/([a-z-]+)$/, (m) => halamanMisi(m[1]), 'petualangan', 'Misi Literasi'],
+  [/^\/ulfa$/, () => halamanUlfa(), 'ulfa', 'Ruang Ulfa'],
   [/^\/progres$/, () => halamanProgres(), 'beranda', 'Progres'],
   [/^\/akun$/, () => halamanAkun(), null, 'Akun'],
   [/^\/masuk$/, () => halamanMasuk(), null, 'Selamat datang'],
@@ -72,6 +75,7 @@ function tampilGalat(galat) {
 }
 
 simpan.terapkanPengaturan();
+document.querySelector('.nav .avatar')?.append(tokoh('ulfa', 'senyum', 58, { lompat: false }));
 window.addEventListener('hashchange', render);
 render();
 

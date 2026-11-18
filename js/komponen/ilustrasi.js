@@ -1,4 +1,4 @@
-// Ilustrasi kartun 2D ORISINAL ULFALINE: Ulfa & Lino berbadan penuh, adegan hutan tropis, peti harta.
+// Ilustrasi kartun 2D ORISINAL ULFALINE: Ulfa (siswi SMP) & Lino berbadan penuh, adegan, peti harta.
 // Gaya: garis tegas, warna cerah, gradasi lembut. Bukan karakter/elemen dari karya pihak lain.
 
 import { s } from '../ui.js';
@@ -14,70 +14,87 @@ function gradasi(id, atas, bawah, arah = 'v') {
 
 // ------------------------------------------------------------------- Ulfa
 /**
- * Ulfa berbadan penuh. Koordinat lokal: lebar ±100, kaki di y = 168.
- * pose: 'jalan' | 'hore' | 'tunjuk' | 'diam'
+ * Ulfa, siswi SMP berseragam (kemeja putih, rok biru tua), rambut kuncir berpita, ransel & sepatu kets.
+ * Koordinat lokal: lebar ±100, kaki di y = 168. pose: 'jalan' | 'hore' | 'tunjuk' | 'diam'
  */
 export function gambarUlfa(pose = 'diam', u = `u${nomor++}`) {
-  const kulit = `url(#${u}k)`;
-  const hijab = `url(#${u}h)`;
-  const rompi = `url(#${u}r)`;
+  const G = '#3b2a20';
+  const KULIT = '#ffd9bd';
+  const RAMBUT = `url(#${u}r)`;
   const g = s('g', {});
   g.append(s('defs', {},
-    gradasi(`${u}k`, '#f3c49b', '#d9a074'),
-    gradasi(`${u}h`, '#22c1b4', '#0f8a80'),
-    gradasi(`${u}r`, '#f59a3c', '#d9741f'),
-    gradasi(`${u}t`, '#e8b057', '#c4852b')));
+    gradasi(`${u}r`, '#9a5a2e', '#6e3b1c'),
+    gradasi(`${u}k`, '#ff8fb1', '#f2668f'),
+    gradasi(`${u}rk`, '#2f4a8c', '#22366a')));
+
+  // posisi kaki & lengan per pose
+  const kaki = {
+    jalan: [[40, 126, 34, 152], [60, 126, 66, 150]],
+    hore: [[42, 126, 38, 152], [58, 126, 62, 152]],
+    tunjuk: [[42, 126, 40, 154], [58, 126, 62, 154]],
+    diam: [[42, 126, 41, 154], [58, 126, 59, 154]],
+  }[pose] || [[42, 126, 41, 154], [58, 126, 59, 154]];
   const lengan = {
-    jalan: [['M30 82 Q20 104 24 120', 'M70 82 Q82 98 86 112'], [[24, 122], [87, 114]]],
-    hore: [['M30 80 Q16 60 18 38', 'M70 80 Q84 60 82 38'], [[18, 34], [82, 34]]],
-    tunjuk: [['M30 82 Q22 104 26 120', 'M70 80 Q90 76 104 70'], [[26, 122], [107, 69]]],
-    diam: [['M30 82 Q22 104 26 122', 'M70 82 Q78 104 74 122'], [[26, 124], [74, 124]]],
-  }[pose] || [[], []];
-  const kaki = pose === 'jalan'
-    ? [['M42 126 L36 160', 'M58 126 L66 158']]
-    : pose === 'hore' ? [['M42 126 L38 154', 'M58 126 L62 154']] : [['M42 126 L42 160', 'M58 126 L58 160']];
+    jalan: [[30, 84, 22, 108], [70, 84, 80, 104]],
+    hore: [[30, 82, 16, 56], [70, 82, 84, 56]],
+    tunjuk: [[30, 84, 32, 104], [70, 82, 98, 74]],
+    diam: [[31, 84, 38, 100], [69, 84, 62, 100]],
+  }[pose] || [[31, 84, 38, 100], [69, 84, 62, 100]];
+  const garisTebal = (x1, y1, x2, y2, w, warna) => [
+    s('line', { x1, y1, x2, y2, stroke: G, 'stroke-width': w + 3.5, 'stroke-linecap': 'round' }),
+    s('line', { x1, y1, x2, y2, stroke: warna, 'stroke-width': w, 'stroke-linecap': 'round' }),
+  ];
+
   g.append(
-    s('ellipse', { cx: 50, cy: 166, rx: 28, ry: 5, fill: 'rgba(0,0,0,.18)' }),
-    // kaki (celana khaki) & sepatu bot coklat
-    ...kaki[0].map((d) => s('path', { d, stroke: GARIS, 'stroke-width': 18, 'stroke-linecap': 'round', fill: 'none' })),
-    ...kaki[0].map((d) => s('path', { d, stroke: '#b98d4f', 'stroke-width': 13.5, 'stroke-linecap': 'round', fill: 'none' })),
-    ...kaki[0].map((d) => {
-      const akhir = d.split('L')[1].trim().split(' ').map(Number);
-      return s('ellipse', { cx: akhir[0] + 2, cy: akhir[1] + 3, rx: 10, ry: 6, fill: '#6b3f1f', stroke: GARIS, 'stroke-width': 2 });
-    }),
-    // lengan belakang (lengan baju krem)
-    ...lengan[0].map((d) => s('path', { d, stroke: GARIS, 'stroke-width': 13, 'stroke-linecap': 'round', fill: 'none' })),
-    ...lengan[0].map((d) => s('path', { d, stroke: '#fff3da', 'stroke-width': 9.5, 'stroke-linecap': 'round', fill: 'none' })),
-    ...lengan[1].map(([x, y]) => s('circle', { cx: x, cy: y, r: 6.5, fill: kulit, stroke: GARIS, 'stroke-width': 2 })),
-    // badan: baju krem + rompi penjelajah oranye
-    s('path', { d: 'M28 80 Q50 70 72 80 L76 128 Q50 136 24 128 Z', fill: '#fff3da', stroke: GARIS, 'stroke-width': 2.5 }),
-    s('path', { d: 'M28 82 Q38 76 44 78 L42 130 Q32 129 25 127 Z', fill: rompi, stroke: GARIS, 'stroke-width': 2 }),
-    s('path', { d: 'M72 82 Q62 76 56 78 L58 130 Q68 129 75 127 Z', fill: rompi, stroke: GARIS, 'stroke-width': 2 }),
-    s('rect', { x: 29, y: 100, width: 11, height: 9, rx: 2, fill: '#d9741f', stroke: GARIS, 'stroke-width': 1.5 }),
-    s('rect', { x: 60, y: 100, width: 11, height: 9, rx: 2, fill: '#d9741f', stroke: GARIS, 'stroke-width': 1.5 }),
-    s('path', { d: 'M25 121 Q50 128 75 121 L75 127 Q50 134 25 127 Z', fill: '#6b3f1f' }),
-    // hijab menjuntai ke dada
-    s('path', { d: 'M24 52 C24 22 40 10 50 10 C60 10 76 22 76 52 C78 72 70 90 50 94 C30 90 22 72 24 52 Z', fill: hijab, stroke: GARIS, 'stroke-width': 2.5 }),
+    s('ellipse', { cx: 50, cy: 166, rx: 26, ry: 4.5, fill: 'rgba(80,50,20,.18)' }),
+    // ransel (di belakang badan)
+    s('rect', { x: 20, y: 80, width: 60, height: 44, rx: 14, fill: `url(#${u}k)`, stroke: G, 'stroke-width': 2.2 }),
+    // kaki, kaus kaki putih, sepatu kets merah muda
+    ...kaki.flatMap(([x1, y1, x2, y2]) => [
+      ...garisTebal(x1, y1, x2, y2, 8, KULIT),
+      ...garisTebal(x2 + (x1 - x2) * 0.35, y2 - 10, x2, y2, 8.5, '#ffffff'),
+      s('path', { d: `M${x2 - 8} ${y2 + 2} Q${x2 - 8} ${y2 - 6} ${x2} ${y2 - 5} Q${x2 + 10} ${y2 - 4} ${x2 + 11} ${y2 + 3} Z`, fill: '#ff7aa2', stroke: G, 'stroke-width': 2 }),
+      s('path', { d: `M${x2 - 9} ${y2 + 2.5} L${x2 + 12} ${y2 + 2.5} L${x2 + 11} ${y2 + 6} L${x2 - 8} ${y2 + 6} Z`, fill: '#fff', stroke: G, 'stroke-width': 1.6 }),
+      s('path', { d: `M${x2 - 3} ${y2 - 3} l5 0 M${x2 - 2} ${y2 - 0.5} l5 0`, stroke: '#fff', 'stroke-width': 1.4 }),
+    ]),
+    // rok lipit biru tua
+    s('path', { d: 'M30 100 L70 100 L78 130 Q50 136 22 130 Z', fill: `url(#${u}rk)`, stroke: G, 'stroke-width': 2.2 }),
+    ...[38, 46, 54, 62].map((x) => s('path', { d: `M${x} 102 L${x + (x - 50) * 0.35} 131`, stroke: '#16244a', 'stroke-width': 1.4 })),
+    // kemeja putih berkerah
+    s('path', { d: 'M32 78 Q50 72 68 78 L70 102 Q50 106 30 102 Z', fill: '#ffffff', stroke: G, 'stroke-width': 2.2 }),
+    s('path', { d: 'M28 80 Q22 84 23 92 L31 92 Z', fill: '#ffffff', stroke: G, 'stroke-width': 2 }),
+    s('path', { d: 'M72 80 Q78 84 77 92 L69 92 Z', fill: '#ffffff', stroke: G, 'stroke-width': 2 }),
+    s('path', { d: 'M42 74 L50 84 L58 74 L56 72 L50 78 L44 72 Z', fill: '#ffffff', stroke: G, 'stroke-width': 1.8 }),
+    s('circle', { cx: 50, cy: 89, r: 1.4, fill: G }),
+    s('circle', { cx: 50, cy: 95, r: 1.4, fill: G }),
+    // tali ransel
+    s('path', { d: 'M36 77 Q34 90 37 100', stroke: '#f2668f', 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round' }),
+    s('path', { d: 'M64 77 Q66 90 63 100', stroke: '#f2668f', 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round' }),
+    // lengan & tangan
+    ...lengan.flatMap(([x1, y1, x2, y2]) => [...garisTebal(x1, y1, x2, y2, 7.5, KULIT),
+      s('circle', { cx: x2, cy: y2, r: 5.2, fill: KULIT, stroke: G, 'stroke-width': 2 })]),
+    // kuncir rambut & pita
+    s('path', { d: 'M28 34 C10 40 8 70 20 84 C16 66 22 52 32 44 Z', fill: RAMBUT, stroke: G, 'stroke-width': 2 }),
+    s('path', { d: 'M22 30 l-12 -8 l2 14 Z M26 30 l10 -10 l2 13 Z', fill: '#ff6f9c', stroke: G, 'stroke-width': 1.8 }),
+    s('circle', { cx: 24, cy: 30, r: 3.6, fill: '#ff6f9c', stroke: G, 'stroke-width': 1.6 }),
+    // kepala
+    s('ellipse', { cx: 50, cy: 48, rx: 24, ry: 25, fill: RAMBUT, stroke: G, 'stroke-width': 2.2 }),
+    s('ellipse', { cx: 51, cy: 54, rx: 20, ry: 19.5, fill: KULIT, stroke: G, 'stroke-width': 2 }),
+    s('ellipse', { cx: 72, cy: 55, rx: 4, ry: 5, fill: KULIT, stroke: G, 'stroke-width': 1.8 }),
+    // poni menyamping
+    s('path', { d: 'M27 46 C30 26 66 22 75 44 C66 36 56 36 50 42 C46 34 36 36 31 48 Z', fill: RAMBUT, stroke: G, 'stroke-width': 2 }),
     // wajah
-    s('ellipse', { cx: 50, cy: 50, rx: 18, ry: 20, fill: kulit, stroke: GARIS, 'stroke-width': 2 }),
-    s('ellipse', { cx: 43, cy: 49, rx: 4.3, ry: 5.4, fill: '#2b1b10' }),
-    s('ellipse', { cx: 57, cy: 49, rx: 4.3, ry: 5.4, fill: '#2b1b10' }),
-    s('circle', { cx: 44.6, cy: 47, r: 1.7, fill: '#fff' }),
-    s('circle', { cx: 58.6, cy: 47, r: 1.7, fill: '#fff' }),
-    s('path', { d: 'M38.5 43 Q43 40 47 42.5 M53 42.5 Q57 40 61.5 43', stroke: GARIS, 'stroke-width': 1.8, fill: 'none', 'stroke-linecap': 'round' }),
-    s('circle', { cx: 38, cy: 57, r: 3.6, fill: '#ff8a7a', opacity: 0.6 }),
-    s('circle', { cx: 62, cy: 57, r: 3.6, fill: '#ff8a7a', opacity: 0.6 }),
+    s('ellipse', { cx: 43, cy: 54, rx: 3.6, ry: 4.6, fill: '#2a1a12' }),
+    s('ellipse', { cx: 59, cy: 54, rx: 3.6, ry: 4.6, fill: '#2a1a12' }),
+    s('circle', { cx: 44.3, cy: 52.4, r: 1.4, fill: '#fff' }),
+    s('circle', { cx: 60.3, cy: 52.4, r: 1.4, fill: '#fff' }),
+    s('path', { d: 'M39 47 Q43 45 47 46.5 M55 46.5 Q59 45 63 47', stroke: G, 'stroke-width': 1.6, fill: 'none', 'stroke-linecap': 'round' }),
+    s('path', { d: 'M51 58 q1.5 1.5 0 2.6', stroke: '#c98a6a', 'stroke-width': 1.3, fill: 'none' }),
+    s('ellipse', { cx: 38, cy: 61, rx: 3.8, ry: 2.6, fill: '#ff9e9e', opacity: 0.7 }),
+    s('ellipse', { cx: 64, cy: 61, rx: 3.8, ry: 2.6, fill: '#ff9e9e', opacity: 0.7 }),
     pose === 'hore'
-      ? s('path', { d: 'M43 58 Q50 69 57 58 Z', fill: '#8a2f22', stroke: GARIS, 'stroke-width': 1.6 })
-      : s('path', { d: 'M44 59 Q50 64.5 56 59', stroke: '#8a2f22', 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' }),
-    // topi penjelajah
-    s('ellipse', { cx: 50, cy: 24, rx: 33, ry: 7, fill: `url(#${u}t)`, stroke: GARIS, 'stroke-width': 2.5 }),
-    s('path', { d: 'M32 24 C32 6 68 6 68 24 Z', fill: `url(#${u}t)`, stroke: GARIS, 'stroke-width': 2.5 }),
-    s('path', { d: 'M33 19 Q50 15 67 19 L67.5 23 Q50 19 32.5 23 Z', fill: '#ff6f59' }),
-    // kompas di tali
-    s('path', { d: 'M44 80 L50 100 L56 80', stroke: '#6b3f1f', 'stroke-width': 1.5, fill: 'none' }),
-    s('circle', { cx: 50, cy: 103, r: 5, fill: '#ffd34d', stroke: GARIS, 'stroke-width': 1.8 }),
-    s('path', { d: 'M50 99.5 L51.5 103 L50 106.5 L48.5 103 Z', fill: '#e5483b' }),
+      ? s('path', { d: 'M44 63 Q51 73 58 63 Z', fill: '#c2414e', stroke: G, 'stroke-width': 1.6 })
+      : s('path', { d: 'M45 63.5 Q51 70 57 63.5 Q51 66 45 63.5 Z', fill: '#c2414e', stroke: G, 'stroke-width': 1.5 }),
   );
   return g;
 }
