@@ -346,6 +346,28 @@ dialog::backdrop { background: rgb(0 0 0 / 45%); }
 .sertifikat { border: 3px double #c99a2e; }
 
 
+/* peta bergambar & adegan kartun */
+.peta-wadah {
+  height: min(68vh, 600px); min-height: 320px; overflow-y: auto; margin: 0 0 16px;
+  border-radius: var(--radius); border: 3px solid var(--garis); box-shadow: var(--shadow);
+  background: #2e8fd6; overscroll-behavior: contain;
+}
+.peta2d { display: block; width: 100%; height: auto; }
+.peta2d .bangunan, .peta2d .penanda { cursor: pointer; }
+.peta2d .penanda.kini { animation: denyut 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes denyut { 50% { transform: scale(1.18); } }
+.peta2d .penanda.kini circle { filter: drop-shadow(0 0 6px #fff6b0); }
+.kupu { animation: kepak .5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+@keyframes kepak { to { transform: scaleX(.35); } }
+.adegan { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 4px); border: 2.5px solid var(--garis); margin-bottom: 10px; background: #c9ecff; }
+.kartu > .adegan:first-child { margin-top: -2px; }
+.adegan .tokoh-adegan.lompat { animation: lompat .6s cubic-bezier(.3, 1.6, .5, 1) 1; transform-box: fill-box; transform-origin: 50% 100%; }
+.adegan .tutup-peti { transition: transform .8s cubic-bezier(.3, 1.5, .5, 1); transform-box: fill-box; }
+.adegan .koin-peti { transition: opacity .5s .4s; }
+.adegan.buka .tutup-peti { transform: rotate(-28deg) translate(-6px, -14px); }
+.adegan.buka .koin-peti { opacity: 1; }
+:root[data-gerak="kurang"] .kupu, :root[data-gerak="kurang"] .penanda.kini { animation: none !important; }
+
 /* lagu ekspedisi & peta rute */
 .lirik { margin: 8px 0 12px; padding-left: 1.4em; display: grid; gap: 4px; }
 .lirik li { padding: 4px 10px; border-radius: 10px; font-weight: 700; transition: background .2s; }
@@ -366,7 +388,7 @@ dialog::backdrop { background: rgb(0 0 0 / 45%); }
 .nama-rute { font-size: .75rem; font-weight: 900; color: #2b2d42; white-space: nowrap; }
 
 @media print {
-  .atas, .nav, .navlangkah, .tombol, .dunia, .percakapan, p > a { display: none !important; }
+  .atas, .nav, .navlangkah, .tombol, .peta-wadah, .percakapan, p > a { display: none !important; }
   main { padding: 0; }
   .sertifikat { box-shadow: none; }
 }
@@ -374,6 +396,7 @@ dialog::backdrop { background: rgb(0 0 0 / 45%); }
 .galat-aplikasi { padding: 16px; margin: 16px; border-radius: 12px; background: var(--error-soft); }
 
 @media (prefers-reduced-motion: reduce) {
+  .kupu, .penanda.kini { animation: none !important; }
   .tokoh.lompat { animation: none !important; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

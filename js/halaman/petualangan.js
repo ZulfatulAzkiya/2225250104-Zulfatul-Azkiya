@@ -7,7 +7,8 @@ import { muatJson } from '../api.js';
 import { buatPilihan } from '../komponen/pilihan.js';
 import { buatPengerja } from '../komponen/pengerja.js';
 import { garisBilangan, INFO_SIMBOL } from '../komponen/visual.js';
-import { buatDunia, dukungWebGL, TITIK_POS, TITIK_HARTA } from '../petualangan/dunia3d.js';
+import { buatPeta2D, TITIK_POS, TITIK_HARTA } from '../petualangan/peta2d.js';
+import { adegan } from '../komponen/ilustrasi.js';
 import * as suara from '../petualangan/suara.js';
 import { tokoh, kataHore, kataSemangat } from '../komponen/tokoh.js';
 
@@ -98,7 +99,7 @@ export function halamanPeta() {
     const pt = simpan.petualangan();
     if (!pt.pembuka) {
       kosongkan(wadah, h('section', { class: 'kartu' },
-        h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 110), tokoh('lino', 'senyum', 90)),
+        adegan({ pose: 'tunjuk', judul: 'Ulfa menunjuk ke arah petualangan, Lino di sampingnya' }),
         h('h2', { style: 'text-align:center;margin-top:8px' }, 'Peta kuno ditemukan!'),
         percakapan(data.pembuka),
         h('button', {
@@ -112,7 +113,7 @@ export function halamanPeta() {
     const sudah = new Set(Object.keys(pt.pos).filter((k) => pt.pos[k].selesai));
     const tujuan = aktif < data.pos.length ? TITIK_POS[aktif] : TITIK_HARTA;
     const r = rekap(data);
-    const ruang3d = h('div', { class: 'dunia' });
+    const ruangPeta = h('div', { class: 'peta-wadah' });
     const info = h('div', { 'aria-live': 'polite' });
     const masuk = (i) => {
       if (i > aktif) {
@@ -123,15 +124,6 @@ export function halamanPeta() {
       suara.efek('klik');
       location.hash = `#/petualangan/${data.pos[i].id}`;
     };
-
-    let dunia = null;
-    const tombolKamera = h('button', { class: 'tombol netral', type: 'button' }, '🧭 Seluruh peta');
-    let semua = false;
-    tombolKamera.addEventListener('click', () => {
-      semua = !semua;
-      if (semua) dunia?.lihatSemua(); else dunia?.ikuti();
-      tombolKamera.textContent = semua ? '🚶 Ikuti Ulfa' : '🧭 Seluruh peta';
-    });
 
     const kartuBerikut = aktif < data.pos.length
       ? h('section', { class: 'kartu sorot' },
@@ -144,8 +136,8 @@ export function halamanPeta() {
         h('a', { class: 'tombol penuh', href: '#/petualangan/harta' }, 'Buka Peti Harta Karun ✨'));
 
     kosongkan(wadah,
-      h('div', { class: 'baris antara', style: 'margin-bottom:8px' }, tombolSuara(), tombolKamera),
-      ruang3d, info, kartuBerikut,
+      h('div', { class: 'baris antara', style: 'margin-bottom:8px' }, tombolSuara(), h('span', { class: 'redup kecil' }, 'Ketuk tempat di peta untuk masuk')),
+      ruangPeta, info, kartuBerikut,
       h('section', { class: 'kartu' },
         h('h2', {}, 'Bekal skor literasi'),
         h('div', { class: 'skor-indikator' }, INDIKATOR_URUT.map((k) => batangIndikator(data.indikator[k], r.skor[k]))),
@@ -158,28 +150,18 @@ export function halamanPeta() {
       kartuLagu(),
       h('p', { class: 'redup kecil', style: 'text-align:center' }, 'Ingin tantangan lain? ', h('a', { href: '#/literasi' }, '🌏 Misi Literasi tambahan')));
 
-    if (!dukungWebGL()) {
-      kosongkan(ruang3d, h('div', { class: 'dunia-cadangan' }, '🗺️ Perangkat ini tidak mendukung tampilan 3D. Gunakan tombol di bawah untuk melanjutkan perjalanan.'));
-      return;
-    }
-    buatDunia(ruang3d, {
+    const peta = buatPeta2D(ruangPeta, {
       daftarPos: data.pos, posAktif: aktif, selesai: sudah, diTitik: Math.min(pt.titik, tujuan), onPilihPos: masuk,
-    }).then((d) => {
-      dunia = d;
-      if (!d) return;
-      saatKeluar(() => d.hapus());
-      suara.mulaiMusik();
-      if (pt.titik < tujuan) {
-        d.pindahKe(tujuan, () => {
-          simpan.setTitikPetualangan(tujuan);
-          suara.efek('pos');
-          umumkan(aktif < data.pos.length ? `Ulfa tiba di ${data.pos[aktif].nama}` : 'Ulfa tiba di Pulau Harta');
-        });
-      }
-    }).catch((e) => {
-      console.warn(e);
-      kosongkan(ruang3d, h('div', { class: 'dunia-cadangan' }, '🗺️ Peta 3D belum bisa ditampilkan. Gunakan tombol di bawah.'));
     });
+    saatKeluar(() => peta.hapus());
+    suara.mulaiMusik();
+    if (pt.titik < tujuan) {
+      peta.pindahKe(tujuan, () => {
+        simpan.setTitikPetualangan(tujuan);
+        suara.efek('pos');
+        umumkan(aktif < data.pos.length ? `Ulfa tiba di ${data.pos[aktif].nama}` : 'Ulfa tiba di Pulau Harta');
+      });
+    }
   }
 
   return [h('h1', {}, '🗺️ Ekspedisi Pulau Aljabar'), wadah];
@@ -336,7 +318,7 @@ export function halamanPos(id) {
       const terakhir = iPos === data.pos.length - 1;
       kosongkan(wadah,
         h('section', { class: 'kartu', style: 'text-align:center' },
-          h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 96), tokoh('lino', 'hore', 80)),
+          adegan({ pose: 'hore', judul: 'Ulfa dan Lino bersorak', tinggi: 180 }),
           h('h2', {}, `${pos.nama} terlewati!`),
           Object.keys(maks).length
             ? h('ul', { class: 'daftar', style: 'text-align:left' }, Object.keys(maks).map((ind) => h('li', { style: 'padding:4px 0' },
@@ -362,28 +344,21 @@ export function halamanHarta() {
       kosongkan(wadah, umpan('info', '🔒 ', 'Peti harta masih terkunci. Lewati semua pos terlebih dahulu.'), h('a', { class: 'tombol penuh', href: '#/petualangan' }, 'Kembali ke peta'));
       return;
     }
-    const ruang3d = h('div', { class: 'dunia' });
+    const layar = adegan({ pose: 'tunjuk', peti: 'tutup', judul: 'Ulfa dan Lino di depan peti harta karun', tinggi: 260 });
     const hasil = h('div', { 'aria-live': 'polite' });
     const buka = h('button', { class: 'tombol penuh', type: 'button' }, 'Buka Peti! 🗝️');
-    let dunia = null;
-    const tampilSertifikat = () => {
-      suara.efek('harta');
-      kosongkan(hasil,
-        h('section', { class: 'kartu' }, h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 110), tokoh('lino', 'hore', 90)), percakapan(data.penutup)),
-        sertifikat(data), kartuLagu());
-    };
     buka.addEventListener('click', () => {
       buka.hidden = true;
-      if (dunia) dunia.bukaPeti(tampilSertifikat); else tampilSertifikat();
+      layar.classList.add('buka');
+      suara.efek('buka');
+      setTimeout(() => {
+        suara.efek('harta');
+        kosongkan(hasil,
+          h('section', { class: 'kartu' }, adegan({ pose: 'hore', judul: 'Ulfa dan Lino bersorak', tinggi: 180 }), percakapan(data.penutup)),
+          sertifikat(data), kartuLagu());
+      }, 900);
     });
-    kosongkan(wadah, ruang3d, buka, hasil);
-    if (dukungWebGL()) {
-      buatDunia(ruang3d, {
-        daftarPos: data.pos, posAktif: data.pos.length, selesai: new Set(data.pos.map((p) => p.id)), diTitik: TITIK_HARTA, fokusHarta: true,
-      }).then((d) => { dunia = d; if (d) saatKeluar(() => d.hapus()); }).catch(() => ruang3d.remove());
-    } else {
-      ruang3d.remove();
-    }
+    kosongkan(wadah, h('div', { class: 'kartu', style: 'padding:0;overflow:hidden' }, layar), buka, hasil);
   }).catch(() => kosongkan(wadah, umpan('salah', '', 'Data petualangan belum bisa dimuat.')));
   return [h('p', { style: 'margin:0' }, h('a', { href: '#/petualangan' }, '← Peta')), h('h1', {}, '🏆 Pulau Harta'), wadah];
 }
