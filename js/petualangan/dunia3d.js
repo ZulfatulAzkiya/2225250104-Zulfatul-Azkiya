@@ -403,7 +403,9 @@ export async function buatDunia(wadah, { daftarPos, posAktif, selesai, diTitik, 
       const ke = keTitik / (JALAN.length - 1);
       if (kurangGerak) { tAktif = ke; taruh(ke); selesaiCb?.(); return; }
       const jarakTitik = Math.abs(ke - tAktif) * (JALAN.length - 1);
-      gerak = { dari: tAktif, ke, mulai: performance.now(), durasi: 1300 * Math.max(1, jarakTitik), lompatan: Math.max(4, Math.round(6 * jarakTitik)), terakhirLompat: -1, selesai: selesaiCb };
+      // Perjalanan jauh dipercepat (maks ±4 detik) agar siswa tidak menunggu lama.
+      const durasi = 1300 * Math.min(3, Math.max(1, jarakTitik));
+      gerak = { dari: tAktif, ke, mulai: performance.now(), durasi, lompatan: Math.max(4, Math.round(durasi / 220)), terakhirLompat: -1, selesai: selesaiCb };
     },
     ikuti() { mode = 'ikuti'; },
     lihatSemua() { mode = 'semua'; },
