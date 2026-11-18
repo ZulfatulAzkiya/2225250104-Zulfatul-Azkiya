@@ -4,7 +4,7 @@
 
 import { s } from '../ui.js';
 
-const GARIS = '#3b2a20';
+const GARIS = '#8a5a3b';
 
 function mulut(ekspresi, cx, cy, lebar) {
   if (ekspresi === 'hore') {
@@ -36,22 +36,22 @@ function ulfa(ekspresi) {
   }[ekspresi] || [];
   return [
     // bahu: kemeja putih berkerah & tali ransel
-    s('path', { d: 'M22 128 C24 104 40 96 60 96 C80 96 96 104 98 128 Z', fill: '#ffffff', stroke: GARIS, 'stroke-width': 2.5 }),
+    s('path', { d: 'M22 128 C24 104 40 96 60 96 C80 96 96 104 98 128 Z', fill: '#ffffff', stroke: GARIS, 'stroke-width': 1.9 }),
     s('path', { d: 'M48 96 L60 110 L72 96 L68 94 L60 102 L52 94 Z', fill: '#fff', stroke: GARIS, 'stroke-width': 2 }),
     s('path', { d: 'M36 100 Q33 114 36 128 M84 100 Q87 114 84 128', stroke: '#f2668f', 'stroke-width': 6, fill: 'none' }),
     // kuncir & pita
-    s('path', { d: 'M30 40 C8 48 6 84 22 100 C18 78 24 60 36 50 Z', fill: RAMBUT, stroke: GARIS, 'stroke-width': 2.2 }),
-    s('path', { d: 'M24 34 l-15 -10 l3 18 Z M29 34 l13 -12 l2 16 Z', fill: '#ff6f9c', stroke: GARIS, 'stroke-width': 2 }),
+    s('path', { d: 'M30 40 C8 48 6 84 22 100 C18 78 24 60 36 50 Z', fill: RAMBUT, stroke: GARIS, 'stroke-width': 1.7 }),
+    s('path', { d: 'M26.5 34 C19 22 6 24 7 33 C8 41 19 40 26.5 34 Z M26.5 34 C32 22 45 22 45 31 C45 40 34 40 26.5 34 Z', fill: '#ff7fa8', stroke: GARIS, 'stroke-width': 1.8 }),
     s('circle', { cx: 26.5, cy: 34, r: 4.5, fill: '#ff6f9c', stroke: GARIS, 'stroke-width': 1.8 }),
     // kepala
-    s('ellipse', { cx: 60, cy: 56, rx: 30, ry: 31, fill: RAMBUT, stroke: GARIS, 'stroke-width': 2.5 }),
-    s('ellipse', { cx: 61, cy: 63, rx: 25, ry: 24.5, fill: KULIT, stroke: GARIS, 'stroke-width': 2.2 }),
+    s('ellipse', { cx: 60, cy: 56, rx: 30, ry: 31, fill: RAMBUT, stroke: GARIS, 'stroke-width': 1.9 }),
+    s('ellipse', { cx: 61, cy: 63, rx: 25, ry: 24.5, fill: KULIT, stroke: GARIS, 'stroke-width': 1.7 }),
     s('ellipse', { cx: 87, cy: 64, rx: 5, ry: 6, fill: KULIT, stroke: GARIS, 'stroke-width': 2 }),
-    s('path', { d: 'M31 54 C35 28 80 24 91 52 C80 42 68 42 60 50 C55 40 42 42 36 56 Z', fill: RAMBUT, stroke: GARIS, 'stroke-width': 2.2 }),
+    s('path', { d: 'M31 54 C35 28 80 24 91 52 C80 42 68 42 60 50 C55 40 42 42 36 56 Z', fill: RAMBUT, stroke: GARIS, 'stroke-width': 1.7 }),
     ekspresi === 'tanya'
-      ? s('path', { d: 'M64 52 Q70 47 76 51', stroke: GARIS, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' })
-      : s('path', { d: 'M64 54 Q69 51 75 54', stroke: GARIS, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' }),
-    s('path', { d: 'M45 54 Q50 51 55 54', stroke: GARIS, 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' }),
+      ? s('path', { d: 'M64 52 Q70 47 76 51', stroke: GARIS, 'stroke-width': 1.7, fill: 'none', 'stroke-linecap': 'round' })
+      : s('path', { d: 'M64 54 Q69 51 75 54', stroke: GARIS, 'stroke-width': 1.7, fill: 'none', 'stroke-linecap': 'round' }),
+    s('path', { d: 'M45 54 Q50 51 55 54', stroke: GARIS, 'stroke-width': 1.7, fill: 'none', 'stroke-linecap': 'round' }),
     mata(ekspresi, 51, 63, 4.4),
     mata(ekspresi, 70, 63, 4.4),
     s('ellipse', { cx: 44, cy: 72, rx: 5, ry: 3.2, fill: '#ff9e9e', opacity: 0.7 }),
@@ -64,12 +64,12 @@ function ulfa(ekspresi) {
 
 function lino(ekspresi) {
   return [
-    s('ellipse', { cx: 26, cy: 42, rx: 15, ry: 19, fill: '#9a6f45', stroke: GARIS, 'stroke-width': 2.5, transform: `rotate(${ekspresi === 'hore' ? -40 : -25} 26 42)` }),
+    s('ellipse', { cx: 26, cy: 42, rx: 15, ry: 19, fill: '#9a6f45', stroke: GARIS, 'stroke-width': 1.9, transform: `rotate(${ekspresi === 'hore' ? -40 : -25} 26 42)` }),
     s('ellipse', { cx: 26, cy: 42, rx: 8, ry: 12, fill: '#f2b9a2', transform: `rotate(${ekspresi === 'hore' ? -40 : -25} 26 42)` }),
-    s('ellipse', { cx: 94, cy: 42, rx: 15, ry: 19, fill: '#9a6f45', stroke: GARIS, 'stroke-width': 2.5, transform: `rotate(${ekspresi === 'hore' ? 40 : 25} 94 42)` }),
+    s('ellipse', { cx: 94, cy: 42, rx: 15, ry: 19, fill: '#9a6f45', stroke: GARIS, 'stroke-width': 1.9, transform: `rotate(${ekspresi === 'hore' ? 40 : 25} 94 42)` }),
     s('ellipse', { cx: 94, cy: 42, rx: 8, ry: 12, fill: '#f2b9a2', transform: `rotate(${ekspresi === 'hore' ? 40 : 25} 94 42)` }),
-    s('ellipse', { cx: 60, cy: 108, rx: 26, ry: 17, fill: '#a87c50', stroke: GARIS, 'stroke-width': 2.5 }),
-    s('circle', { cx: 60, cy: 66, r: 34, fill: '#a87c50', stroke: GARIS, 'stroke-width': 2.5 }),
+    s('ellipse', { cx: 60, cy: 108, rx: 26, ry: 17, fill: '#a87c50', stroke: GARIS, 'stroke-width': 1.9 }),
+    s('circle', { cx: 60, cy: 66, r: 34, fill: '#a87c50', stroke: GARIS, 'stroke-width': 1.9 }),
     s('ellipse', { cx: 60, cy: 74, rx: 24, ry: 21, fill: '#d4b085' }),
     s('circle', { cx: 45, cy: 62, r: 15, fill: '#fff6d8', stroke: GARIS, 'stroke-width': 2 }),
     s('circle', { cx: 75, cy: 62, r: 15, fill: '#fff6d8', stroke: GARIS, 'stroke-width': 2 }),

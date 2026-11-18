@@ -12,7 +12,7 @@ FRONTEND = Path(__file__).resolve().parents[2] / "frontend"
 BERKAS_APLIKASI = sorted(
     p.relative_to(FRONTEND).as_posix()
     for p in FRONTEND.rglob("*")
-    if p.is_file() and p.suffix in {".html", ".css", ".js", ".json", ".png", ".svg", ".webmanifest"} and p.name != "sw.js"
+    if p.is_file() and p.suffix in {".html", ".css", ".js", ".json", ".png", ".svg", ".webmanifest", ".ttf"} and p.name != "sw.js"
 )
 
 

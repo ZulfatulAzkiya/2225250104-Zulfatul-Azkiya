@@ -67,7 +67,7 @@ Checklist layar: [docs/panduan-ui-ux.md](docs/panduan-ui-ux.md) §8.
 
 ## Gaya Visual
 
-Tema "Portal Buku Cerita": krem hangat, hijau zaitun, aksen oranye; judul halaman berupa pita hijau; kartu membulat berbayang lembut. Karakter: **Ulfa** (siswi SMP: kemeja putih, rok biru tua, rambut kuncir berpita, ransel & kets) dan **Lino** (tarsius), digambar sebagai SVG di `komponen/ilustrasi.js` (berbadan penuh) dan `komponen/tokoh.js` (wajah ekspresif). Jangan meniru karakter/desain milik pihak lain.
+Font **Fredoka** (OFL, `frontend/fonts/`, lisensi di `Fredoka-OFL.txt`). Tema "Portal Buku Cerita": krem hangat, hijau zaitun, aksen oranye; judul halaman berupa pita hijau; kartu membulat berbayang lembut. Karakter: **Ulfa** (siswi SMP: kemeja putih, rok biru tua, rambut kuncir berpita, ransel & kets) dan **Lino** (tarsius), digambar sebagai SVG berbentuk melengkung halus di `komponen/ilustrasi.js` (berbadan penuh; lengan/kaki/mata dianimasikan lewat CSS: berayun, berkedip) dan `komponen/tokoh.js` (wajah ekspresif). Jangan meniru karakter/desain milik pihak lain.
 
 ## Konvensi Kode
 

@@ -3,7 +3,7 @@
 
 import { s } from '../ui.js';
 
-const GARIS = '#3a2a1e';
+const GARIS = '#8a5a3b';
 let nomor = 0;
 
 /** Definisi gradasi dengan id unik per gambar. */
@@ -14,88 +14,102 @@ function gradasi(id, atas, bawah, arah = 'v') {
 
 // ------------------------------------------------------------------- Ulfa
 /**
- * Ulfa, siswi SMP berseragam (kemeja putih, rok biru tua), rambut kuncir berpita, ransel & sepatu kets.
+ * Ulfa, siswi SMP berseragam: bentuk melengkung halus, garis tepi lembut, gradasi & kilau.
+ * Lengan, kaki, dan mata adalah grup terpisah (kelas CSS) agar bisa beranimasi luwes.
  * Koordinat lokal: lebar ±100, kaki di y = 168. pose: 'jalan' | 'hore' | 'tunjuk' | 'diam'
  */
 export function gambarUlfa(pose = 'diam', u = `u${nomor++}`) {
-  const G = '#3b2a20';
-  const KULIT = '#ffd9bd';
-  const RAMBUT = `url(#${u}r)`;
-  const g = s('g', {});
+  const G = '#8a5a3b';
+  const W = 1.6;
+  const g = s('g', { class: `ulfa pose-${pose}` });
   g.append(s('defs', {},
-    gradasi(`${u}r`, '#9a5a2e', '#6e3b1c'),
-    gradasi(`${u}k`, '#ff8fb1', '#f2668f'),
-    gradasi(`${u}rk`, '#2f4a8c', '#22366a')));
+    gradasi(`${u}rb`, '#a8673a', '#6f3b1f'),
+    gradasi(`${u}kl`, '#ffe3cc', '#f6c4a2'),
+    gradasi(`${u}rk`, '#3b5aa3', '#22356b'),
+    gradasi(`${u}kj`, '#ffffff', '#e9eef6'),
+    gradasi(`${u}rs`, '#ffa3c0', '#f0628f'),
+    gradasi(`${u}sp`, '#ff9cbc', '#f2668f'),
+    s('radialGradient', { id: `${u}pipi` }, s('stop', { offset: '0%', 'stop-color': '#ff8f9a', 'stop-opacity': 0.75 }), s('stop', { offset: '100%', 'stop-color': '#ff8f9a', 'stop-opacity': 0 }))));
+  const KULIT = `url(#${u}kl)`;
 
-  // posisi kaki & lengan per pose
-  const kaki = {
-    jalan: [[40, 126, 34, 152], [60, 126, 66, 150]],
-    hore: [[42, 126, 38, 152], [58, 126, 62, 152]],
-    tunjuk: [[42, 126, 40, 154], [58, 126, 62, 154]],
-    diam: [[42, 126, 41, 154], [58, 126, 59, 154]],
-  }[pose] || [[42, 126, 41, 154], [58, 126, 59, 154]];
-  const lengan = {
-    jalan: [[30, 84, 22, 108], [70, 84, 80, 104]],
-    hore: [[30, 82, 16, 56], [70, 82, 84, 56]],
-    tunjuk: [[30, 84, 32, 104], [70, 82, 98, 74]],
-    diam: [[31, 84, 38, 100], [69, 84, 62, 100]],
-  }[pose] || [[31, 84, 38, 100], [69, 84, 62, 100]];
-  const garisTebal = (x1, y1, x2, y2, w, warna) => [
-    s('line', { x1, y1, x2, y2, stroke: G, 'stroke-width': w + 3.5, 'stroke-linecap': 'round' }),
-    s('line', { x1, y1, x2, y2, stroke: warna, 'stroke-width': w, 'stroke-linecap': 'round' }),
-  ];
+  // Satu lengan: bentuk meruncing melengkung dengan tangan bulat, berporos di bahu (0,0).
+  const lengan = (sudut, kelas) => s('g', { class: `lengan ${kelas}`, style: `--sudut:${sudut}deg`, transform: `rotate(${sudut})` },
+    s('path', { d: 'M-4.5 0 C-5.5 9 -5 17 -3.6 24 C-2.6 27.5 2.6 27.5 3.6 24 C5 17 5.5 9 4.5 0 Z', fill: KULIT, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M-6.5 -2 C-7 4 -6 8 -5 10 C-1 12 1 12 5 10 C6 8 7 4 6.5 -2 Z', fill: `url(#${u}kj)`, stroke: G, 'stroke-width': W }),
+    s('ellipse', { cx: 0, cy: 28, rx: 5.4, ry: 5.8, fill: KULIT, stroke: G, 'stroke-width': W }));
+  // Satu kaki: paha-betis meruncing, kaus kaki, sepatu kets membulat. Poros di pinggul (0,0).
+  const kaki = (sudut, kelas) => s('g', { class: `kaki ${kelas}`, style: `--sudut:${sudut}deg`, transform: `rotate(${sudut})` },
+    s('path', { d: 'M-5 0 C-5.5 10 -4.6 20 -3.6 28 L3.6 28 C4.6 20 5.5 10 5 0 Z', fill: KULIT, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M-4.2 20 C-4.4 24 -4 27 -3.8 31 L3.8 31 C4 27 4.4 24 4.2 20 Z', fill: '#ffffff', stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M-7 36 C-7.5 30.5 -4 29 0 29 C6 29 10.5 31.5 11 35.5 C11.2 37.5 9.5 38.6 7.5 38.6 L-5 38.6 C-6.4 38.6 -7 37.6 -7 36 Z', fill: `url(#${u}sp)`, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M-7 36.2 L11 36.2', stroke: '#fff', 'stroke-width': 2, 'stroke-linecap': 'round' }),
+    s('path', { d: 'M-1 31.5 q2 1 4 0', stroke: '#fff', 'stroke-width': 1.2, fill: 'none', 'stroke-linecap': 'round' }));
 
-  g.append(
-    s('ellipse', { cx: 50, cy: 166, rx: 26, ry: 4.5, fill: 'rgba(80,50,20,.18)' }),
-    // ransel (di belakang badan)
-    s('rect', { x: 20, y: 80, width: 60, height: 44, rx: 14, fill: `url(#${u}k)`, stroke: G, 'stroke-width': 2.2 }),
-    // kaki, kaus kaki putih, sepatu kets merah muda
-    ...kaki.flatMap(([x1, y1, x2, y2]) => [
-      ...garisTebal(x1, y1, x2, y2, 8, KULIT),
-      ...garisTebal(x2 + (x1 - x2) * 0.35, y2 - 10, x2, y2, 8.5, '#ffffff'),
-      s('path', { d: `M${x2 - 8} ${y2 + 2} Q${x2 - 8} ${y2 - 6} ${x2} ${y2 - 5} Q${x2 + 10} ${y2 - 4} ${x2 + 11} ${y2 + 3} Z`, fill: '#ff7aa2', stroke: G, 'stroke-width': 2 }),
-      s('path', { d: `M${x2 - 9} ${y2 + 2.5} L${x2 + 12} ${y2 + 2.5} L${x2 + 11} ${y2 + 6} L${x2 - 8} ${y2 + 6} Z`, fill: '#fff', stroke: G, 'stroke-width': 1.6 }),
-      s('path', { d: `M${x2 - 3} ${y2 - 3} l5 0 M${x2 - 2} ${y2 - 0.5} l5 0`, stroke: '#fff', 'stroke-width': 1.4 }),
-    ]),
-    // rok lipit biru tua
-    s('path', { d: 'M30 100 L70 100 L78 130 Q50 136 22 130 Z', fill: `url(#${u}rk)`, stroke: G, 'stroke-width': 2.2 }),
-    ...[38, 46, 54, 62].map((x) => s('path', { d: `M${x} 102 L${x + (x - 50) * 0.35} 131`, stroke: '#16244a', 'stroke-width': 1.4 })),
-    // kemeja putih berkerah
-    s('path', { d: 'M32 78 Q50 72 68 78 L70 102 Q50 106 30 102 Z', fill: '#ffffff', stroke: G, 'stroke-width': 2.2 }),
-    s('path', { d: 'M28 80 Q22 84 23 92 L31 92 Z', fill: '#ffffff', stroke: G, 'stroke-width': 2 }),
-    s('path', { d: 'M72 80 Q78 84 77 92 L69 92 Z', fill: '#ffffff', stroke: G, 'stroke-width': 2 }),
-    s('path', { d: 'M42 74 L50 84 L58 74 L56 72 L50 78 L44 72 Z', fill: '#ffffff', stroke: G, 'stroke-width': 1.8 }),
-    s('circle', { cx: 50, cy: 89, r: 1.4, fill: G }),
-    s('circle', { cx: 50, cy: 95, r: 1.4, fill: G }),
-    // tali ransel
-    s('path', { d: 'M36 77 Q34 90 37 100', stroke: '#f2668f', 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round' }),
-    s('path', { d: 'M64 77 Q66 90 63 100', stroke: '#f2668f', 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round' }),
-    // lengan & tangan
-    ...lengan.flatMap(([x1, y1, x2, y2]) => [...garisTebal(x1, y1, x2, y2, 7.5, KULIT),
-      s('circle', { cx: x2, cy: y2, r: 5.2, fill: KULIT, stroke: G, 'stroke-width': 2 })]),
-    // kuncir rambut & pita
-    s('path', { d: 'M28 34 C10 40 8 70 20 84 C16 66 22 52 32 44 Z', fill: RAMBUT, stroke: G, 'stroke-width': 2 }),
-    s('path', { d: 'M22 30 l-12 -8 l2 14 Z M26 30 l10 -10 l2 13 Z', fill: '#ff6f9c', stroke: G, 'stroke-width': 1.8 }),
-    s('circle', { cx: 24, cy: 30, r: 3.6, fill: '#ff6f9c', stroke: G, 'stroke-width': 1.6 }),
-    // kepala
-    s('ellipse', { cx: 50, cy: 48, rx: 24, ry: 25, fill: RAMBUT, stroke: G, 'stroke-width': 2.2 }),
-    s('ellipse', { cx: 51, cy: 54, rx: 20, ry: 19.5, fill: KULIT, stroke: G, 'stroke-width': 2 }),
-    s('ellipse', { cx: 72, cy: 55, rx: 4, ry: 5, fill: KULIT, stroke: G, 'stroke-width': 1.8 }),
-    // poni menyamping
-    s('path', { d: 'M27 46 C30 26 66 22 75 44 C66 36 56 36 50 42 C46 34 36 36 31 48 Z', fill: RAMBUT, stroke: G, 'stroke-width': 2 }),
-    // wajah
-    s('ellipse', { cx: 43, cy: 54, rx: 3.6, ry: 4.6, fill: '#2a1a12' }),
-    s('ellipse', { cx: 59, cy: 54, rx: 3.6, ry: 4.6, fill: '#2a1a12' }),
-    s('circle', { cx: 44.3, cy: 52.4, r: 1.4, fill: '#fff' }),
-    s('circle', { cx: 60.3, cy: 52.4, r: 1.4, fill: '#fff' }),
-    s('path', { d: 'M39 47 Q43 45 47 46.5 M55 46.5 Q59 45 63 47', stroke: G, 'stroke-width': 1.6, fill: 'none', 'stroke-linecap': 'round' }),
-    s('path', { d: 'M51 58 q1.5 1.5 0 2.6', stroke: '#c98a6a', 'stroke-width': 1.3, fill: 'none' }),
-    s('ellipse', { cx: 38, cy: 61, rx: 3.8, ry: 2.6, fill: '#ff9e9e', opacity: 0.7 }),
-    s('ellipse', { cx: 64, cy: 61, rx: 3.8, ry: 2.6, fill: '#ff9e9e', opacity: 0.7 }),
-    pose === 'hore'
-      ? s('path', { d: 'M44 63 Q51 73 58 63 Z', fill: '#c2414e', stroke: G, 'stroke-width': 1.6 })
-      : s('path', { d: 'M45 63.5 Q51 70 57 63.5 Q51 66 45 63.5 Z', fill: '#c2414e', stroke: G, 'stroke-width': 1.5 }),
+  const sudut = {
+    jalan: { la: 22, ra: -22, lk: 12, rk: -12 },
+    hore: { la: 128, ra: -150, lk: 6, rk: -6 },
+    tunjuk: { la: 10, ra: -100, lk: 3, rk: -3 },
+    diam: { la: 12, ra: -12, lk: 2, rk: -2 },
+  }[pose] || { la: 12, ra: -12, lk: 2, rk: -2 };
+
+  const badan = s('g', { class: 'badan' });
+  badan.append(
+    // ransel membulat
+    s('path', { d: 'M23 92 C21 80 30 76 50 76 C70 76 79 80 77 92 L76 118 C76 124 70 127 50 127 C30 127 24 124 24 118 Z', fill: `url(#${u}rs)`, stroke: G, 'stroke-width': W }),
+    // kaki (di belakang rok)
+    s('g', { transform: 'translate(43 124)' }, kaki(sudut.lk, 'kaki-kiri')),
+    s('g', { transform: 'translate(57 124)' }, kaki(sudut.rk, 'kaki-kanan')),
+    // rok lipit melebar dengan ujung bergelombang
+    s('path', { d: 'M31 100 C40 98 60 98 69 100 C73 110 77 120 79 129 C74 131.5 70 129.5 65 131.5 C60 129.5 55 131.5 50 129.5 C45 131.5 40 129.5 35 131.5 C30 129.5 26 131.5 21 129 C23 120 27 110 31 100 Z', fill: `url(#${u}rk)`, stroke: G, 'stroke-width': W }),
+    ...[38, 46, 54, 62].map((x) => s('path', { d: `M${x} 102 C${x + (x - 50) * 0.15} 112 ${x + (x - 50) * 0.3} 122 ${x + (x - 50) * 0.38} 130`, stroke: '#1b2a57', 'stroke-width': 1.1, fill: 'none', opacity: 0.8 })),
+    // kemeja putih
+    s('path', { d: 'M33 79 C40 75 60 75 67 79 C69 86 70 94 69.5 101.5 C60 104 40 104 30.5 101.5 C30 94 31 86 33 79 Z', fill: `url(#${u}kj)`, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M42 75.5 C45 79 47.5 82 50 85 C52.5 82 55 79 58 75.5 C56 74.5 54 74.2 50 78.5 C46 74.2 44 74.5 42 75.5 Z', fill: '#fff', stroke: G, 'stroke-width': W }),
+    s('circle', { cx: 50, cy: 90, r: 1.3, fill: G }),
+    s('circle', { cx: 50, cy: 96, r: 1.3, fill: G }),
+    // tali ransel melengkung
+    s('path', { d: 'M37.5 78 C35.5 86 35.5 94 37.5 101', stroke: '#f0628f', 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round' }),
+    s('path', { d: 'M62.5 78 C64.5 86 64.5 94 62.5 101', stroke: '#f0628f', 'stroke-width': 4.5, fill: 'none', 'stroke-linecap': 'round' }),
+    // lengan (poros di bahu)
+    s('g', { transform: 'translate(32 81)' }, lengan(sudut.la, 'lengan-kiri')),
+    s('g', { transform: 'translate(68 81)' }, lengan(sudut.ra, 'lengan-kanan')),
   );
+
+  const kepala = s('g', { class: 'kepala' });
+  kepala.append(
+    // kuncir bergelombang & pita simpul bulat
+    s('path', { d: 'M30 36 C14 38 8 56 13 72 C15 79 20 84 24 86 C21 79 20 72 22 65 C24 57 28 50 34 45 Z', fill: `url(#${u}rb)`, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M16 60 C17 68 19 74 22 79', stroke: '#c58a5c', 'stroke-width': 1.3, fill: 'none', opacity: 0.8 }),
+    s('g', { transform: 'translate(27 31) rotate(-18)' },
+      s('path', { d: 'M0 0 C-6 -9 -15 -8 -15 -1 C-15 6 -6 6 0 0 Z', fill: '#ff7fa8', stroke: G, 'stroke-width': W }),
+      s('path', { d: 'M0 0 C6 -9 15 -8 15 -1 C15 6 6 6 0 0 Z', fill: '#ff7fa8', stroke: G, 'stroke-width': W }),
+      s('path', { d: 'M-1 1 C-4 6 -6 9 -7 12 M1 1 C4 6 6 9 7 12', stroke: '#ff7fa8', 'stroke-width': 3, 'stroke-linecap': 'round' }),
+      s('ellipse', { cx: 0, cy: 0, rx: 3.6, ry: 3.2, fill: '#ff5b93', stroke: G, 'stroke-width': W })),
+    // kepala & wajah
+    s('ellipse', { cx: 50.5, cy: 48, rx: 24, ry: 25, fill: `url(#${u}rb)`, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M31 58 C30 44 38 34 51 34 C64 34 72 44 71 58 C70 68 62 74 51 74 C40 74 32 68 31 58 Z', fill: KULIT, stroke: G, 'stroke-width': W }),
+    s('ellipse', { cx: 71.5, cy: 56, rx: 3.6, ry: 4.6, fill: KULIT, stroke: G, 'stroke-width': W }),
+    // poni lembut menyamping
+    s('path', { d: 'M27.5 49 C28 31 44 23 56 25 C67 27 75 36 75 46 C70 40 63 37.5 56 39 C53 42 50 45 46.5 46 C46 41.5 47 39 48 37.5 C42 39 36 43.5 32 51 Z', fill: `url(#${u}rb)`, stroke: G, 'stroke-width': W }),
+    s('path', { d: 'M40 31 C46 27.5 55 27 61 29', stroke: '#d79c6c', 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round', opacity: 0.85 }),
+    // mata besar dengan kilau (grup "mata" berkedip)
+    s('g', { class: 'mata' },
+      s('ellipse', { cx: 43, cy: 56, rx: 3.9, ry: 4.9, fill: '#3a2216' }),
+      s('ellipse', { cx: 59, cy: 56, rx: 3.9, ry: 4.9, fill: '#3a2216' }),
+      s('circle', { cx: 44.4, cy: 54.2, r: 1.5, fill: '#fff' }),
+      s('circle', { cx: 60.4, cy: 54.2, r: 1.5, fill: '#fff' }),
+      s('circle', { cx: 42.2, cy: 58, r: 0.7, fill: '#fff' }),
+      s('circle', { cx: 58.2, cy: 58, r: 0.7, fill: '#fff' })),
+    s('path', { d: 'M38.5 49.5 C40.5 47.8 43.5 47.4 46.5 48.6 M55.5 48.6 C58.5 47.4 61.5 47.8 63.5 49.5', stroke: '#7a4a2a', 'stroke-width': 1.4, fill: 'none', 'stroke-linecap': 'round' }),
+    s('path', { d: 'M50.8 60.5 q1.3 1.3 0 2.4', stroke: '#d89a7c', 'stroke-width': 1.2, fill: 'none', 'stroke-linecap': 'round' }),
+    s('ellipse', { cx: 37.5, cy: 63, rx: 5, ry: 3.4, fill: `url(#${u}pipi)` }),
+    s('ellipse', { cx: 64.5, cy: 63, rx: 5, ry: 3.4, fill: `url(#${u}pipi)` }),
+    pose === 'hore'
+      ? s('path', { d: 'M44.5 65 C46 71 56 71 57.5 65 C54 66.5 48 66.5 44.5 65 Z', fill: '#c94b5a', stroke: G, 'stroke-width': 1.3 })
+      : s('path', { d: 'M45.5 65.2 C47.5 69 54.5 69 56.5 65.2', stroke: '#b3404f', 'stroke-width': 1.8, fill: 'none', 'stroke-linecap': 'round' }),
+  );
+
+  g.append(s('ellipse', { cx: 50, cy: 166, rx: 24, ry: 4, fill: 'rgba(90,60,30,.16)' }), badan, kepala);
   return g;
 }
 
@@ -112,7 +126,7 @@ export function gambarLino(pose = 'duduk', u = `l${nomor++}`) {
     s('path', { d: 'M44 86 C66 86 70 60 62 44', stroke: '#9a6f45', 'stroke-width': 2.8, fill: 'none', 'stroke-linecap': 'round' }),
     s('ellipse', { cx: 61, cy: 40, rx: 5, ry: 8, fill: '#7a5532', stroke: GARIS, 'stroke-width': 1.8 }),
     // badan & kaki
-    s('ellipse', { cx: 35, cy: 78, rx: 15, ry: 17, fill: bulu, stroke: GARIS, 'stroke-width': 2.2 }),
+    s('ellipse', { cx: 35, cy: 78, rx: 15, ry: 17, fill: bulu, stroke: GARIS, 'stroke-width': 1.6 }),
     s('ellipse', { cx: 35, cy: 81, rx: 9, ry: 11, fill: '#e2c39a' }),
     s('ellipse', { cx: 26, cy: 94, rx: 7, ry: 4, fill: bulu, stroke: GARIS, 'stroke-width': 1.8 }),
     s('ellipse', { cx: 44, cy: 94, rx: 7, ry: 4, fill: bulu, stroke: GARIS, 'stroke-width': 1.8 }),
@@ -129,7 +143,7 @@ export function gambarLino(pose = 'duduk', u = `l${nomor++}`) {
     s('ellipse', { cx: 55, cy: 22, rx: 9, ry: 12, fill: bulu, stroke: GARIS, 'stroke-width': 2, transform: 'rotate(28 55 22)' }),
     s('ellipse', { cx: 55, cy: 22, rx: 5, ry: 7.5, fill: '#f2b9a2', transform: 'rotate(28 55 22)' }),
     // kepala & mata besar
-    s('circle', { cx: 35, cy: 40, r: 22, fill: bulu, stroke: GARIS, 'stroke-width': 2.2 }),
+    s('circle', { cx: 35, cy: 40, r: 22, fill: bulu, stroke: GARIS, 'stroke-width': 1.6 }),
     s('ellipse', { cx: 35, cy: 46, rx: 15, ry: 13, fill: '#e2c39a' }),
     s('circle', { cx: 26, cy: 38, r: 9.5, fill: '#fff8de', stroke: GARIS, 'stroke-width': 1.6 }),
     s('circle', { cx: 44, cy: 38, r: 9.5, fill: '#fff8de', stroke: GARIS, 'stroke-width': 1.6 }),
@@ -232,7 +246,7 @@ export function adegan({ pose = 'jalan', judul = 'Ulfa dan Lino', peti = false, 
 /** Peti harta kartun. terbuka: tutup terangkat & koin terlihat. Lebar ±80. */
 export function gambarPeti(terbuka = false) {
   const tutup = s('g', { class: 'tutup-peti', style: 'transform-origin: 40px 22px' },
-    s('path', { d: 'M4 22 C4 4 76 4 76 22 Z', fill: '#a8642c', stroke: GARIS, 'stroke-width': 2.5 }),
+    s('path', { d: 'M4 22 C4 4 76 4 76 22 Z', fill: '#a8642c', stroke: GARIS, 'stroke-width': 1.8 }),
     s('rect', { x: 34, y: 4, width: 12, height: 18, fill: '#ffc93c', stroke: GARIS, 'stroke-width': 2 }));
   if (terbuka) tutup.style.transform = 'rotate(-28deg) translate(-6px, -14px)';
   const koin = s('g', { class: 'koin-peti', opacity: terbuka ? 1 : 0 },
@@ -241,7 +255,7 @@ export function gambarPeti(terbuka = false) {
     s('path', { d: 'M64 0 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 Z', fill: '#fff6b0' }));
   return s('g', { class: 'peti' },
     koin,
-    s('rect', { x: 4, y: 22, width: 72, height: 40, rx: 4, fill: '#8f5424', stroke: GARIS, 'stroke-width': 2.5 }),
+    s('rect', { x: 4, y: 22, width: 72, height: 40, rx: 4, fill: '#8f5424', stroke: GARIS, 'stroke-width': 1.8 }),
     s('rect', { x: 4, y: 30, width: 72, height: 6, fill: '#ffc93c', stroke: GARIS, 'stroke-width': 1.5 }),
     s('rect', { x: 34, y: 26, width: 12, height: 16, rx: 2, fill: '#ffc93c', stroke: GARIS, 'stroke-width': 2 }),
     tutup);
