@@ -24,6 +24,8 @@ const nyala = (kunci) => simpan.ambil().pengaturan[kunci] !== 'mati';
 const frekuensi = (midi) => 440 * 2 ** ((midi - 69) / 12);
 
 function audio() {
+  // Browser hanya mengizinkan suara setelah pengguna menyentuh/mengklik halaman.
+  if (!ctx && navigator.userActivation && !navigator.userActivation.hasBeenActive) return null;
   if (!ctx) {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;

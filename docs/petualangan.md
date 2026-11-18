@@ -1,4 +1,4 @@
-# Ekspedisi Pulau Aljabar (Petualangan Harta Karun 3D)
+# Ekspedisi Pulau Aljabar (Petualangan Harta Karun, Kartun Bergambar)
 
 ## 1. Konsep
 
@@ -6,9 +6,13 @@ Siswa membantu **Ulfa** (penjelajah berhijab) dan **Lino** (tarsius, hewan khas 
 
 **Orisinalitas & hak cipta.** Bahan referensi di Google Drive berisi gambar, karakter, dan partitur lagu tema *Dora the Explorer* (milik Nickelodeon). Bahan tersebut **tidak dipakai dan tidak ditiru**. Yang diambil hanya konsep umum (genre): petualangan dengan peta dan rintangan. Karakter, model 3D, gambar, dan musik ULFALINE dibuat sendiri:
 - Karakter SVG: `frontend/gambar/ulfa.svg`, `frontend/gambar/lino.svg`
-- Model 3D dari bentuk dasar di `frontend/js/petualangan/dunia3d.js`
+- Ilustrasi kartun 2D (SVG) berbadan penuh & adegan: `frontend/js/komponen/ilustrasi.js`
+- Peta pulau bergambar beranimasi: `frontend/js/petualangan/peta2d.js`
+- Wajah ekspresif (senyum, hore, tanya, semangat): `frontend/js/komponen/tokoh.js`
 - Musik & efek suara disintesis di `frontend/js/petualangan/suara.js` (melodi pentatonis orisinal)
-- Pustaka 3D: three.js r160 (lisensi MIT), `frontend/vendor/three.module.min.js`
+- Tidak memakai pustaka atau aset gambar pihak ketiga.
+
+**Gaya visual (v1.3).** Atas permintaan pemilik proyek, tampilan diubah dari 3D low-poly menjadi **kartun 2D bergaris tegas dan penuh warna**, mengikuti nuansa umum kartun petualangan anak: langit cerah, matahari, awan, pohon kelapa, bunga, kupu-kupu, jalan setapak berliku, dan karakter berbadan penuh dengan pose (berjalan, bersorak, menunjuk). Karakter dan desainnya tetap milik ULFALINE sendiri.
 
 ## 2. Keselarasan dengan Pretest–Posttest
 
@@ -31,13 +35,15 @@ Poin diberikan jika jawaban benar pada **percobaan pertama**. Untuk teka-teki la
 - Satu teka-teki per layar, dengan indikator kemajuan titik.
 - Narasi ≤ 40 kata per gelembung (diuji), dengan tombol 🔊 **Dengarkan** (narasi suara bahasa Indonesia lewat Web Speech API, jika tersedia di perangkat).
 - **Musik hanya di peta.** Saat membaca dan mengerjakan teka-teki tidak ada musik. Musik bisa dimatikan (tombol di peta, atau Akun → Suara).
-- Animasi 3D dikendalikan siswa (Ulfa berjalan setelah pos selesai, peti terbuka saat tombol ditekan). Pengaturan **Kurangi gerakan** membuat perpindahan langsung tanpa animasi.
-- Jika perangkat tidak mendukung WebGL, peta 3D diganti tombol/daftar pos sehingga petualangan tetap bisa diselesaikan.
+- Animasi dikendalikan siswa (Ulfa berjalan setelah pos selesai, peti terbuka saat tombol ditekan). Pengaturan **Kurangi gerakan** membuat perpindahan langsung tanpa animasi.
+- Peta berupa SVG, sehingga ringan dan tajam di semua HP tanpa WebGL. Pos juga bisa dibuka lewat tombol dan daftar pos.
+- Di awal tiap pos ada **peta rute bergambar**, dan Ulfa bertanya "Kita sedang menuju ke mana?". Setiap jawaban mendapat reaksi Lino (hore) atau Ulfa (menyemangati).
+- **Lagu Ekspedisi** (melodi & lirik orisinal) diputar hanya jika siswa menekan tombol, dengan lirik karaoke.
 
 ## 4. Teknis
 
 - Rute: `#/petualangan` (peta), `#/petualangan/<id-pos>`, `#/petualangan/harta`.
 - Data: `frontend/data/petualangan.json` (narasi, teka-teki, skor). Jenis teka-teki: `pilihan`, `langkah` (memakai pengerja langkah demi langkah), `batu`.
 - Progres: `localStorage` → `petualangan.pos[id] = {selesai, skor, bintang, kali}` dan `petualangan.titik` (posisi Ulfa di jalan).
-- three.js dimuat **hanya** saat peta dibuka (import dinamis), lalu adegan dibuang (`hapus()`) saat siswa pindah halaman. Rendering dibatasi ±40 fps dan berhenti saat tab tersembunyi.
+- Peta dibuang (`hapus()`) saat siswa pindah halaman, dan musik serta narasi dihentikan.
 - Uji: `tests/test_konten.py` (kunci, model setara, total skor = 6 per indikator, narasi singkat, tidak menyalin soal tes) dan `e2e/uji_e2e.py` (menempuh 7 pos sampai sertifikat 24/24).

@@ -49,7 +49,7 @@ Untuk menerbitkan online dan memasang di HP, lihat [docs/panduan-instalasi.md](d
 | 💡 **Petunjuk 3 tingkat** dan **contoh serupa** | GL02, GL03 |
 | 🌱 **3 level** (Dasar → Menengah → Tantangan), terbuka saat nilai ≥ 80; soal baru tanpa batas dari generator Python | GL01, GL04 |
 | 📊 **Nilai + pembahasan** (langkahmu vs langkah kunci) + saran materi | DS01, DS03 |
-| 🗺️ **Ekspedisi Pulau Aljabar (3D)**: petualangan harta karun bersama Ulfa & Lino, 7 pos teka-teki, musik & narasi suara, sertifikat skor 4 indikator literasi (selaras pretest–posttest) | Semua temuan + literasi |
+| 🗺️ **Ekspedisi Pulau Aljabar**: petualangan harta karun bergaya kartun bersama Ulfa & Lino, peta pulau bergambar, 7 pos teka-teki, Lagu Ekspedisi, musik & narasi suara, sertifikat skor 4 indikator literasi (selaras pretest–posttest) | Semua temuan + literasi |
 | 🌏 **8 Misi Literasi**: Pahami → Rumuskan → Selesaikan → Tafsirkan → Cek, dengan konteks AKM (personal, sosial budaya, saintifik) | Literasi matematika |
 | ⚙️ Ukuran teks, kurangi gerakan, tema gelap | DS05, aksesibilitas |
 

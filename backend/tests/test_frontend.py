@@ -44,9 +44,9 @@ mini_racer = pytest.importorskip("py_mini_racer")
 KODE_SENDIRI = [b for b in BERKAS_APLIKASI if b.endswith(".js") and not b.startswith("vendor/")]
 
 
-def test_pustaka_pihak_ketiga_berlisensi():
-    three = (FRONTEND / "vendor" / "three.module.min.js").read_text(encoding="utf-8")[:300]
-    assert "SPDX-License-Identifier: MIT" in three
+def test_tanpa_pustaka_pihak_ketiga():
+    """Semua gambar & animasi dibuat sendiri (SVG); tidak ada pustaka/aset pihak ketiga di frontend."""
+    assert not (FRONTEND / "vendor").exists()
 
 
 @pytest.mark.parametrize("berkas", KODE_SENDIRI + ["sw.js"])

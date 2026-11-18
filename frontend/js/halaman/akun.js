@@ -3,7 +3,7 @@
 import { h, umpan } from '../ui.js';
 import * as simpan from '../simpan.js';
 import { blokPasang } from '../pasang.js';
-import { tokoh } from '../komponen/tokoh.js';
+import { adegan } from '../komponen/ilustrasi.js';
 
 function bersihkan(teks, maks) {
   return teks.replace(/[<>]/g, '').trim().slice(0, maks);
@@ -30,7 +30,7 @@ export function halamanMasuk() {
   h('button', { class: 'tombol penuh', type: 'submit', style: 'margin-top:16px' }, 'Mulai Belajar'));
   return [
     h('section', { class: 'kartu', style: 'text-align:center' },
-      h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 110), tokoh('lino', 'senyum', 90)),
+      adegan({ pose: 'hore', judul: 'Ulfa dan Lino menyambutmu', tinggi: 200 }),
       h('h1', { style: 'margin-top:8px' }, 'ULFALINE'),
       h('p', {}, 'Ayo bertualang bersama Ulfa & Lino! Belajar persamaan & pertidaksamaan linear satu variabel, langkah demi langkah.')),
     h('section', { class: 'kartu' }, form,

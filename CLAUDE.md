@@ -39,7 +39,7 @@ Catatan Windows: path proyek ini panjang, jadi `pip install playwright` di `.ven
 | `backend/app/services/generator.py` | Templat soal per topik × level, diverifikasi sebelum dikirim |
 | `frontend/js/mesin.js` | **Cermin 1:1** dari tiga file Python pertama |
 | `frontend/js/komponen/pengerja.js` | UI latihan langkah demi langkah |
-| `frontend/js/halaman/petualangan.js`, `js/petualangan/` | Ekspedisi Pulau Aljabar: peta 3D (three.js, `vendor/`), suara Web Audio, pos teka-teki, sertifikat. Lihat [docs/petualangan.md](docs/petualangan.md) |
+| `frontend/js/halaman/petualangan.js`, `js/petualangan/` | Ekspedisi Pulau Aljabar: peta kartun 2D (SVG, `petualangan/peta2d.js`), ilustrasi Ulfa & Lino (`komponen/ilustrasi.js`, `komponen/tokoh.js`), suara & Lagu Ekspedisi (Web Audio), pos teka-teki, sertifikat. Lihat [docs/petualangan.md](docs/petualangan.md) |
 
 **PENTING: paritas JS ↔ Python.** Setiap perubahan logika di `aljabar.py`/`operasi.py`/`pemeriksa.py` harus diterapkan juga ke `mesin.js` (dan sebaliknya), termasuk teks pesan. `tests/test_paritas_js.py` menjalankan `mesin.js` di V8 (mini-racer) dan membandingkan >500 kasus.
 
@@ -75,7 +75,7 @@ Checklist layar: [docs/panduan-ui-ux.md](docs/panduan-ui-ux.md) §8.
 
 ## Hak Cipta
 
-Jangan memakai gambar, karakter, nama, atau musik dari karya pihak lain (mis. kartun/serial TV) meskipun ada di bahan referensi. Semua aset ULFALINE dibuat sendiri; pustaka pihak ketiga hanya yang berlisensi terbuka (three.js, MIT).
+Jangan memakai gambar, karakter, nama, atau musik dari karya pihak lain (mis. kartun/serial TV) meskipun ada di bahan referensi. Semua aset ULFALINE dibuat sendiri; frontend tidak memakai pustaka/aset pihak ketiga (diuji `test_tanpa_pustaka_pihak_ketiga`).
 
 ## Privasi
 
