@@ -3,6 +3,7 @@
 import { h, umpan } from '../ui.js';
 import * as simpan from '../simpan.js';
 import { blokPasang } from '../pasang.js';
+import { tokoh } from '../komponen/tokoh.js';
 
 function bersihkan(teks, maks) {
   return teks.replace(/[<>]/g, '').trim().slice(0, maks);
@@ -29,9 +30,9 @@ export function halamanMasuk() {
   h('button', { class: 'tombol penuh', type: 'submit', style: 'margin-top:16px' }, 'Mulai Belajar'));
   return [
     h('section', { class: 'kartu', style: 'text-align:center' },
-      h('img', { src: 'ikon/ikon.svg', alt: '', width: 88, height: 88, style: 'border-radius:20px' }),
+      h('div', { class: 'pahlawan' }, tokoh('ulfa', 'hore', 110), tokoh('lino', 'senyum', 90)),
       h('h1', { style: 'margin-top:8px' }, 'ULFALINE'),
-      h('p', {}, 'Belajar persamaan & pertidaksamaan linear satu variabel, pelan-pelan dan langkah demi langkah.')),
+      h('p', {}, 'Ayo bertualang bersama Ulfa & Lino! Belajar persamaan & pertidaksamaan linear satu variabel, langkah demi langkah.')),
     h('section', { class: 'kartu' }, form,
       h('p', { class: 'redup kecil', style: 'margin-top:12px' }, 'Nama hanya disimpan di perangkat ini. Tidak perlu email atau nomor HP.')),
   ];
